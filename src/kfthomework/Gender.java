@@ -11,26 +11,30 @@ package kfthomework;
  */
 public class Gender {
     private enum gender{woman,man,undefied};
-    gender genderOfPeople;
+    gender genderOfPerson;
     public Gender(){
-        genderOfPeople=gender.undefied;
+        genderOfPerson=gender.undefied;
     };
-    public void SetGenderToWoman(){
-        genderOfPeople=gender.woman;
+    public void setGenderToWoman(){
+        genderOfPerson=gender.woman;
     }
-    public void SetGenderToMan(){
-        genderOfPeople=gender.man;
+    public void setGenderToMan(){
+        genderOfPerson=gender.man;
     }
-    public String GenderText(){
-        return this.genderOfPeople.toString();
+    public String genderText(){
+        return this.genderOfPerson.toString();
     }
-    public String GenderTextHeShe(){
+    public String genderTextHeShe(){
         //Return string "he" or "she" according to gender. 
-        return (genderOfPeople==gender.undefied) ? "(error: undefied gender-->she or he)" :(genderOfPeople==gender.woman? "she":"he");
+        return (genderOfPerson==gender.undefied) ? "(error: undefied gender-->she or he)" :(genderOfPerson==gender.woman? "she":"he");
     }
-    public String GenderTextHisHer(){
+    public String genderTextHisHer(){
         //Return string "his" or "her" according to gender.
-        return (genderOfPeople==gender.undefied) ? "(error: undefied gender-->her or his)" :(genderOfPeople==gender.woman? "her":"his");
+        return (genderOfPerson==gender.undefied) ? "(error: undefied gender-->her or his)" :(genderOfPerson==gender.woman? "her":"his");
+    }
+    public String qenderTextHimHer(){
+        //Return string "him" or "her" according to gender.
+        return (genderOfPerson==gender.undefied) ? "(error: undefied gender-->her or his)" :(genderOfPerson==gender.woman? "her":"him");
     }
             
 }

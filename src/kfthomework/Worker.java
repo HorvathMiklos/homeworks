@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author mhorvath
  */
-public class Worker extends People{
+public class Worker extends Person{
     private int workerID;    
     private static int nextWorkerID=0;
     private int fireingReqvests;
@@ -28,19 +28,38 @@ public class Worker extends People{
         this.salary=salary;
         allWorkers.add(this);
     }
-    public int GetFireingReqvests(){
+    public int getFireingReqvests(){
         return this.fireingReqvests;
     }
-    public void IncreaseTheChanceOfGettingFired(){
+    public void increaseTheChanceOfGettingFired(){
         this.fireingReqvests++;
     }
-   
-    @Override
-    public void DoWork(){
+    public void printListOfWorers(List<Worker> workerList){
+        System.out.println("---------------------------------------------------------");
+        workerList.forEach((workerToPrint)->{ 
+            
+            System.out.print("ID:               ");
+            System.out.print(workerToPrint.workerID);
+            System.out.print("name:             ");
+            System.out.print(workerToPrint.name);
+            System.out.print("gender:           ");
+            System.out.print(workerToPrint.gender.genderText());
+            System.out.print("date of birth:    ");
+            System.out.print(workerToPrint.dateOfBirth);
+            System.out.print("money:            ");
+            System.out.print(workerToPrint.money+" HUF");
+            System.out.print("salary:           ");
+            System.out.print(workerToPrint.salary+" HUF");
+            System.out.println("---------------------------------------------------------");
+            });
     }
     @Override
-    public List<People> ListAll(){
-    List<People> ListOfAllWorkers = new ArrayList<>();
+    public void doWork(){
+        System.out.println(this.name+" made some work, so "+this.gender.genderTextHisHer()+" boss is happy now!");
+    }
+    @Override
+    public List<Person> listAll(){
+    List<Person> ListOfAllWorkers = new ArrayList<>();
         Worker.allWorkers.forEach((OneOfTheWorkersOfTheCompany) -> {
             ListOfAllWorkers.add(OneOfTheWorkersOfTheCompany);
         });

@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author mhorvath
  */
-public abstract class People {
+public abstract class Person {
     
     protected String name;
     protected String dateOfBirth;
@@ -20,47 +20,48 @@ public abstract class People {
     protected int money;
     protected int salary;
 
-    public abstract void DoWork();
+    public abstract void doWork();
+        
+    public abstract List<Person> listAll();
 
-    public abstract List<People> ListAll();
-
-    public void ReceaveSalary() {
-
+    public void receaveSalary() {
+        this.money+=salary;
+        System.out.println(this.name+" got salary, "+this.gender.genderTextHeShe()+"have "+this.money+"HUF now.");
     }
 
-    public String GetName() {
+    public String getName() {
         return this.name;
     }
 
-    public void SetName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String GetDateOfBirth() {
+    public String getDateOfBirth() {
         return this.dateOfBirth;
     }
 
-    public void SetDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
     
-    public Gender GetGender(Gender gender){
+    public Gender getGender(Gender gender){
         return this.gender;
     }
     
-    public int GetMoney() {
+    public int getMoney() {
         return this.money;
     }
 
-    public void SetMoney(int money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    public int GetSalary() {
+    public int getSalary() {
         return this.salary;
     }
 
-    public void SetSalary(int salary) {
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
