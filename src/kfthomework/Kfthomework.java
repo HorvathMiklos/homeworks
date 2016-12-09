@@ -5,6 +5,8 @@
  */
 package kfthomework;
 
+import java.util.Scanner;
+
 /**
  *
  * @author mhorvath
@@ -14,8 +16,8 @@ public class Kfthomework {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
        
-    }
-    
+    }    
 }

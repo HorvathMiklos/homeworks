@@ -45,7 +45,7 @@ public class Company{
             System.out.print(companyToPrint.place);
             System.out.print("pofile:           ");
             System.out.print(companyToPrint.profile);
-            System.out.print("ID:               ");
+            System.out.print("money:               ");
             System.out.print(companyToPrint.money);
             System.out.println("---------------------------------------------------------");
             });
