@@ -19,11 +19,11 @@ public abstract class Person {
     
     protected int money;
     protected int salary;
+    
 
     public abstract void doWork();
-        
-    public abstract List<Person> listAll();
-
+     
+    
     public void receaveSalary() {
         this.money+=salary;
         System.out.println(this.name+" got salary, "+this.gender.genderTextHeShe()+"have "+this.money+"HUF now.");

@@ -54,25 +54,106 @@ public class CompanyMenu {
         }
     }
     public static void addNewCompany(){
-    
+        String name,place,profile;
+        int money;
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println();
+        System.out.println("New Company:");
+        System.out.println();
+        System.out.println("name:      ");
+        name=keyboard.next();
+        System.out.println("place:     ");
+        place=keyboard.next();
+        System.out.println("profile:   ");
+        profile=keyboard.next();
+        System.out.println("money:     ");
+        money=keyboard.nextInt();
+        new Company(name,place,profile,money);
+        System.out.println();
+        System.out.println("New Company created");
     }
     public static void listAllCompanies(){
-    
+        Company.printListOfCompanies(Company.listAll());
     }
     public static void listBossesOfACompany(){
-    
+        Scanner keyboard = new Scanner(System.in);
+        int companyID;
+        System.out.println("Select company by ID:");
+        listAllCompanies();
+        System.out.println("Company ID:");
+        companyID=keyboard.nextInt();
+        Company.listAll().forEach((companyInList)->{
+            if(companyInList.getCompanyID()==companyID){
+                Boss.printListOfBosses(companyInList.listCompanyBosses());
+            }
+        });        
     }
     public static void listWorkersOfACompany(){
-    
+        Scanner keyboard = new Scanner(System.in);
+        int companyID;
+        System.out.println("Select company by ID:");
+        listAllCompanies();
+        System.out.println("Company ID:");
+        companyID=keyboard.nextInt();
+        Company.listAll().forEach((companyInList)->{
+            if(companyInList.getCompanyID()==companyID){
+                Worker.printListOfWorkers(companyInList.listCompanyWorkers());
+            }
+        });
     }
     public static void employ(){
-    
+        Scanner keyboard = new Scanner(System.in);
+        int companyID;
+        System.out.println("Select company by ID:");
+        listAllCompanies();
+        System.out.println("Company ID:");
+        companyID=keyboard.nextInt();
+        Company.listAll().forEach((companyInList)->{
+            int workerID;
+            if(companyInList.getCompanyID()==companyID){
+                System.out.println("Select worker by ID");
+                WorkerMenu.listAllWorkers();
+                System.out.println("WorkerID:");
+                workerID=keyboard.nextInt();
+                Worker.listAll().forEach((workerInList)->{
+                    if(workerInList.getWorkerID()==workerID){
+                        if(!workerInList.haveAJob()){
+                            companyInList.employ(workerInList);
+                        }
+                    }
+                });
+            }
+        });
     }
     public static void fire(){
-    
+        Scanner keyboard = new Scanner(System.in);
+        int companyID;
+        System.out.println("Select company by ID:");
+        listAllCompanies();
+        System.out.println("Company ID:");
+        companyID=keyboard.nextInt();
+        Company.listAll().forEach((companyInList)->{
+            byte angerLevelOfCEO;
+            if(companyInList.getCompanyID()==companyID){
+                System.out.println("How angry is the CEO? (0-10)");
+                angerLevelOfCEO=keyboard.nextByte();
+                companyInList.fireEmployee(angerLevelOfCEO);
+            }
+        });
     }
     public static void pay(){
-    
+        Scanner keyboard = new Scanner(System.in);
+        int companyID;
+        System.out.println("Select company by ID:");
+        listAllCompanies();
+        System.out.println("Company ID:");
+        companyID=keyboard.nextInt();
+        Company.listAll().forEach((companyInList)->{
+            byte angerLevelOfCEO;
+            if(companyInList.getCompanyID()==companyID){
+               companyInList.payEmployees();
+            }
+        });
     }
     
     public static void printCompanyMenu(){

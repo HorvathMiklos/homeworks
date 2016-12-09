@@ -16,7 +16,7 @@ public class Boss extends Person {
     private int bossID;
     private static int nextBossID=0;
     private static List<Boss> allBosses= new ArrayList<>();
-    public void Boss(String name,String dateOfBirth,Gender gender,int money,int salary){
+    Boss(String name,String dateOfBirth,Gender gender,int money,int salary){
         this.bossID=Boss.nextBossID;
         Boss.nextBossID++;
         this.name=name;
@@ -33,15 +33,15 @@ public class Boss extends Person {
     public void doWork(){
         System.out.println(this.name+" made some work, so "+this.gender.genderTextHisHer()+" company will have a great future!");
     }
-    @Override
-    public List<Person> listAll(){
-        List<Person> ListOfAllBosses = new ArrayList<>();
+    
+    public static List<Boss> listAll(){
+        List<Boss> ListOfAllBosses = new ArrayList<>();
         Boss.allBosses.forEach((OneOfTheBossesOfTheCompany) -> {
             ListOfAllBosses.add(OneOfTheBossesOfTheCompany);
         });
         return ListOfAllBosses;
     }
-    public void printListOfBosses(List<Boss> bossList){
+    public static void printListOfBosses(List<Boss> bossList){
         System.out.println("---------------------------------------------------------");
         bossList.forEach((bossToPrint)->{ 
             

@@ -5,6 +5,8 @@
  */
 package kfthomework;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -41,16 +43,89 @@ public class BossMenu {
         }
     }
     public static void addNewBoss(){
-        
+        String name, dateOfBirth;
+        Gender gender=new Gender();
+        byte genderChoose;
+        int money,salary;
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println();
+        System.out.println("New Boss:");
+        System.out.println();
+        System.out.println("name:      ");
+        name=keyboard.next();
+        System.out.println("date of birth:     ");
+        dateOfBirth=keyboard.next();
+        System.out.println("gender(0-woman,1-man):     ");
+            genderChoose=keyboard.nextByte();
+            switch(genderChoose){
+                case 0:{
+                    gender.setGenderToWoman();
+                    break;
+                }
+                case 1:{
+                    gender.setGenderToMan();
+                    break;
+                }
+                default:{
+                    System.out.println("error: invalid gender");
+                }
+                    
+            }
+        System.out.println("money:     ");
+        money=keyboard.nextInt();
+        System.out.println("salary:     ");
+        salary=keyboard.nextInt();
+        new Boss(name,dateOfBirth,gender,money,salary);
+        System.out.println();
+        System.out.println("New Boss created");
     }
     public static void listAllBosses(){
-        
+        Boss.printListOfBosses(Boss.listAll());
     }
     public static void doWork(){
-        
+        Scanner keyboard = new Scanner(System.in);
+        int bossID;
+        System.out.println("Choose witch boss should work!");
+        listAllBosses();
+        System.out.println("Boss ID: ");
+        bossID=keyboard.nextInt();
+        Worker.listAll().forEach((bossInList)->{
+            if(bossInList.getWorkerID()==bossID){
+            bossInList.doWork();
+            }
+        });
     }
-    public static void requestFire(){
+    public static void requestFire() {
+        Scanner keyboard = new Scanner(System.in);
+        byte bossID;       
+        System.out.println("Choose boss by ID");
+        Boss.printListOfBosses(Boss.listAll());
+        System.out.println("Boss ID: ");
+        bossID = keyboard.nextByte();
+        Boss.listAll().forEach((angryBoss) -> {
+            if (angryBoss.getBossID() == bossID) {
+                List<Worker> workersUnderAngryBoss = new ArrayList<>();
+                Company.listAll().forEach((companyInList) -> {
+                    if (companyInList.listCompanyBosses().contains(angryBoss)) {
+                        companyInList.listCompanyWorkers().forEach((workerInList) -> {
+                            workersUnderAngryBoss.add(workerInList);
+                        });
+                    }
+                });
+                System.out.println("Choose worker by ID: ");
+                Worker.printListOfWorkers(workersUnderAngryBoss);
+                System.out.println("Worker ID: ");
+                byte workerID= keyboard.nextByte();
+                workersUnderAngryBoss.forEach((workerInList)->{
+                    if(workerInList.getWorkerID()==workerID){
+                        angryBoss.requestFireEmployee(workerInList, workerInList.employeer);
+                    }
+                });
+            }
+        });
         
+        
+
     }
     public static void printBossMenu(){
         System.out.println();

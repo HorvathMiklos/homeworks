@@ -18,6 +18,8 @@ public class Kfthomework {
      */
     
     public static void main(String[] args) {
-       
+        System.out.println("Hello! Good luck to manage those companyes!");
+        System.out.println("There are many lazy workers and angry CEO-s!");
+        MainMenu.chooseMenuPont();
     }    
 }

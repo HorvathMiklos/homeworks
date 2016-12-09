@@ -22,7 +22,8 @@ public class Company{
     private List<Boss> bosses;
     private List<Worker> workers;
     private static List<Company> allCompanies= new ArrayList<>();
-    public void Kft(String name,String place,String profile, int money){
+
+    Company(String name, String place, String profile, int money) {
         this.companyID=Company.nextCompanyID;
         Company.nextCompanyID++;
         this.name=name;
@@ -31,10 +32,11 @@ public class Company{
         this.money=money;
         allCompanies.add(this);
     }
-    public List<Company> listAll(){
+    
+public static List<Company> listAll(){
         return allCompanies;
     }
-    public void printListOfCompanies(List<Company> companyList){
+    public static void printListOfCompanies(List<Company> companyList){
         System.out.println("---------------------------------------------------------");
         companyList.forEach((companyToPrint)->{             
             System.out.print("ID:               ");
@@ -55,6 +57,9 @@ public class Company{
     }
     public List<Boss> listCompanyBosses(){
         return this.bosses;
+    }
+    public int getCompanyID(){
+        return this.companyID;
     }
     public String getName(){
         return this.name;
@@ -77,8 +82,10 @@ public class Company{
     public void employ(Person newEmployee){       
         if (newEmployee instanceof Worker){
             if(!this.workers.contains((Worker)newEmployee)){
-                this.workers.add((Worker)newEmployee);
-                System.out.println(((Worker) newEmployee).name+"got a new job in "+this.name);
+                if(!((Worker) newEmployee).haveAJob()){
+                    this.workers.add((Worker)newEmployee);
+                    System.out.println(((Worker) newEmployee).name+"got a new job in "+this.name);
+                    }
             }
             else{
                 System.out.println(((Worker) newEmployee).name+" was already working for "+this.name);
@@ -95,25 +102,36 @@ public class Company{
         }
     }
     public void fireEmployee(byte angerLevelOfCEO){
-        for(Worker WorkerInDanger : this.workers){
-            if(WorkerInDanger.getFireingReqvests()>(10-angerLevelOfCEO)){
-                this.workers.remove(WorkerInDanger);
-                System.out.println(WorkerInDanger.name+" lost "+WorkerInDanger.gender.genderTextHisHer()+" job at "+this.name);
+        for(Worker workerInDanger : this.workers){
+            if(workerInDanger.getFireingReqvests()>(10-angerLevelOfCEO)){
+                this.workers.remove(workerInDanger);
+                workerInDanger.looseJob();
+                System.out.println(workerInDanger.name+" lost "+workerInDanger.gender.genderTextHisHer()+" job at "+this.name);
             }
             else{
-                System.out.println(WorkerInDanger.name+" will come to work tomorow, "+WorkerInDanger.gender.genderTextHeShe()+"is happy.");
+                System.out.println(workerInDanger.name+" will come to work tomorow, "+workerInDanger.gender.genderTextHeShe()+"is happy.");
             }
         }
     }
-    private void payEmployeesOnList(List<Person> EmployeeList){
-        EmployeeList.forEach((EmployeeOnPayList)->{
-            EmployeeOnPayList.receaveSalary();
+    private void payEmployeesOnList(List<Person> employeeList){
+        employeeList.forEach((employeeOnPayList)->{
+            employeeOnPayList.receaveSalary();
             System.out.println(this.name+" have "+this.money+"HUF");
         });
     }
     public void payEmployees(){
         List<Person> payList=new ArrayList();
         this.bosses.forEach((bossWhoDemandMoney)->{payList.add(bossWhoDemandMoney);});
-        this.bosses.forEach((bossWhoDemandMoney)->{payList.add(bossWhoDemandMoney);});   
+        this.workers.forEach((workerWhoDemandMoney)->{payList.add(workerWhoDemandMoney);});
+        payList.forEach((personOnPayList)->{
+            if(this.money>=personOnPayList.getSalary()){
+            this.money=this.money-personOnPayList.getSalary();
+            personOnPayList.receaveSalary();
+            }
+            else{
+            System.out.println("This company don't have enough money to pay everybody on paylist");            
+            }
+        });
+        
     }
 }

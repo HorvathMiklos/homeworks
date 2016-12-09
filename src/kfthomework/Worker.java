@@ -17,7 +17,10 @@ public class Worker extends Person{
     private static int nextWorkerID=0;
     private int fireingReqvests;
     private static List<Worker> allWorkers= new ArrayList<>();
-    public void Worker(String name,String dateOfBirth,Gender gender,int money,int salary){
+    private boolean isEmployed;
+    Company employeer;
+
+    Worker(String name, String dateOfBirth, Gender gender, int money, int salary) {
         this.workerID=Worker.nextWorkerID;
         Worker.nextWorkerID++;
         this.fireingReqvests=0;
@@ -26,7 +29,12 @@ public class Worker extends Person{
         this.gender=gender;
         this.money=money;
         this.salary=salary;
+        this.isEmployed=false;
+        this.employeer=null;
         allWorkers.add(this);
+    }
+    public int getWorkerID(){
+        return this.workerID;
     }
     public int getFireingReqvests(){
         return this.fireingReqvests;
@@ -34,7 +42,23 @@ public class Worker extends Person{
     public void increaseTheChanceOfGettingFired(){
         this.fireingReqvests++;
     }
-    public void printListOfWorers(List<Worker> workerList){
+    public void looseJob(){
+        this.isEmployed=false;
+        this.employeer=null;
+    }
+    public void findJob(Company employeer){
+        if(!this.isEmployed){
+            this.isEmployed=true;
+            this.employeer=employeer;
+        }
+        else{
+            System.out.println(this.name+" already have a job so "+this.gender.genderTextHeShe()+"can't be employed again!");
+        }
+    }
+    public boolean haveAJob(){
+        return isEmployed;
+    }
+    public static void printListOfWorkers(List<Worker> workerList){
         System.out.println("---------------------------------------------------------");
         workerList.forEach((workerToPrint)->{ 
             
@@ -57,9 +81,9 @@ public class Worker extends Person{
     public void doWork(){
         System.out.println(this.name+" made some work, so "+this.gender.genderTextHisHer()+" boss is happy now!");
     }
-    @Override
-    public List<Person> listAll(){
-    List<Person> ListOfAllWorkers = new ArrayList<>();
+    
+public static List<Worker> listAll(){
+    List<Worker> ListOfAllWorkers = new ArrayList<>();
         Worker.allWorkers.forEach((OneOfTheWorkersOfTheCompany) -> {
             ListOfAllWorkers.add(OneOfTheWorkersOfTheCompany);
         });

@@ -37,12 +37,57 @@ public class WorkerMenu {
         }
     }
     public static void addNewWorker(){
-        
+        String name, dateOfBirth;
+        Gender gender=new Gender();
+        byte genderChoose;
+        int money,salary;
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println();
+        System.out.println("New Worker:");
+        System.out.println();
+        System.out.println("name:      ");
+        name=keyboard.next();
+        System.out.println("date of birth:     ");
+        dateOfBirth=keyboard.next();
+        System.out.println("gender(0-woman,1-man):     ");
+            genderChoose=keyboard.nextByte();
+            switch(genderChoose){
+                case 0:{
+                    gender.setGenderToWoman();
+                    break;
+                }
+                case 1:{
+                    gender.setGenderToMan();
+                    break;
+                }
+                default:{
+                    System.out.println("error: invalid gender");
+                }
+                    
+            }
+        System.out.println("money:     ");
+        money=keyboard.nextInt();
+        System.out.println("salary:     ");
+        salary=keyboard.nextInt();
+        new Worker(name,dateOfBirth,gender,money,salary);
+        System.out.println();
+        System.out.println("New Worker created");
     }
     public static void listAllWorkers(){
-        
+        Worker.printListOfWorkers(Worker.listAll());
     }
     public static void doWork(){
+        Scanner keyboard = new Scanner(System.in);
+        int workerID;
+        System.out.println("Choose witch worker should work!");
+        listAllWorkers();
+        System.out.println("Worker ID: ");
+        workerID=keyboard.nextInt();
+        Worker.listAll().forEach((workerInList)->{
+            if(workerInList.getWorkerID()==workerID){
+            workerInList.doWork();
+            }
+        });
         
     }
     public static void printWorkerMenu(){
