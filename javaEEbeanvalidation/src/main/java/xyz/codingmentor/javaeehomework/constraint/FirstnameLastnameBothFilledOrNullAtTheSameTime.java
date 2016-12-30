@@ -20,7 +20,10 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
 public @interface FirstnameLastnameBothFilledOrNullAtTheSameTime {
-   String message() default "{FirstnameLastnameBothFilledOrNullAtTheSameTime.message}";
-   Class<?>[] groups() default {};
-   Class<? extends Payload>[] payload() default {};
+
+    String message() default "{FirstnameLastnameBothFilledOrNullAtTheSameTime.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

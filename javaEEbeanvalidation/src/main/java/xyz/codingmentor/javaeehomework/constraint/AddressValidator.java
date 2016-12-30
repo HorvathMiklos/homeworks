@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.javaeehomework.constraint;
 
 import javax.validation.ConstraintValidator;
@@ -8,10 +7,11 @@ import javax.validation.ConstraintValidatorContext;
  *
  * @author mhorvath
  */
-public class AddressValidator implements ConstraintValidator<ValidAddress, String>{
+public class AddressValidator implements ConstraintValidator<ValidAddress, String> {
 
     @Override
     public void initialize(ValidAddress a) {
+        //happy sonar
     }
 
     @Override

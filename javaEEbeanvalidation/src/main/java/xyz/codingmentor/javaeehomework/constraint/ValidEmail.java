@@ -20,9 +20,10 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RUNTIME)
 public @interface ValidEmail {
-   String message() default "{Email.message}";
 
-   Class<?>[] groups() default {};
+    String message() default "{Email.message}";
 
-   Class<? extends Payload>[] payload() default {};
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

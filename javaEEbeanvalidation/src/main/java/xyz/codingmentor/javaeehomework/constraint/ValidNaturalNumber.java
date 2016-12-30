@@ -20,9 +20,10 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RUNTIME)
 public @interface ValidNaturalNumber {
+
     String message() default "{NaturalNumber.message}";
 
-   Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-   Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

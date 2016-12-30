@@ -20,6 +20,7 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RUNTIME)
 public @interface ValidAddress {
+
     String message() default "{Address.message}";
 
     Class<?>[] groups() default {};

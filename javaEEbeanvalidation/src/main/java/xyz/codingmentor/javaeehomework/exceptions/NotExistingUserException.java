@@ -1,13 +1,13 @@
-
-package exceptions;
+package xyz.codingmentor.javaeehomework.exceptions;
 
 /**
  *
  * @author mhorvath
  */
-public class NotExistingUserException extends RuntimeException{
+public class NotExistingUserException extends RuntimeException {
 
     public NotExistingUserException() {
+        //happy sonar
     }
 
     public NotExistingUserException(String message) {

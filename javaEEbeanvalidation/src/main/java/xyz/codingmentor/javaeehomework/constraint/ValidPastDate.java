@@ -9,7 +9,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
-import java.util.Calendar;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
@@ -21,10 +20,11 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RUNTIME)
 public @interface ValidPastDate {
-   String message() default "{PastDate.message}";
 
-   Class<?>[] groups() default {};
+    String message() default "{PastDate.message}";
 
-   Class<? extends Payload>[] payload() default {};
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 
 }

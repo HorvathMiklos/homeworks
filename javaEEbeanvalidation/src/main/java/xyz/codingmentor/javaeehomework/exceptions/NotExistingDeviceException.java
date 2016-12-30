@@ -1,13 +1,13 @@
-
-package exceptions;
+package xyz.codingmentor.javaeehomework.exceptions;
 
 /**
  *
  * @author mhorvath
  */
-public class NotExistingDeviceException extends RuntimeException{
+public class NotExistingDeviceException extends RuntimeException {
 
     public NotExistingDeviceException() {
+        //happy sonar
     }
 
     public NotExistingDeviceException(String message) {

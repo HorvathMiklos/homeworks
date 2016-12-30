@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.javaeehomework.constraint;
 
 import javax.validation.ConstraintValidator;
@@ -11,19 +10,20 @@ import xyz.codingmentor.javaeehomework.beans.Manufacturer;
  *
  * @author mhorvath
  */
-public class SamsungIsNotGreenValidator implements ConstraintValidator<SamsungIsNotGreen, Device>{
+public class SamsungIsNotGreenValidator implements ConstraintValidator<SamsungIsNotGreen, Device> {
 
     @Override
-    public void initialize(SamsungIsNotGreen a) {        
+    public void initialize(SamsungIsNotGreen a) {
+        //happy sonar
     }
 
     @Override
     public boolean isValid(Device device, ConstraintValidatorContext cvc) {
-        if(device == null){
-        return true;
+        if (device == null) {
+            return true;
         }
-        if(device.getManufacturer()==Manufacturer.Samsung){
-        return device.getColor()!=Color.GREEN;
+        if (device.getManufacturer() == Manufacturer.SAMSUNG) {
+            return device.getColor() != Color.GREEN;
         }
         return true;
     }

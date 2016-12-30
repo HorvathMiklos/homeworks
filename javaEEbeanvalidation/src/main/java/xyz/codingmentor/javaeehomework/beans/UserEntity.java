@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.javaeehomework.beans;
 
 import javax.validation.constraints.NotNull;
@@ -20,16 +19,19 @@ import xyz.codingmentor.javaeehomework.constraint.ValidPhone;
 @FirstnameLastnameBothFilledOrNullAtTheSameTime
 @DateOfBirthBeforeRegistration
 public class UserEntity {
+
     @NotNull
-    @Size(min = 6)    
+    @Size(min = 6)
     String username;
     @NotNull
-    @Size(min = 6)   
+    @Size(min = 6)
     @Pattern.List({
-        @Pattern(regexp = ".*[a-z].*"),
-        @Pattern(regexp = ".*[A-Z].*"),
+        @Pattern(regexp = ".*[a-z].*")
+        ,
+        @Pattern(regexp = ".*[A-Z].*")
+        ,
         @Pattern(regexp = "(.*[1-9].*)|(.*[\\=\\+\\<\\>\\.\\,\\)].*)")
-    })   
+    })
     String password;
     String firstname;
     String lastname;
@@ -172,6 +174,4 @@ public class UserEntity {
         return true;
     }
 
-    
-    
 }

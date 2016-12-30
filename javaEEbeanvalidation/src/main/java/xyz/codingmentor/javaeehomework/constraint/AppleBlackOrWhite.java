@@ -20,7 +20,10 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
 public @interface AppleBlackOrWhite {
-   String message() default "{ppleBlackOrWhite.message}";
-   Class<?>[] groups() default {};
-   Class<? extends Payload>[] payload() default {};
+
+    String message() default "{ppleBlackOrWhite.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

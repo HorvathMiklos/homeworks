@@ -20,9 +20,10 @@ import javax.validation.Payload;
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
 public @interface SamsungIsNotGreen {
+
     String message() default "{SamsungIsNotGreen.message}";
 
-   Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-   Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }

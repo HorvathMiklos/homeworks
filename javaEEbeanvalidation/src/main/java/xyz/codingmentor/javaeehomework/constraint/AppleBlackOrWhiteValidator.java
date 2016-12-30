@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.javaeehomework.constraint;
 
 import javax.validation.ConstraintValidator;
@@ -11,21 +10,22 @@ import xyz.codingmentor.javaeehomework.beans.Manufacturer;
  *
  * @author mhorvath
  */
-public class AppleBlackOrWhiteValidator implements ConstraintValidator<AppleBlackOrWhite, Device>{
+public class AppleBlackOrWhiteValidator implements ConstraintValidator<AppleBlackOrWhite, Device> {
 
     @Override
     public void initialize(AppleBlackOrWhite a) {
+        //happy sonar
     }
 
     @Override
     public boolean isValid(Device device, ConstraintValidatorContext cvc) {
-       if(device==null){
-           return true;
-       }
-       if(device.getManufacturer()==Manufacturer.Apple){
-           return device.getColor()==Color.BLACK||device.getColor()==Color.WHITE;
-       }
-       return true;
+        if (device == null) {
+            return true;
+        }
+        if (device.getManufacturer() == Manufacturer.APPLE) {
+            return device.getColor() == Color.BLACK || device.getColor() == Color.WHITE;
+        }
+        return true;
     }
 
 }

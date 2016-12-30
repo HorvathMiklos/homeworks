@@ -20,9 +20,10 @@ import javax.validation.Payload;
 @Target({ElementType.FIELD})
 @Retention(RUNTIME)
 public @interface ValidPositive {
-   String message() default "{Positive.message}";
 
-   Class<?>[] groups() default {};
+    String message() default "{Positive.message}";
 
-   Class<? extends Payload>[] payload() default {};
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }
