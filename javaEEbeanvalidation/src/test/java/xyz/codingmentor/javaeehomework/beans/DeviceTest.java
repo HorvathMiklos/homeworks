@@ -59,21 +59,21 @@ public class DeviceTest {
     @Test
     public void testIdNull() {
         String badId = null;
-        newDevice.id = badId;
+        newDevice.setId(badId);;
         testViolation(badId, 1);
     }
 
     @Test
     public void badUUID() {
         String badId = "09e503a1--e41-4d7a-acad-ba68fd73dddf";
-        newDevice.id = badId;
+        newDevice.setId(badId);
         testViolation(badId, 1);
     }
 
     @Test
     public void shortId() {
         String badId = "09e503a1-0e41-4d7a-acad-ba68fd73ddd";
-        newDevice.id = badId;
+        newDevice.setId(badId);
         testViolation(badId, 2);
     }
 

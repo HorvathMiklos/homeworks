@@ -1,9 +1,10 @@
 package xyz.codingmentor.javaeehomework.db;
 
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingDeviceException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import xyz.codingmentor.javaeehomework.beans.Device;
+import xyz.codingmentor.javaeehomework.exceptions.DeviceAllreadyInDeviceListException;
 
 /**
  *
@@ -11,47 +12,40 @@ import xyz.codingmentor.javaeehomework.beans.Device;
  */
 public class DeviceDB {
 
-    private List<Device> deviceList = new ArrayList();
-
+    private Map deviceList = new HashMap();
+    private static void checkDeviceExistence(String deviceID,Map deviceList){
+        if(!deviceList.containsKey(deviceID)){
+            throw new NotExistingDeviceException();
+        }
+    }
     Device addDevice(Device newDevice) {
-        deviceList.add(newDevice);
-        return deviceList.get(deviceList.size() - 1);
+        if(deviceList.containsKey(newDevice.getId())){
+            throw new DeviceAllreadyInDeviceListException();
+        }
+        deviceList.put(newDevice.getId(), newDevice);
+        return (Device) deviceList.get(newDevice.getId());
     }
 
     Device editDevice(Device deviceToEdit) {
-        for (Device device : deviceList) {
-            if (deviceToEdit.equals(device)) {
-                device.setManufacturer(deviceToEdit.getManufacturer());
-                device.setType(deviceToEdit.getType());
-                device.setPrice(deviceToEdit.getPrice());
-                device.setColor(deviceToEdit.getColor());
-                device.setCount(deviceToEdit.getCount());
-                return device;
-            }
-        }
-        throw new NotExistingDeviceException();
+        checkDeviceExistence(deviceToEdit.getId(), deviceList);
+        deviceList.put(deviceToEdit.getId(), deviceToEdit);
+        return (Device) deviceList.get(deviceToEdit.getId());                      
     }
 
     Device getDevice(String iD) {
-        for (Device device : deviceList) {
-            if (device.getId() == iD) {
-                return device;
-            }
-        }
-        throw new NotExistingDeviceException();
+        checkDeviceExistence(iD, deviceList);
+        return (Device) deviceList.get(iD);        
     }
 
     Device deleteDevice(Device deviceToDelete) {
-        for (Device device : deviceList) {
-            if (deviceToDelete.equals(device)) {
-                deviceList.remove(deviceToDelete);
-                return device;
-            }
-        }
-        throw new NotExistingDeviceException();
+        Device deletedDevice;
+        checkDeviceExistence(deviceToDelete.getId(), deviceList);
+        deletedDevice=getDevice(deviceToDelete.getId());
+        deviceList.remove(deviceToDelete.getId());
+        return deletedDevice;
     }
 
-    List<Device> getAllDevices() {
+    Map getAllDevices() {
         return this.deviceList;
     }
 }

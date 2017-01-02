@@ -1,14 +1,13 @@
 package xyz.codingmentor.javaeehomework.beans;
 
 import java.util.Objects;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import xyz.codingmentor.javaeehomework.constraint.AppleBlackOrWhite;
 import xyz.codingmentor.javaeehomework.constraint.SamsungIsNotGreen;
-import xyz.codingmentor.javaeehomework.constraint.ValidNaturalNumber;
-import xyz.codingmentor.javaeehomework.constraint.ValidPositive;
 
 /**
  *
@@ -17,30 +16,25 @@ import xyz.codingmentor.javaeehomework.constraint.ValidPositive;
 @AppleBlackOrWhite
 @SamsungIsNotGreen
 public class Device {
-
-    @Pattern.List({
-        @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"),})
+    @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     @NotNull
     @Size(min = 36)
-    String id;
-
-   
-
+    private String id;  
     @NotNull
-    Manufacturer manufacturer;
+    private Manufacturer manufacturer;
     @NotNull
     @Size(min = 3)
-    String type;
+    private String type;
     @NotNull
-    @ValidPositive
-    Integer price;
+    @Min(1)
+    private Integer price;
     @NotNull
-    Color color;
+    private Color color;
     @NotNull
-    @ValidNaturalNumber
-    Integer count;
-
- @Override
+    @Min(0)
+    private Integer count;
+    
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.id);
@@ -63,7 +57,7 @@ public class Device {
             return false;
         }
         return true;
-    }
+    } 
     public void setId(String id) {
         this.id = id;
     }

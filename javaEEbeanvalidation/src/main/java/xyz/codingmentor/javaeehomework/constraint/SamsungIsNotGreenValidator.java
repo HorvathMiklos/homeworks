@@ -14,7 +14,7 @@ public class SamsungIsNotGreenValidator implements ConstraintValidator<SamsungIs
 
     @Override
     public void initialize(SamsungIsNotGreen a) {
-        //happy sonar
+        //nothing to initialize, method empty on purpose
     }
 
     @Override

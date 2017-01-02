@@ -12,7 +12,7 @@ public class FirstnameLastnameBothFilledOrNullAtTheSameTimeValidator implements 
 
     @Override
     public void initialize(FirstnameLastnameBothFilledOrNullAtTheSameTime a) {
-        //happy sonar
+        //nothing to initialize, method empty on purpose
     }
 
     @Override

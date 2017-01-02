@@ -7,7 +7,7 @@ package xyz.codingmentor.javaeehomework.exceptions;
 public class NotExistingUserException extends RuntimeException {
 
     public NotExistingUserException() {
-        //happy sonar
+        //nothing to initialize, method empty on purpose
     }
 
     public NotExistingUserException(String message) {

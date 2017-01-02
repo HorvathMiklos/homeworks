@@ -12,7 +12,7 @@ public class DateOfBirthBeforeRegistrationValidator implements ConstraintValidat
 
     @Override
     public void initialize(DateOfBirthBeforeRegistration a) {
-        //happy sonar
+        //nothing to initialize, method empty on purpose
     }
 
     @Override
@@ -23,7 +23,7 @@ public class DateOfBirthBeforeRegistrationValidator implements ConstraintValidat
         if (user.getDateOfBirth() == null || user.getRegistrationDate() == null) {
             return true;
         }
-        return 0 > user.getDateOfBirth().compareTo(user.getRegistrationDate());
+        return user.getDateOfBirth().before(user.getRegistrationDate());        
     }
 
 }

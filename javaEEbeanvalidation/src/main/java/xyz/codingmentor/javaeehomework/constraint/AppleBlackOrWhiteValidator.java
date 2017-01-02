@@ -14,7 +14,7 @@ public class AppleBlackOrWhiteValidator implements ConstraintValidator<AppleBlac
 
     @Override
     public void initialize(AppleBlackOrWhite a) {
-        //happy sonar
+        //nothing to initialize, method empty on purpose
     }
 
     @Override

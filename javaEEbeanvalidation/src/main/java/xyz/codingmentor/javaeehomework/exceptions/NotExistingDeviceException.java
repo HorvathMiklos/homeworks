@@ -7,7 +7,7 @@ package xyz.codingmentor.javaeehomework.exceptions;
 public class NotExistingDeviceException extends RuntimeException {
 
     public NotExistingDeviceException() {
-        //happy sonar
+        //nothing to initialize, method empty on purpose
     }
 
     public NotExistingDeviceException(String message) {

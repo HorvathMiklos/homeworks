@@ -112,7 +112,7 @@ public class UserEntityTest {
     public void testEmailNull() {
         String badEmail = null;
         newUser.setEmail(badEmail);
-        testViolation(badEmail, 2);
+        testViolation(badEmail, 1);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class UserEntityTest {
     public void testRegistrationDateNull() {
         Date nullDate = null;
         newUser.setRegistrationDate(nullDate);
-        testViolation(nullDate, 2);
+        testViolation(nullDate, 1);
     }
 
     @Test

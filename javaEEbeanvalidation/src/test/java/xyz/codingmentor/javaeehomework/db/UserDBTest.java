@@ -5,7 +5,6 @@
  */
 package xyz.codingmentor.javaeehomework.db;
 
-import xyz.codingmentor.javaeehomework.db.UserDB;
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingUserException;
 import java.util.Calendar;
 import javax.validation.Validation;
@@ -95,7 +94,7 @@ public class UserDBTest {
     @Test
     public void testAddUser() {
         userDB.addUser(newUser);
-        assertEquals(true, userDB.getAllUser().contains(newUser));
+        assertEquals(true, userDB.getAllUser().containsValue(newUser));
     }
 
     @Test
@@ -134,9 +133,9 @@ public class UserDBTest {
     @Test
     public void testDeleteUser() {
         userDB.addUser(newUserJulia);
-        assertEquals(true, userDB.getAllUser().contains(newUserJulia));
+        assertEquals(true, userDB.getAllUser().containsKey(newUserJulia.getUsername()));
         userDB.deleteUser(newUserJulia);
-        assertEquals(false, userDB.getAllUser().contains(newUserJulia));
+        assertEquals(false, userDB.getAllUser().containsKey(newUserJulia.getUsername()));
     }
 
     @Test(expected = NotExistingUserException.class)

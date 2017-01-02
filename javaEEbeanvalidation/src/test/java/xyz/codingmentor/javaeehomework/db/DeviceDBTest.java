@@ -5,14 +5,11 @@
  */
 package xyz.codingmentor.javaeehomework.db;
 
-import xyz.codingmentor.javaeehomework.db.DeviceDB;
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingDeviceException;
-import xyz.codingmentor.javaeehomework.exceptions.NotExistingUserException;
 import java.util.UUID;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -76,7 +73,7 @@ public class DeviceDBTest {
     @Test
     public void testAddDevice() {
         deviceDB.addDevice(newDeviceOne);
-        assertEquals(true, deviceDB.getAllDevices().contains(newDeviceOne));
+        assertEquals(true, deviceDB.getAllDevices().containsValue(newDeviceOne));
     }
 
     @Test
@@ -110,8 +107,8 @@ public class DeviceDBTest {
         deviceDB.addDevice(newDeviceOne);
         deviceDB.addDevice(newDeviceTwo);
         deviceDB.deleteDevice(newDeviceTwo);
-        assertEquals(true, deviceDB.getAllDevices().contains(newDeviceOne));
-        assertEquals(false, deviceDB.getAllDevices().contains(newDeviceTwo));
+        assertEquals(true, deviceDB.getAllDevices().containsKey(newDeviceOne.getId()));
+        assertEquals(false, deviceDB.getAllDevices().containsKey(newDeviceTwo.getId()));
 
     }
 

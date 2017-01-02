@@ -1,10 +1,11 @@
 package xyz.codingmentor.javaeehomework.db;
 
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingUserException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import xyz.codingmentor.javaeehomework.beans.UserEntity;
+import xyz.codingmentor.javaeehomework.exceptions.UserAllreadyInUserListException;
 
 /**
  *
@@ -12,68 +13,60 @@ import xyz.codingmentor.javaeehomework.beans.UserEntity;
  */
 public class UserDB {
 
-    List<UserEntity> userList;
+    Map userList;
     Calendar currentTime;
 
     UserDB() {
-        userList = new ArrayList();
+        userList = new HashMap();
 
     }
-
+    private static void checkUserExistence(String username,Map userList){
+        if(!userList.containsKey(username)){
+            throw new NotExistingUserException();
+        }
+    }
     public UserEntity addUser(UserEntity newUser) {
-        userList.add(newUser);
-        return userList.get(userList.size() - 1);
+        if(userList.containsKey(newUser.getUsername())){
+            throw new UserAllreadyInUserListException();
+        }
+        userList.put(newUser.getUsername(), newUser);
+        return (UserEntity) userList.get(newUser.getUsername());             
     }
 
     public UserEntity getUser(String username) {
-        for (UserEntity user : userList) {
-            if (user.getUsername() == username) {
-                return user;
-            }
-        }
-        throw new NotExistingUserException();
+        checkUserExistence(username, userList);
+        return (UserEntity) userList.get(username);
+        
     }
 
-    public boolean authenticate(String username, String pasword) {
-        for (UserEntity user : userList) {
-            if (user.getUsername() == username && user.getPassword() == pasword) {
-                return true;
-            }
+    public boolean authenticate(String username, String password) {
+        UserEntity userToAuthenticate;
+        if(null==userList.get(username)){
+            return false;
         }
-        return false;
+        userToAuthenticate=(UserEntity)userList.get(username);
+        return userToAuthenticate.getPassword() == null ? false : userToAuthenticate.getPassword().equals(password);
+        
     }
 
     public UserEntity modifyUser(UserEntity userToModify) {
         Calendar now = Calendar.getInstance();
-        for (UserEntity user : userList) {
-            if (userToModify.equals(user)) {
-                user.setUsername(userToModify.getUsername());
-                user.setPassword(userToModify.getPassword());
-                user.setAddress(userToModify.getAddress());
-                user.setFirstname(userToModify.getFirstname());
-                user.setFirstname(userToModify.getLastname());
-                user.setPhone(userToModify.getPhone());
-                user.setSex(userToModify.getSex());
-                user.setRegistrationDate(userToModify.getRegistrationDate());
-                user.setDateOfBirth(userToModify.getDateOfBirth());
-                user.setLastModifiedDate(now.getTime());
-                return user;
-            }
-        }
-        throw new NotExistingUserException();
+        checkUserExistence(userToModify.getUsername(), userList);
+        userToModify.setLastModifiedDate(now.getTime());
+        userList.put(userToModify.getUsername(),userToModify );
+        return (UserEntity) userList.get(userToModify.getUsername());        
     }
 
     public UserEntity deleteUser(UserEntity userToDelete) {
-        for (UserEntity user : userList) {
-            if (userToDelete.equals(user)) {
-                userList.remove(user);
-                return user;
-            }
-        }
-        throw new NotExistingUserException();
+        UserEntity deletedUser;
+        checkUserExistence(userToDelete.getUsername(), userList);
+        deletedUser=(UserEntity) userList.get(userToDelete.getUsername());
+        userList.remove(userToDelete.getUsername());
+        return deletedUser;
+       
     }
 
-    List<UserEntity> getAllUser() {
+    Map getAllUser() {
         return this.userList;
     }
 

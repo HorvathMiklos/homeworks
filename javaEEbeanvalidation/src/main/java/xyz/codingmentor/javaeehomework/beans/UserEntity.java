@@ -2,15 +2,11 @@ package xyz.codingmentor.javaeehomework.beans;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Objects;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import xyz.codingmentor.javaeehomework.constraint.DateOfBirthBeforeRegistration;
 import xyz.codingmentor.javaeehomework.constraint.FirstnameLastnameBothFilledOrNullAtTheSameTime;
-import xyz.codingmentor.javaeehomework.constraint.ValidAddress;
-import xyz.codingmentor.javaeehomework.constraint.ValidEmail;
-import xyz.codingmentor.javaeehomework.constraint.ValidPastDate;
-import xyz.codingmentor.javaeehomework.constraint.ValidPhone;
 
 /**
  *
@@ -22,34 +18,32 @@ public class UserEntity {
 
     @NotNull
     @Size(min = 6)
-    String username;
+    private String username;
     @NotNull
     @Size(min = 6)
     @Pattern.List({
-        @Pattern(regexp = ".*[a-z].*")
-        ,
-        @Pattern(regexp = ".*[A-Z].*")
-        ,
+        @Pattern(regexp = ".*[a-z].*"),
+        @Pattern(regexp = ".*[A-Z].*"),
         @Pattern(regexp = "(.*[1-9].*)|(.*[\\=\\+\\<\\>\\.\\,\\)].*)")
     })
-    String password;
-    String firstname;
-    String lastname;
-    @ValidAddress
-    String address;
-    @ValidPhone
-    String phone;
+    private String password;
+    private String firstname;
+    private String lastname;
+    @Pattern(regexp ="^\\d{4}.*")
+    private String address;
+    @Pattern(regexp ="^((06)|(\\+36))\\d{9}")
+    private String phone;
     @NotNull
-    @ValidEmail
-    String email;
-    Sex sex;
+    @Pattern(regexp ="^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}")        
+    private String email;
+    private Sex sex;
     @NotNull
-    @ValidPastDate
-    Date registrationDate;
-    @ValidPastDate
-    Date lastModifiedDate;
-    Date dateOfBirth;
-    boolean admin;
+    @Past
+    private Date registrationDate;
+    @Past
+    private Date lastModifiedDate;
+    private Date dateOfBirth;
+    private boolean admin;
 
     public UserEntity(String username, String password, String email) {
         this.username = username;
@@ -120,10 +114,7 @@ public class UserEntity {
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
-
-    void getRegistrationDate(Date time) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     public String getUsername() {
         return username;
@@ -144,34 +135,7 @@ public class UserEntity {
     public boolean isAdmin() {
         return admin;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.email);
-        return hash;
-    }
-
-    public String getAddress() {
+     public String getAddress() {
         return address;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final UserEntity other = (UserEntity) obj;
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        return true;
-    }
-
 }
