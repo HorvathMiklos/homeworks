@@ -1,7 +1,9 @@
 package xyz.codingmentor.javaeehomework.db;
 
+import java.util.ArrayList;
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingDeviceException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import xyz.codingmentor.javaeehomework.beans.Device;
 import xyz.codingmentor.javaeehomework.exceptions.DeviceAllreadyInDeviceListException;
@@ -12,40 +14,40 @@ import xyz.codingmentor.javaeehomework.exceptions.DeviceAllreadyInDeviceListExce
  */
 public class DeviceDB {
 
-    private Map deviceList = new HashMap();
-    private static void checkDeviceExistence(String deviceID,Map deviceList){
-        if(!deviceList.containsKey(deviceID)){
-            throw new NotExistingDeviceException();
+    private Map deviceMap = new HashMap<String,Device>();
+    private void checkDeviceExistence(String deviceID){
+        if(!deviceMap.containsKey(deviceID)){
+            throw new NotExistingDeviceException(deviceID);
         }
     }
-    Device addDevice(Device newDevice) {
-        if(deviceList.containsKey(newDevice.getId())){
+    public Device addDevice(Device newDevice) {
+        if(deviceMap.containsKey(newDevice.getId())){
             throw new DeviceAllreadyInDeviceListException();
         }
-        deviceList.put(newDevice.getId(), newDevice);
-        return (Device) deviceList.get(newDevice.getId());
+        deviceMap.put(newDevice.getId(), newDevice);
+        return (Device) deviceMap.get(newDevice.getId());
     }
 
-    Device editDevice(Device deviceToEdit) {
-        checkDeviceExistence(deviceToEdit.getId(), deviceList);
-        deviceList.put(deviceToEdit.getId(), deviceToEdit);
-        return (Device) deviceList.get(deviceToEdit.getId());                      
+    public Device editDevice(Device deviceToEdit) {
+        checkDeviceExistence(deviceToEdit.getId());
+        deviceMap.put(deviceToEdit.getId(), deviceToEdit);
+        return (Device) deviceMap.get(deviceToEdit.getId());                      
     }
 
-    Device getDevice(String iD) {
-        checkDeviceExistence(iD, deviceList);
-        return (Device) deviceList.get(iD);        
+    public Device getDevice(String iD) {
+        checkDeviceExistence(iD);
+        return (Device) deviceMap.get(iD);        
     }
 
-    Device deleteDevice(Device deviceToDelete) {
+    public Device deleteDevice(Device deviceToDelete) {
         Device deletedDevice;
-        checkDeviceExistence(deviceToDelete.getId(), deviceList);
+        checkDeviceExistence(deviceToDelete.getId());
         deletedDevice=getDevice(deviceToDelete.getId());
-        deviceList.remove(deviceToDelete.getId());
+        deviceMap.remove(deviceToDelete.getId());
         return deletedDevice;
     }
 
-    Map getAllDevices() {
-        return this.deviceList;
+    public List<Device> getAllDevices() {
+        return new ArrayList<>(deviceMap.values());
     }
 }

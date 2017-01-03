@@ -1,8 +1,10 @@
 package xyz.codingmentor.javaeehomework.db;
 
+import java.util.ArrayList;
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingUserException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import xyz.codingmentor.javaeehomework.beans.UserEntity;
 import xyz.codingmentor.javaeehomework.exceptions.UserAllreadyInUserListException;
@@ -12,62 +14,59 @@ import xyz.codingmentor.javaeehomework.exceptions.UserAllreadyInUserListExceptio
  * @author mhorvath
  */
 public class UserDB {
-
-    Map userList;
-    Calendar currentTime;
-
-    UserDB() {
-        userList = new HashMap();
+    private Map userMap;
+    public UserDB() {
+        userMap = new HashMap<String,UserEntity>();
 
     }
-    private static void checkUserExistence(String username,Map userList){
-        if(!userList.containsKey(username)){
-            throw new NotExistingUserException();
+    private void checkUserExistence(String username){
+        if(!userMap.containsKey(username)){
+            throw new NotExistingUserException(username);
         }
     }
     public UserEntity addUser(UserEntity newUser) {
-        if(userList.containsKey(newUser.getUsername())){
+        if(userMap.containsKey(newUser.getUsername())){
             throw new UserAllreadyInUserListException();
         }
-        userList.put(newUser.getUsername(), newUser);
-        return (UserEntity) userList.get(newUser.getUsername());             
+        userMap.put(newUser.getUsername(), newUser);
+        return (UserEntity) userMap.get(newUser.getUsername());             
     }
 
     public UserEntity getUser(String username) {
-        checkUserExistence(username, userList);
-        return (UserEntity) userList.get(username);
+        checkUserExistence(username);
+        return (UserEntity) userMap.get(username);
         
     }
 
     public boolean authenticate(String username, String password) {
         UserEntity userToAuthenticate;
-        if(null==userList.get(username)){
+        if(null==userMap.get(username)){
             return false;
         }
-        userToAuthenticate=(UserEntity)userList.get(username);
+        userToAuthenticate=(UserEntity)userMap.get(username);
         return userToAuthenticate.getPassword() == null ? false : userToAuthenticate.getPassword().equals(password);
         
     }
 
     public UserEntity modifyUser(UserEntity userToModify) {
         Calendar now = Calendar.getInstance();
-        checkUserExistence(userToModify.getUsername(), userList);
+        checkUserExistence(userToModify.getUsername());
         userToModify.setLastModifiedDate(now.getTime());
-        userList.put(userToModify.getUsername(),userToModify );
-        return (UserEntity) userList.get(userToModify.getUsername());        
+        userMap.put(userToModify.getUsername(),userToModify );
+        return (UserEntity) userMap.get(userToModify.getUsername());        
     }
 
     public UserEntity deleteUser(UserEntity userToDelete) {
         UserEntity deletedUser;
-        checkUserExistence(userToDelete.getUsername(), userList);
-        deletedUser=(UserEntity) userList.get(userToDelete.getUsername());
-        userList.remove(userToDelete.getUsername());
+        checkUserExistence(userToDelete.getUsername());
+        deletedUser=(UserEntity) userMap.get(userToDelete.getUsername());
+        userMap.remove(userToDelete.getUsername());
         return deletedUser;
        
     }
 
-    Map getAllUser() {
-        return this.userList;
+    public List<UserEntity> getAllUser() {
+        return new ArrayList<>(userMap.values());
     }
 
 }

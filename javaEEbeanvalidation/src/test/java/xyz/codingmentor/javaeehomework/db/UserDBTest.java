@@ -94,7 +94,7 @@ public class UserDBTest {
     @Test
     public void testAddUser() {
         userDB.addUser(newUser);
-        assertEquals(true, userDB.getAllUser().containsValue(newUser));
+        assertEquals(true, userDB.getAllUser().contains(newUser));
     }
 
     @Test
@@ -133,9 +133,9 @@ public class UserDBTest {
     @Test
     public void testDeleteUser() {
         userDB.addUser(newUserJulia);
-        assertEquals(true, userDB.getAllUser().containsKey(newUserJulia.getUsername()));
+        assertEquals(true, userDB.getAllUser().contains(newUserJulia));
         userDB.deleteUser(newUserJulia);
-        assertEquals(false, userDB.getAllUser().containsKey(newUserJulia.getUsername()));
+        assertEquals(false, userDB.getAllUser().contains(newUserJulia));
     }
 
     @Test(expected = NotExistingUserException.class)

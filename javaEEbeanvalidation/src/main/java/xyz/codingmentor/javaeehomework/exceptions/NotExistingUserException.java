@@ -6,24 +6,15 @@ package xyz.codingmentor.javaeehomework.exceptions;
  */
 public class NotExistingUserException extends RuntimeException {
 
-    public NotExistingUserException() {
-        //nothing to initialize, method empty on purpose
-    }
+   private final String entityName;
+   
+   public NotExistingUserException(String entityName){
+       this.entityName = entityName;
+   }
 
-    public NotExistingUserException(String message) {
-        super(message);
-    }
-
-    public NotExistingUserException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public NotExistingUserException(Throwable cause) {
-        super(cause);
-    }
-
-    public NotExistingUserException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
+   @Override
+   public String getMessage() {
+       return "The entitiy : " + this.entityName +  " does not exist!";
+   }
 
 }

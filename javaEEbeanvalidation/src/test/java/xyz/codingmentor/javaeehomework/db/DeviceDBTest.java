@@ -73,7 +73,7 @@ public class DeviceDBTest {
     @Test
     public void testAddDevice() {
         deviceDB.addDevice(newDeviceOne);
-        assertEquals(true, deviceDB.getAllDevices().containsValue(newDeviceOne));
+        assertEquals(true, deviceDB.getAllDevices().contains(newDeviceOne));
     }
 
     @Test
@@ -107,8 +107,8 @@ public class DeviceDBTest {
         deviceDB.addDevice(newDeviceOne);
         deviceDB.addDevice(newDeviceTwo);
         deviceDB.deleteDevice(newDeviceTwo);
-        assertEquals(true, deviceDB.getAllDevices().containsKey(newDeviceOne.getId()));
-        assertEquals(false, deviceDB.getAllDevices().containsKey(newDeviceTwo.getId()));
+        assertEquals(true, deviceDB.getAllDevices().contains(newDeviceOne));
+        assertEquals(false, deviceDB.getAllDevices().contains(newDeviceTwo));
 
     }
 
