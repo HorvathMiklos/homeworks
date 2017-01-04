@@ -45,6 +45,10 @@ public class UserEntity {
     private Date dateOfBirth;
     private boolean admin;
 
+    public UserEntity() {
+        //for json reader, empty on purpuse
+    }
+
     public UserEntity(String username, String password, String email) {
         this.username = username;
         this.password = password;
@@ -128,14 +132,23 @@ public class UserEntity {
         return phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public Date getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+    
     public Sex getSex() {
         return sex;
     }
-
+    public String getAddress() {
+        return address;
+    }
     public boolean isAdmin() {
         return admin;
     }
-     public String getAddress() {
-        return address;
-    }
+    
+     
 }

@@ -7,33 +7,23 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import xyz.codingmentor.javaeehomework.beans.Device;
-import xyz.codingmentor.javaeehomework.beans.UserEntity;
 
 /**
  *
  * @author mhorvath
  */
 public class JSONwriter {
-    private String path;
+    
     private final ObjectMapper mapper;
-    public JSONwriter(String path) {
-        this.path = path;
+    public JSONwriter() {
         mapper=new ObjectMapper();
     }
     
-    public void userEntityListToJson(List<UserEntity> userEntitys){
+    public <T> void listToJson(List<T> entities,String path){
         try {
-            mapper.writeValue(new File(path), userEntitys);
+            mapper.writeValue(new File(path), entities);
         } catch (IOException ex) {
             Logger.getLogger(JSONwriter.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    public void deviceListToJson(List<Device> devices){
-        try {
-            mapper.writeValue(new File(path), devices);
-        } catch (IOException ex) {
-            Logger.getLogger(JSONwriter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    }    
 }

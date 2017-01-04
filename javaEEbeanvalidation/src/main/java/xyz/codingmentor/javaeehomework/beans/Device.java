@@ -33,6 +33,10 @@ public class Device {
     @NotNull
     @Min(0)
     private Integer count;
+
+    public Device() {
+        //for json reader, empty on purpuse
+    }
     
     
     public void setId(String id) {
