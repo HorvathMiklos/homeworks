@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package xyz.codingmentor.javaeehomework.beans;
 
 import java.util.Set;
@@ -15,10 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 
-/**
- *
- * @author mhorvath
- */
+
 public class DeviceTest {
 
     private static ValidatorFactory vf;
@@ -37,7 +30,7 @@ public class DeviceTest {
     }
 
     @Before
-    public void setUpClass() {
+    public void setUp() {
         vf = Validation.buildDefaultValidatorFactory();
         validator = vf.getValidator();
         newDevice = new Device();

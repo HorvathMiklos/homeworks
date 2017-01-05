@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package xyz.codingmentor.javaeehomework.db;
 
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingDeviceException;
@@ -17,10 +13,7 @@ import xyz.codingmentor.javaeehomework.beans.Color;
 import xyz.codingmentor.javaeehomework.beans.Device;
 import xyz.codingmentor.javaeehomework.beans.Manufacturer;
 
-/**
- *
- * @author mhorvath
- */
+
 public class DeviceDBTest {
 
     private static ValidatorFactory vf;
@@ -36,7 +29,7 @@ public class DeviceDBTest {
     }
 
     @Before
-    public void setUpClass() {
+    public void setUp() {
         vf = Validation.buildDefaultValidatorFactory();
         validator = vf.getValidator();
         deviceDB = new DeviceDB();

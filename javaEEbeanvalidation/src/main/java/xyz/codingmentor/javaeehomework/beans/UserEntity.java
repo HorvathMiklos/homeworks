@@ -149,6 +149,11 @@ public class UserEntity {
     public boolean isAdmin() {
         return admin;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" + "username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", sex=" + sex + ", registrationDate=" + registrationDate + ", lastModifiedDate=" + lastModifiedDate + ", dateOfBirth=" + dateOfBirth + ", admin=" + admin + '}';
+    }
     
      
 }

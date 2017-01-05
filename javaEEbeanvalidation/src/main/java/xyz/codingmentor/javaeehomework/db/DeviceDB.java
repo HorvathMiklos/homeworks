@@ -14,7 +14,12 @@ import xyz.codingmentor.javaeehomework.exceptions.DeviceAllreadyInDeviceListExce
  */
 public class DeviceDB {
 
-    private Map deviceMap = new HashMap<String,Device>();
+    private Map<String,Device> deviceMap;
+
+    public DeviceDB() {
+        deviceMap = deviceMap = new HashMap();
+    }
+    
     private void checkDeviceExistence(String deviceID){
         if(!deviceMap.containsKey(deviceID)){
             throw new NotExistingDeviceException(deviceID);
@@ -25,18 +30,18 @@ public class DeviceDB {
             throw new DeviceAllreadyInDeviceListException();
         }
         deviceMap.put(newDevice.getId(), newDevice);
-        return (Device) deviceMap.get(newDevice.getId());
+        return deviceMap.get(newDevice.getId());
     }
 
     public Device editDevice(Device deviceToEdit) {
         checkDeviceExistence(deviceToEdit.getId());
         deviceMap.put(deviceToEdit.getId(), deviceToEdit);
-        return (Device) deviceMap.get(deviceToEdit.getId());                      
+        return deviceMap.get(deviceToEdit.getId());                      
     }
 
     public Device getDevice(String iD) {
         checkDeviceExistence(iD);
-        return (Device) deviceMap.get(iD);        
+        return deviceMap.get(iD);        
     }
 
     public Device deleteDevice(Device deviceToDelete) {

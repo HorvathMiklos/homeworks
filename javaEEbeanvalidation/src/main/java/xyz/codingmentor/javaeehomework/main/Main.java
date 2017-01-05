@@ -38,26 +38,11 @@ public class Main {
         deviceDB=reader.jsonToDeviceDB(devicesPath);
         LOGGER.log(Level.INFO, userDB.toString());
         for (UserEntity userEntity : userDB.getAllUser()) {
-            LOGGER.log(Level.INFO, userEntity.getUsername());
-            LOGGER.log(Level.INFO, userEntity.getPassword());
-            LOGGER.log(Level.INFO, userEntity.getFirstname());
-            LOGGER.log(Level.INFO, userEntity.getAddress());
-            LOGGER.log(Level.INFO, userEntity.getPhone());
-            LOGGER.log(Level.INFO, userEntity.getEmail());
-            LOGGER.log(Level.INFO, userEntity.getSex().toString());
-            LOGGER.log(Level.INFO, userEntity.getRegistrationDate().toString());
-            LOGGER.log(Level.INFO, userEntity.getLastModifiedDate().toString());
-            LOGGER.log(Level.INFO, userEntity.getDateOfBirth().toString());
-            LOGGER.log(Level.INFO, userEntity.isAdmin()? "admin":"user");            
+            LOGGER.log(Level.INFO, userEntity.toString());               
         }
         LOGGER.log(Level.INFO, deviceDB.toString());
         for (Device device : deviceDB.getAllDevices()) {
-            LOGGER.log(Level.INFO, device.getId());
-            LOGGER.log(Level.INFO, device.getManufacturer().toString());
-            LOGGER.log(Level.INFO, device.getType());
-            LOGGER.log(Level.INFO, device.getPrice().toString());
-            LOGGER.log(Level.INFO, device.getColor().toString());
-            LOGGER.log(Level.INFO, device.getCount().toString());            
+            LOGGER.log(Level.INFO, device.toString());            
         }
     }
     public static List<Device> newDeviceList(){        

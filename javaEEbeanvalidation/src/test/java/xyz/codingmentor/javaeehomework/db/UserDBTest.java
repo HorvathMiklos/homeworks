@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package xyz.codingmentor.javaeehomework.db;
 
 import xyz.codingmentor.javaeehomework.exceptions.NotExistingUserException;
@@ -16,10 +12,7 @@ import org.junit.Before;
 import xyz.codingmentor.javaeehomework.beans.Sex;
 import xyz.codingmentor.javaeehomework.beans.UserEntity;
 
-/**
- *
- * @author mhorvath
- */
+
 public class UserDBTest {
 
     private static ValidatorFactory vf;
@@ -35,7 +28,7 @@ public class UserDBTest {
     }
 
     @Before
-    public void setUpClass() {
+    public void setUp() {
         vf = Validation.buildDefaultValidatorFactory();
         validator = vf.getValidator();
         userDB = new UserDB();

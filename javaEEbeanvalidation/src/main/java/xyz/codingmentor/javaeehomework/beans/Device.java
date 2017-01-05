@@ -109,5 +109,11 @@ public class Device {
             return false;
         }
         return true;
-    } 
+    }
+
+    @Override
+    public String toString() {
+        return "Device{" + "id=" + id + ", manufacturer=" + manufacturer + ", type=" + type + ", price=" + price + ", color=" + color + ", count=" + count + '}';
+    }
+    
 }

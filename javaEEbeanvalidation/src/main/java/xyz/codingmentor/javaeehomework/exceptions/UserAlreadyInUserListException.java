@@ -5,9 +5,9 @@ package xyz.codingmentor.javaeehomework.exceptions;
  *
  * @author mhorvath
  */
-public class UserAllreadyInUserListException  extends RuntimeException{
+public class UserAlreadyInUserListException  extends RuntimeException{
 
-    public UserAllreadyInUserListException() {
+    public UserAlreadyInUserListException() {
         //nothing to initialize, method empty on purpose
     }
 

@@ -7,17 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import xyz.codingmentor.javaeehomework.beans.UserEntity;
-import xyz.codingmentor.javaeehomework.exceptions.UserAllreadyInUserListException;
+import xyz.codingmentor.javaeehomework.exceptions.UserAlreadyInUserListException;
 
 /**
  *
  * @author mhorvath
  */
 public class UserDB {
-    private Map userMap;
+    private Map<String,UserEntity> userMap;
     public UserDB() {
-        userMap = new HashMap<String,UserEntity>();
-
+        userMap = new HashMap<>();
     }
     private void checkUserExistence(String username){
         if(!userMap.containsKey(username)){
@@ -26,15 +25,15 @@ public class UserDB {
     }
     public UserEntity addUser(UserEntity newUser) {
         if(userMap.containsKey(newUser.getUsername())){
-            throw new UserAllreadyInUserListException();
+            throw new UserAlreadyInUserListException();
         }
         userMap.put(newUser.getUsername(), newUser);
-        return (UserEntity) userMap.get(newUser.getUsername());             
+        return userMap.get(newUser.getUsername());             
     }
 
     public UserEntity getUser(String username) {
         checkUserExistence(username);
-        return (UserEntity) userMap.get(username);
+        return userMap.get(username);
         
     }
 
@@ -43,7 +42,7 @@ public class UserDB {
         if(null==userMap.get(username)){
             return false;
         }
-        userToAuthenticate=(UserEntity)userMap.get(username);
+        userToAuthenticate=userMap.get(username);
         return userToAuthenticate.getPassword() == null ? false : userToAuthenticate.getPassword().equals(password);
         
     }
@@ -53,13 +52,13 @@ public class UserDB {
         checkUserExistence(userToModify.getUsername());
         userToModify.setLastModifiedDate(now.getTime());
         userMap.put(userToModify.getUsername(),userToModify );
-        return (UserEntity) userMap.get(userToModify.getUsername());        
+        return userMap.get(userToModify.getUsername());        
     }
 
     public UserEntity deleteUser(UserEntity userToDelete) {
         UserEntity deletedUser;
         checkUserExistence(userToDelete.getUsername());
-        deletedUser=(UserEntity) userMap.get(userToDelete.getUsername());
+        deletedUser= userMap.get(userToDelete.getUsername());
         userMap.remove(userToDelete.getUsername());
         return deletedUser;
        
