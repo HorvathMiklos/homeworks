@@ -17,7 +17,7 @@ public class DeviceDB {
     private Map<String,Device> deviceMap;
 
     public DeviceDB() {
-        deviceMap = deviceMap = new HashMap();
+        deviceMap = deviceMap = new HashMap<>();
     }
     
     private void checkDeviceExistence(String deviceID){

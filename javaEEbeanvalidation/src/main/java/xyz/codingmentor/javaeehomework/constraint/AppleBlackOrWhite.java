@@ -8,7 +8,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-
+/**
+ *
+ * @author mhorvath
+ */
 @Constraint(validatedBy = AppleBlackOrWhiteValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
