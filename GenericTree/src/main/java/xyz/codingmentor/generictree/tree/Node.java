@@ -48,7 +48,7 @@ public class Node<T> {
         }
     }
     public boolean haveParent(){
-        return null==this.parent;
+        return !(null==this.parent);
     }
     public boolean hasChilds(){
         return !this.childrens.isEmpty();
