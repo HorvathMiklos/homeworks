@@ -20,16 +20,27 @@ import xyz.codingmentor.javaeehomework.json.JSONwriter;
  *
  * @author mhorvath
  */
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
+import xyz.codingmentor.javaeehomework.cart.Cart;
+import xyz.codingmentor.javaeehomework.exceptions.InvalidBeanExeption;
 public class Main {
     private static final Logger LOGGER = Logger.getLogger("myLogger");
+    private static final String DEVICE_TYPE="phone";
     private Main(){
         //hide public main, empty on purpuse
     }
-    public static void main(String[] args) {
-        String usersPath="users.json";
-        String devicesPath="devices.json";
+    public static void main(String[] args) {       
+        Weld weld = new Weld();
+        WeldContainer container = weld.initialize(); 
         UserDB userDB;
         DeviceDB deviceDB;
+        UserDB userDBvalidationtest = container.instance().select(UserDB.class).get();
+        DeviceDB deviceDBvalidationtest = container.instance().select(DeviceDB.class).get();
+        String usersPath="users.json";
+        String devicesPath="devices.json";        
+        UserEntity invalidUser;
+        Device invalidDevice;
         JSONwriter writer = new JSONwriter();        
         JSONreader reader = new JSONreader();
         writer.listToJson(newDeviceList(),devicesPath);
@@ -44,6 +55,110 @@ public class Main {
         for (Device device : deviceDB.getAllDevices()) {
             LOGGER.log(Level.INFO, device.toString());            
         }
+        
+        invalidUser= new UserEntity("inv", "weakpassword", "invalidmail");
+        invalidUser.setFirstname("Firstname");
+        invalidUser.setLastname("Lastname");
+        invalidUser.setAddress("1123 Java street 58");
+        invalidUser.setPhone("afwegf");
+        invalidUser.setSex(Sex.MALE);            
+        invalidUser.setDateOfBirth(null);
+        invalidUser.setAdmin(true);
+        
+        invalidDevice= new Device();
+        invalidDevice.setId(UUID.randomUUID().toString());        
+        invalidDevice.setManufacturer(Manufacturer.HTC);
+        invalidDevice.setType(DEVICE_TYPE);
+        invalidDevice.setPrice(-36736);
+        invalidDevice.setColor(Color.BLUE);
+        invalidDevice.setCount(-478);
+        
+        
+        userDBvalidationtest.addUser(invalidUser);
+        deviceDBvalidationtest.addDevice(invalidDevice);
+        try {
+            userDBvalidationtest.modifyUser(invalidUser);
+        } catch(InvalidBeanExeption e) {
+            LOGGER.log(Level.INFO,"modifyUser has invalid bean parameter",e);
+        }
+        try {
+            userDBvalidationtest.deleteUser(invalidUser);
+        } catch(InvalidBeanExeption e) {
+            LOGGER.log(Level.INFO,"deleteUser has invalid bean parameter",e);
+        }
+        try {
+            deviceDBvalidationtest.editDevice(invalidDevice);
+        } catch(InvalidBeanExeption e) {
+            LOGGER.log(Level.INFO,"editDevice has invalid bean parameter",e);
+        }
+        try {
+            deviceDBvalidationtest.deleteDevice(invalidDevice);
+        } catch(InvalidBeanExeption e) {
+            LOGGER.log(Level.INFO,"deleteDevice has invalid bean parameter",e);
+        }
+        
+        DeviceDB deviceDBCartTest=new DeviceDB();
+        Cart testCart=new Cart(deviceDBCartTest);
+        Device blueHTC;
+        Device blueHTCten;
+        Device whiteIphone;
+        String blueHTCiD=UUID.randomUUID().toString();
+        String whiteIphoneiD=UUID.randomUUID().toString();
+        blueHTC= new Device();
+        blueHTC.setId(blueHTCiD);        
+        blueHTC.setManufacturer(Manufacturer.HTC);
+        blueHTC.setType(DEVICE_TYPE);
+        blueHTC.setPrice(1000);
+        blueHTC.setColor(Color.BLUE);
+        blueHTC.setCount(50);
+        deviceDBCartTest.addDevice(blueHTC);
+
+        blueHTCten= new Device();
+        blueHTCten.setId(blueHTCiD);        
+        blueHTCten.setManufacturer(Manufacturer.HTC);
+        blueHTCten.setType(DEVICE_TYPE);
+        blueHTCten.setPrice(1000);
+        blueHTCten.setColor(Color.BLUE);
+        blueHTCten.setCount(10);
+        
+        whiteIphone= new Device();
+        whiteIphone.setId(whiteIphoneiD);        
+        whiteIphone.setManufacturer(Manufacturer.APPLE);
+        whiteIphone.setType(DEVICE_TYPE);
+        whiteIphone.setPrice(9000);
+        whiteIphone.setColor(Color.WHITE);
+        whiteIphone.setCount(50);
+        deviceDBCartTest.addDevice(whiteIphone);
+        log(deviceDBCartTest,testCart);
+        testCart.addDevice(blueHTC.getId(),50);
+        testCart.addDevice(whiteIphone.getId(), 50);
+        LOGGER.log(Level.INFO,"after 50 both phone added to cart:");
+        log(deviceDBCartTest, testCart);
+        testCart.deleteDevice(blueHTC.getId(),10);
+        LOGGER.log(Level.INFO,"after 10 blueHTC deleted:");
+        log(deviceDBCartTest, testCart);
+        testCart.addDevice(blueHTC.getId(), 10);
+        LOGGER.log(Level.INFO,"after 10 blueHTC added again:");
+        log(deviceDBCartTest, testCart);        
+        testCart.delete();
+        LOGGER.log(Level.INFO,"after delete");
+        log(deviceDBCartTest, testCart);
+        testCart.addDevice(blueHTC.getId(),50);
+        testCart.addDevice(whiteIphone.getId(), 50);
+        LOGGER.log(Level.INFO,"after 50 both phone added to cart again:");
+        log(deviceDBCartTest, testCart);
+        LOGGER.log(Level.INFO,"buy!");
+        testCart.buy();
+    }
+    private static void log(DeviceDB deviceDBCartTest,Cart testCart){
+        LOGGER.log(Level.INFO,".........................................................................");
+        LOGGER.log(Level.INFO,"deviceDBCartTest tartalma");
+        for (Device device : deviceDBCartTest.getAllDevices()) {
+            LOGGER.log(Level.INFO,device.toString());
+        }
+        LOGGER.log(Level.INFO, "testCart tartalma");
+        testCart.logAllDevices();
+        LOGGER.log(Level.INFO,".........................................................................");       
     }
     public static List<Device> newDeviceList(){        
         List<Device> deviceList= new ArrayList<>();        

@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import xyz.codingmentor.javaeehomework.annotations.Bean;
 import xyz.codingmentor.javaeehomework.constraint.AppleBlackOrWhite;
 import xyz.codingmentor.javaeehomework.constraint.SamsungIsNotGreen;
 
@@ -13,6 +14,7 @@ import xyz.codingmentor.javaeehomework.constraint.SamsungIsNotGreen;
  *
  * @author mhorvath
  */
+@Bean
 @AppleBlackOrWhite
 @SamsungIsNotGreen
 public class Device {

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import xyz.codingmentor.javaeehomework.annotations.Bean;
 import xyz.codingmentor.javaeehomework.constraint.DateOfBirthBeforeRegistration;
 import xyz.codingmentor.javaeehomework.constraint.FirstnameLastnameBothFilledOrNullAtTheSameTime;
 
@@ -12,6 +13,7 @@ import xyz.codingmentor.javaeehomework.constraint.FirstnameLastnameBothFilledOrN
  *
  * @author mhorvath
  */
+@Bean
 @FirstnameLastnameBothFilledOrNullAtTheSameTime
 @DateOfBirthBeforeRegistration
 public class UserEntity {

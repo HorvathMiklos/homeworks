@@ -6,23 +6,29 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.interceptor.ExcludeClassInterceptors;
+import javax.interceptor.Interceptors;
 import xyz.codingmentor.javaeehomework.beans.UserEntity;
 import xyz.codingmentor.javaeehomework.exceptions.UserAlreadyInUserListException;
+import xyz.codingmentor.javaeehomework.interceptor.ValidationInterceptor;
 
 /**
  *
  * @author mhorvath
  */
+@Interceptors(ValidationInterceptor.class)
 public class UserDB {
     private Map<String,UserEntity> userMap;
     public UserDB() {
         userMap = new HashMap<>();
     }
+    @Interceptors(ValidationInterceptor.class)
     private void checkUserExistence(String username){
         if(!userMap.containsKey(username)){
             throw new NotExistingUserException(username);
         }
     }
+    @ExcludeClassInterceptors
     public UserEntity addUser(UserEntity newUser) {
         if(userMap.containsKey(newUser.getUsername())){
             throw new UserAlreadyInUserListException();
@@ -46,7 +52,7 @@ public class UserDB {
         return userToAuthenticate.getPassword() == null ? false : userToAuthenticate.getPassword().equals(password);
         
     }
-
+    
     public UserEntity modifyUser(UserEntity userToModify) {
         Calendar now = Calendar.getInstance();
         checkUserExistence(userToModify.getUsername());
@@ -54,7 +60,7 @@ public class UserDB {
         userMap.put(userToModify.getUsername(),userToModify );
         return userMap.get(userToModify.getUsername());        
     }
-
+    
     public UserEntity deleteUser(UserEntity userToDelete) {
         UserEntity deletedUser;
         checkUserExistence(userToDelete.getUsername());

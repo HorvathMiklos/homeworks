@@ -5,13 +5,17 @@ import xyz.codingmentor.javaeehomework.exceptions.NotExistingDeviceException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.interceptor.ExcludeClassInterceptors;
+import javax.interceptor.Interceptors;
 import xyz.codingmentor.javaeehomework.beans.Device;
 import xyz.codingmentor.javaeehomework.exceptions.DeviceAllreadyInDeviceListException;
+import xyz.codingmentor.javaeehomework.interceptor.ValidationInterceptor;
 
 /**
  *
  * @author mhorvath
  */
+@Interceptors(ValidationInterceptor.class)
 public class DeviceDB {
 
     private Map<String,Device> deviceMap;
@@ -19,12 +23,19 @@ public class DeviceDB {
     public DeviceDB() {
         deviceMap = deviceMap = new HashMap<>();
     }
+    public boolean isExisting(Device device){
+     if(deviceMap.containsValue(device)){
+            return true;
+        }
+        return false;
+    }
     
     private void checkDeviceExistence(String deviceID){
         if(!deviceMap.containsKey(deviceID)){
             throw new NotExistingDeviceException(deviceID);
         }
     }
+    @ExcludeClassInterceptors
     public Device addDevice(Device newDevice) {
         if(deviceMap.containsKey(newDevice.getId())){
             throw new DeviceAllreadyInDeviceListException();
@@ -32,18 +43,24 @@ public class DeviceDB {
         deviceMap.put(newDevice.getId(), newDevice);
         return deviceMap.get(newDevice.getId());
     }
-
+    
     public Device editDevice(Device deviceToEdit) {
         checkDeviceExistence(deviceToEdit.getId());
         deviceMap.put(deviceToEdit.getId(), deviceToEdit);
         return deviceMap.get(deviceToEdit.getId());                      
     }
-
+    
     public Device getDevice(String iD) {
         checkDeviceExistence(iD);
         return deviceMap.get(iD);        
     }
-
+    public boolean isExistingDevice(String iD){
+        if(deviceMap.containsKey(iD)){
+            return true;
+        }
+        return false;
+    }
+    
     public Device deleteDevice(Device deviceToDelete) {
         Device deletedDevice;
         checkDeviceExistence(deviceToDelete.getId());
