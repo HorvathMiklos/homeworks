@@ -44,13 +44,13 @@ public class DeviceDB {
         return deviceMap.get(deviceToEdit.getId());                      
     }
     
-    public Device getDevice(String iD) {
-        checkDeviceExistence(iD);
-        return deviceMap.get(iD);        
+    public Device getDevice(String id) {
+        checkDeviceExistence(id);
+        return deviceMap.get(id);        
     }
     
-    public boolean isExisting(String iD){
-        return deviceMap.containsKey(iD);           
+    public boolean isExisting(String id){
+        return deviceMap.containsKey(id);           
     }
     
     public Device deleteDevice(Device deviceToDelete) {

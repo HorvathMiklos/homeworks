@@ -29,19 +29,19 @@ public class Cart {
         if (!deviceDB.isExisting(id)) {
             throw new NotExistingDeviceException(id);
         }
-        if (deviceDB.getDevice(id).getCount() > count) {
+        Device device=deviceDB.getDevice(id);
+        if (device.getCount() > count) {
             throw new NotEnoughDeviceExeption(id);
         }
         if (devicesInCart.containsKey(id)) {
             devicesInCart.put(id, devicesInCart.get(id) + count);
-            value=value+count*deviceDB.getDevice(id).getPrice();
+            value=value+count*device.getPrice();
         } else {
             devicesInCart.put(id, count);
-            value=value+count*deviceDB.getDevice(id).getPrice();
+            value=value+count*device.getPrice();
         }
-        Device editDevice=deviceDB.getDevice(id);
-        editDevice.setCount(editDevice.getCount() - count);
-        deviceDB.editDevice(editDevice);
+        editDevice.setCount(device.getCount() - count);
+        
     }
 
     private void modifyCountsToDelete(String id, int count) {
