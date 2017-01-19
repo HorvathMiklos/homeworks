@@ -22,7 +22,6 @@ public class UserDB {
     public UserDB() {
         userMap = new HashMap<>();
     }
-    @Interceptors(ValidationInterceptor.class)
     private void checkUserExistence(String username){
         if(!userMap.containsKey(username)){
             throw new NotExistingUserException(username);

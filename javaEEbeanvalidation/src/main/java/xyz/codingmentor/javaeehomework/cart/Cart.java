@@ -14,7 +14,7 @@ import xyz.codingmentor.javaeehomework.exceptions.NotExistingDeviceException;
  * @author mhorvath
  */
 public class Cart {
-
+    private Integer value;
     private Map<String, Integer> devicesInCart;
     private DeviceDB deviceDB;
     private static final Logger LOGGER = Logger.getLogger("myLogger");
@@ -22,83 +22,70 @@ public class Cart {
     public Cart(DeviceDB deviceDB) {
         this.deviceDB = deviceDB;
         devicesInCart = new HashMap<>();
+        value=0;
     }
 
-    public void addDevice(String iD, int count) {
-        Device editDevice;
-        if (!deviceDB.isExistingDevice(iD)) {
-            throw new NotExistingDeviceException();
+    public void addDevice(String id, int count) {
+        if (!deviceDB.isExisting(id)) {
+            throw new NotExistingDeviceException(id);
         }
-        if (deviceDB.getDevice(iD).getCount() > count) {
-            throw new NotEnoughDeviceExeption();
+        if (deviceDB.getDevice(id).getCount() > count) {
+            throw new NotEnoughDeviceExeption(id);
         }
-        if (devicesInCart.containsKey(iD)) {
-            devicesInCart.put(iD, devicesInCart.get(iD) + count);
+        if (devicesInCart.containsKey(id)) {
+            devicesInCart.put(id, devicesInCart.get(id) + count);
+            value=value+count*deviceDB.getDevice(id).getPrice();
         } else {
-            devicesInCart.put(iD, count);
+            devicesInCart.put(id, count);
+            value=value+count*deviceDB.getDevice(id).getPrice();
         }
-        editDevice = deviceDB.getDevice(iD);
+        Device editDevice=deviceDB.getDevice(id);
         editDevice.setCount(editDevice.getCount() - count);
         deviceDB.editDevice(editDevice);
     }
 
-    public void deleteDevice(String iD, int count) {
-        Device editDevice;
-        if (!devicesInCart.containsKey(iD)) {
-            throw new NotExistingDeviceException();
+    private void modifyCountsToDelete(String id, int count) {
+        devicesInCart.put(id, devicesInCart.get(id) - count);
+        Device editDevice = deviceDB.getDevice(id);
+        editDevice.setCount(editDevice.getCount() + count);
+    }
+
+    private void modifyValueToDelete(String id, int count) {
+        value=value-count*deviceDB.getDevice(id).getPrice();
+    }
+    public void deleteDevice(String id, int count) {
+        if (!devicesInCart.containsKey(id)) {
+            throw new NotExistingDeviceException(id);
         }
-        if (devicesInCart.get(iD) < count) {
-            throw new NotEnoughDeviceExeption();
+        if (devicesInCart.get(id) < count) {
+            throw new NotEnoughDeviceExeption(id);
         }
-        devicesInCart.put(iD, devicesInCart.get(iD) - count);
-        if (deviceDB.isExistingDevice(iD)) {
-            editDevice = deviceDB.getDevice(iD);
-            editDevice.setCount(editDevice.getCount() + count);
-            deviceDB.editDevice(editDevice);
-        } else {
-            throw new NotExistingDeviceException();
-        }
+        modifyCountsToDelete(id,count);
+        modifyValueToDelete(id, count);
     }
 
     public void delete() {
         for (Map.Entry<String,Integer> entry : devicesInCart.entrySet()) {
-            deleteDevice(entry.getKey(), entry.getValue());
+             modifyCountsToDelete(entry.getKey(), entry.getValue());
+             modifyValueToDelete(entry.getKey(), entry.getValue());
         }
     }
 
     public Integer value() {
-        int value = 0;
-
-        for (Map.Entry<String,Integer> entry : devicesInCart.entrySet()) {
-            if (!deviceDB.isExistingDevice(entry.getKey())) {
-                LOGGER.log(Level.INFO,"idbeforeexeption: "+entry.getKey());
-                throw new NotExistingDeviceException();
-            }
-            value =value + deviceDB.getDevice(entry.getKey()).getPrice() * devicesInCart.get(entry.getKey());
-        }
         return value;
     }
 
     public void buy() {
         LOGGER.log(Level.INFO,"Bought devices:");
         logAllDevices();
-        LOGGER.log(Level.INFO,"Value of bought devices:"+value().toString());        
+        LOGGER.log(Level.INFO,"Value of bought devices:"+value.toString());        
     }
 
     public void logAllDevices() {
         for (Map.Entry<String,Integer> entry : devicesInCart.entrySet()) {
-            if (deviceDB.isExistingDevice(entry.getKey())) {
-                LOGGER.log(Level.INFO, "ID: " + entry.getKey());
-                LOGGER.log(Level.INFO, " manufacturer: " + deviceDB.getDevice(entry.getKey()).getManufacturer().toString());
-                LOGGER.log(Level.INFO, " color: " + deviceDB.getDevice(entry.getKey()).getColor().toString());
-                LOGGER.log(Level.INFO, " price: " + deviceDB.getDevice(entry.getKey()).getPrice().toString());
-                LOGGER.log(Level.INFO, " count: " + devicesInCart.get(entry.getKey()).toString());
-            }else{
-                LOGGER.log(Level.INFO, "ID: " + entry.getKey());
-                LOGGER.log(Level.INFO, " count: " + devicesInCart.get(entry.getKey()).toString());
-            }
+                LOGGER.log(Level.INFO,deviceDB.getDevice(entry.getKey()).toString());
+                LOGGER.log(Level.INFO,devicesInCart.get(entry.getKey()).toString()+" count in cart: ");
         }
-
     }
 }
 

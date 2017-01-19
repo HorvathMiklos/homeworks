@@ -33,7 +33,7 @@ public class ValidationInterceptor {
         Validator validator = vf.getValidator();
         Set<ConstraintViolation<Object>> violations = validator.validate(bean);
          if (!violations.isEmpty()) {
-            throw new InvalidBeanExeption();
+            throw new InvalidBeanExeption(violations.toString());
         }
         
     }

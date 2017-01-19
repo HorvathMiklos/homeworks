@@ -23,13 +23,7 @@ public class DeviceDB {
     public DeviceDB() {
         deviceMap = deviceMap = new HashMap<>();
     }
-    public boolean isExisting(Device device){
-     if(deviceMap.containsValue(device)){
-            return true;
-        }
-        return false;
-    }
-    
+        
     private void checkDeviceExistence(String deviceID){
         if(!deviceMap.containsKey(deviceID)){
             throw new NotExistingDeviceException(deviceID);
@@ -54,11 +48,9 @@ public class DeviceDB {
         checkDeviceExistence(iD);
         return deviceMap.get(iD);        
     }
-    public boolean isExistingDevice(String iD){
-        if(deviceMap.containsKey(iD)){
-            return true;
-        }
-        return false;
+    public boolean isExisting(String iD){
+        return deviceMap.containsKey(iD);
+           
     }
     
     public Device deleteDevice(Device deviceToDelete) {
