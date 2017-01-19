@@ -48,9 +48,9 @@ public class DeviceDB {
         checkDeviceExistence(iD);
         return deviceMap.get(iD);        
     }
+    
     public boolean isExisting(String iD){
-        return deviceMap.containsKey(iD);
-           
+        return deviceMap.containsKey(iD);           
     }
     
     public Device deleteDevice(Device deviceToDelete) {
