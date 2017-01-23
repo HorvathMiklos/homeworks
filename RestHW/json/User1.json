@@ -1,5 +1,5 @@
 {
-email: valami@valami.com
-password: valami
-address: valami varos valami utca valami hazszam
+	"email":"testaddres1",
+    "password":"testpassword1",
+    "address":"testaddres1"
 }

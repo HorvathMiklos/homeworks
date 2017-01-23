@@ -1,5 +1,5 @@
 
-package xyz.codingmentor.restServices;
+package xyz.codingmentor.restservices;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,26 +33,7 @@ public class UserRestService {
     public List<UserEntity> getAllUsers() {
         return new ArrayList(USERS.values());
     }
-    /*
-    http://localhost:8080/RestHW-web/users
-    {
-        "email":"testaddres1",
-        "password":"testpassword1",
-        "address":"testaddres1"
-    }
-    ---------------------------------------
-    {
-        "email":"testaddres2",
-        "password":"testpassword2",
-        "address":"testaddres2"
-    }
-    ---------------------------------------
-    {
-    "email":"testaddres3",
-    "password":"testpassword3",
-    "address":"testaddres3"
-    }
-    */    
+    //http://localhost:8080/RestHW-web/users
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public UserEntity addUser(UserEntity user) {
@@ -60,13 +41,13 @@ public class UserRestService {
         USERS.put(user.getId(), user);
         return user;
     }
-    //http://localhost:8080/RestHW-web/users/7e390481-f6b3-4822-a45e-71be07835401
+    //http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
     @Path("/{id}")
     @GET
     public UserEntity getUser(@PathParam("id") String id){
         return USERS.get(id);
     }
-    //http://localhost:8080/RestHW-web/users/7e390481-f6b3-4822-a45e-71be07835401
+    //http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
     @Path("/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

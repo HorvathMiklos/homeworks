@@ -1,0 +1,14 @@
+[
+  {
+    "id": "0958c494-2b6e-47df-b6fe-197b82ce87ba",
+    "email": "testaddres1",
+    "password": "testpassword1",
+    "address": "testaddres1"
+  },
+  {
+    "id": "c85344e9-300f-4b62-81d7-bd091d0802ee",
+    "email": "testaddres2",
+    "password": "testpassword2",
+    "address": "testaddres2"
+  }
+]
