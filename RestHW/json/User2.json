@@ -1,5 +1,5 @@
-{
-email: email@gmail.com
-password: bestpassword
-address: 1123 Java City, Server square 42
+{  
+  "email": "testaddres2",
+  "password": "testpassword2",
+  "address": "testaddres2"
 }

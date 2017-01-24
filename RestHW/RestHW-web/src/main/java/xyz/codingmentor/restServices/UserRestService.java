@@ -28,12 +28,17 @@ import xyz.codingmentor.exeptions.NotMatchingIdExeption;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRestService {
     private static final Map<String, UserEntity> USERS = new HashMap<>();
-    
+    /**
+    *http://localhost:8080/RestHW-web/users
+    */
     @GET
     public List<UserEntity> getAllUsers() {
         return new ArrayList(USERS.values());
     }
-    //http://localhost:8080/RestHW-web/users
+    /**
+    *@param user is the userentity witch will be added to the map of users
+    *http://localhost:8080/RestHW-web/users
+    */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public UserEntity addUser(UserEntity user) {
@@ -41,25 +46,36 @@ public class UserRestService {
         USERS.put(user.getId(), user);
         return user;
     }
-    //http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
+    /**
+    *@param id is the id of user witch will be sent back to client
+    *http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
+    */
     @Path("/{id}")
     @GET
     public UserEntity getUser(@PathParam("id") String id){
         return USERS.get(id);
     }
-    //http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
+    
+    /**
+     * @param id is the id of user witch will be modified
+     * @param user is the user entity witch represents the new state of the user
+     * http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
+     */
     @Path("/{id}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public UserEntity modifyUser(@PathParam("id") String id,UserEntity user){
-        
-        
         if(id == null ? user.getId() == null : id.equals(user.getId())){
             USERS.put(user.getId(), user);
             return USERS.get(id);
         }
         throw new NotMatchingIdExeption(id);
     }
+    
+    /**
+     * @param id is the id of user witch will be deleted
+     * http://localhost:8080/RestHW-web/users/0958c494-2b6e-47df-b6fe-197b82ce87ba
+     */
     @Path("/{id}")
     @DELETE
     public void deleteUser(@PathParam("id") String id){
