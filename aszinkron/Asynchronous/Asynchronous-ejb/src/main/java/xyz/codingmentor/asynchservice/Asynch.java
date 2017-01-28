@@ -1,0 +1,39 @@
+
+package xyz.codingmentor.asynchservice;
+
+import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.AsyncResult;
+import javax.ejb.Asynchronous;
+import javax.ejb.Stateless;
+
+/**
+ *
+ * @author mhorvath
+ */
+@Stateless
+public class Asynch {
+    private static final Logger LOGGER = Logger.getLogger(Asynch.class.getName());
+    @Asynchronous
+    public Future<Integer> inefectivlyReturnFive(){
+        LOGGER.log(Level.INFO,"five started");
+        final int i=5000;
+        try {
+            Thread.sleep(i);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Asynch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LOGGER.log(Level.INFO,"five stopped");
+        return new AsyncResult<>(i/1000);       
+    }
+    @Asynchronous
+    public void doNothingForALongTime(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Asynch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return;
+    }
+}
