@@ -6,13 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
-import javax.ejb.Stateless;
 
 /**
  *
  * @author mhorvath
  */
-@Stateless
+
 public class Asynch {
     private static final Logger LOGGER = Logger.getLogger(Asynch.class.getName());
     @Asynchronous
@@ -34,6 +33,5 @@ public class Asynch {
         } catch (InterruptedException ex) {
             Logger.getLogger(Asynch.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return;
     }
 }

@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -17,7 +16,7 @@ import xyz.codingmentor.asynchservice.Asynch;
  *
  * @author mhorvath
  */
-@Stateless
+
 @Path("/")
 @Produces(MediaType.TEXT_PLAIN)
 public class RestService {
