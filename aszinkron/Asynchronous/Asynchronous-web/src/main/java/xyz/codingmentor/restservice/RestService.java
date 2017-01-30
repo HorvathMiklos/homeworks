@@ -25,6 +25,9 @@ public class RestService {
     private Asynch asynch;
     /**
      * send back this text: five=5
+     * Client is not blocked. Server can receive requests while processing this.
+     * This method uses the inefectivlyReturnFive method. this method returns with Future<Integer> type.
+     * This contains the return value of our asynchronous method.
      * http://localhost:8080/Asynchronous-web/five
      */
     @GET
@@ -41,6 +44,8 @@ public class RestService {
     }
     /**
      * send text to client: "we did nothing for a long time but at least asynchronously"
+     * Client is not blocked. Server can receive requests while processing this. 
+     * Thread sleep for 5 seconds.
      * http://localhost:8080/Asynchronous-web/nothing
      */
     @GET
