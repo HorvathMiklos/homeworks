@@ -21,7 +21,7 @@ public class Asynch {
         try {
             Thread.sleep(i);
         } catch (InterruptedException ex) {
-            Logger.getLogger(Asynch.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
         LOGGER.log(Level.INFO,"five stopped");
         return new AsyncResult<>(i/1000);       
@@ -31,7 +31,7 @@ public class Asynch {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(Asynch.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
     }
 }

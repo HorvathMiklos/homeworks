@@ -22,29 +22,26 @@ import xyz.codingmentor.asynchservice.Asynch;
 public class RestService {
     private static final Logger LOGGER = Logger.getLogger(RestService.class.getSimpleName());
     @Inject
-    private Asynch asinch;
+    private Asynch asynch;
     
     @GET
     @Path("/five")
-    public String five() {
-        
-        Integer returnValue=null;
-        
-        Future<Integer> result = asinch.inefectivlyReturnFive();
-        
+    public String five() {        
+        Integer returnValue=null;        
+        Future<Integer> result = asynch.inefectivlyReturnFive();        
         try {
             returnValue = result.get();
         } catch (InterruptedException | ExecutionException ex) {
-            Logger.getLogger(RestService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+            LOGGER.log(Level.SEVERE, null, ex);
+        }        
         return "five="+returnValue.toString();
     }
+    
     @GET
     @Path("/nothing")
     public String nothing(){
         LOGGER.log(Level.INFO,"nothing started");
-        asinch.doNothingForALongTime();
+        asynch.doNothingForALongTime();
         LOGGER.log(Level.INFO,"nothing stopped");
         return "we did nothing for a long time but at least asynchronously";
     }
