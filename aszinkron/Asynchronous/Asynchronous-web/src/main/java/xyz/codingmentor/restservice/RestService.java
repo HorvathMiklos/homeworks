@@ -23,7 +23,10 @@ public class RestService {
     private static final Logger LOGGER = Logger.getLogger(RestService.class.getSimpleName());
     @Inject
     private Asynch asynch;
-    
+    /**
+     * send back this text: five=5
+     * http://localhost:8080/Asynchronous-web/five
+     */
     @GET
     @Path("/five")
     public String five() {        
@@ -36,7 +39,10 @@ public class RestService {
         }        
         return "five="+returnValue.toString();
     }
-    
+    /**
+     * send text to client: "we did nothing for a long time but at least asynchronously"
+     * http://localhost:8080/Asynchronous-web/nothing
+     */
     @GET
     @Path("/nothing")
     public String nothing(){
