@@ -33,20 +33,22 @@ public class RestService {
     @GET
     @Path("/five")
     public String five() {        
-        Integer returnValue=null;        
+        Integer returnValue=0;        
         Future<Integer> result;
         
         result= asynch.inefectivlyReturnFive();        
-        try {
-            returnValue = result.get();
-        } catch (InterruptedException | ExecutionException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        }
         try {
             Thread.sleep(3000);
         } catch (InterruptedException ex) {
             Logger.getLogger(RestService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        LOGGER.log(Level.INFO,"demonstrate asynchronous");
+        try {
+            returnValue = result.get();
+        } catch (InterruptedException | ExecutionException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+       
         return "five="+returnValue.toString();
     }
     /**
@@ -59,6 +61,12 @@ public class RestService {
     @Path("/nothing")
     public String nothing(){        
         asynch.doNothingForALongTime();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(RestService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LOGGER.log(Level.INFO,"demonstrate asynchronous");
         return "we did nothing for a long time but at least asynchronously";
     }
 }
