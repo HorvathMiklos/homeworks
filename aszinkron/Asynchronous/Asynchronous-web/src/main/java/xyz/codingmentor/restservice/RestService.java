@@ -25,7 +25,7 @@ public class RestService {
     private Asynch asynch;
     /**
      * send back this text: five=5
-     * Log demonstrates it is asynchronous. 
+     * Log demonstrates it is asynchronous, because it can ran at the same time with my other method.  
      * This method uses the inefectivlyReturnFive method. this method returns with Future<Integer> type.
      * This contains the return value of our asynchronous method.
      * http://localhost:8080/Asynchronous-web/five
@@ -47,12 +47,11 @@ public class RestService {
         } catch (InterruptedException ex) {
             Logger.getLogger(RestService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        LOGGER.log(Level.INFO,"I can log here");
         return "five="+returnValue.toString();
     }
     /**
      * send text to client: "we did nothing for a long time but at least asynchronously"
-     * Log demonstrates it is asynchronous.  
+     * Log demonstrates it is asynchronous, because it can ran at the same time with my other method.  
      * Thread sleep for 5 seconds.
      * http://localhost:8080/Asynchronous-web/nothing
      */
@@ -60,7 +59,6 @@ public class RestService {
     @Path("/nothing")
     public String nothing(){        
         asynch.doNothingForALongTime();
-        LOGGER.log(Level.INFO,"I can log here");        
         return "we did nothing for a long time but at least asynchronously";
     }
 }
