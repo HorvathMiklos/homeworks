@@ -3,9 +3,9 @@ Original homework description (Hungarian):
 >Ebben a háziban rest felületet kell biztosítani a mobil webshopnak, melyben lehetõség lesz többek között bejelentkezésre, mobilok kosárhoz adására, felhasználók kezelésére. A feladat megoldásához hozz létre egy új (mavenes) EE projektet, melybe a korábban megírt webshop részeket kell majd úgy átemelni, hogy azok mûködjenek továbbra is. Hozz létre REST service-eket a következõ mûveletekre:
 
 ## user:
-- [ ] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
-- [ ] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
-- [ ] lekérés username alapján (bárki megteheti)
+- [x] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
+- [x] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
+- [x] lekérés username alapján (bárki megteheti)
 - [x] összes lekérdezése (bárki megteheti)
 - [x] bejelentkezés (sikeres bejelentkezés után kerüljön be a sessionbe a UserEntity)
 
@@ -45,3 +45,6 @@ A webshop rest interfésze legyen letesztelve, egy külön mappában (pl scripts) le
 
 ## Backlog / TODO 
 - [ ] 
+
+## Questions
+- [ ] Random body at delete changes functionality -> returns empty result (UserRESTService)

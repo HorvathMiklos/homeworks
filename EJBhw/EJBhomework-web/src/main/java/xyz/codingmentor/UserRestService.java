@@ -8,19 +8,17 @@ package xyz.codingmentor;
 import java.io.Serializable;
 import java.util.List;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.beans.UserEntity;
 import xyz.codingmentor.db.UserDB;
@@ -66,14 +64,23 @@ public class UserRestService implements Serializable {
 
     @Path("/{userName}")
     @DELETE
-    public UserEntity deleteUser() {
-        return null;
+    public UserEntity deleteUser(@Context HttpServletRequest request,@PathParam("userName") String userName) throws EntityException {
+        HttpSession session = request.getSession(false);
+        if (null == session.getAttribute(USER_KEY)) {
+            throw new IllegalStateException("Log in first!");
+        }
+
+        UserEntity currentUser = (UserEntity) session.getAttribute(USER_KEY);
+        if (!currentUser.isAdmin()) {
+            throw new IllegalStateException("You are not admin!");
+        }        
+        return userDB.deleteUser(userDB.getUser(userName));
     }
 
     @Path("/{userName}")
     @GET
-    public UserEntity getUserByUserName() {
-        return null;
+    public UserEntity getUserByUserName(@PathParam("userName") String userName) throws EntityException {
+        return userDB.getUser(userName);
     }
 
     @Path("/login")
