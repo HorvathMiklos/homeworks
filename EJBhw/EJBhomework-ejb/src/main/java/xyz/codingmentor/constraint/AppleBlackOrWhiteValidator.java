@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.constraint;
 
 import javax.validation.ConstraintValidator;

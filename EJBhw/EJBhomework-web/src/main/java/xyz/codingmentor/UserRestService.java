@@ -37,6 +37,7 @@ import xyz.codingmentor.exceptions.EntityException;
 public class UserRestService implements Serializable {
 
     private static final String USER_KEY = "user";
+    private static final String LOGIN_ERROR = "Log in first!";
     @Inject
     private UserDB userDB;
 
@@ -51,7 +52,7 @@ public class UserRestService implements Serializable {
 
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
-            throw new IllegalStateException("Log in first!");
+            throw new IllegalStateException(LOGIN_ERROR);
         }
 
         UserEntity currentUser = (UserEntity) session.getAttribute(USER_KEY);
@@ -67,7 +68,7 @@ public class UserRestService implements Serializable {
     public UserEntity deleteUser(@Context HttpServletRequest request,@PathParam("userName") String userName) throws EntityException {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
-            throw new IllegalStateException("Log in first!");
+            throw new IllegalStateException(LOGIN_ERROR);
         }
 
         UserEntity currentUser = (UserEntity) session.getAttribute(USER_KEY);
@@ -102,7 +103,7 @@ public class UserRestService implements Serializable {
     public ResultDTO logout(@Context HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
-            throw new IllegalStateException("Log in first!");
+            throw new IllegalStateException(LOGIN_ERROR);
         }
         request.getSession().invalidate();
         return new ResultDTO(ResultType.SUCCESS, "Logged out");

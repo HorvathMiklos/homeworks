@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.constraint;
 
 import java.lang.annotation.ElementType;
@@ -23,4 +22,3 @@ public @interface DateOfBirthBeforeRegistration {
 
     Class<? extends Payload>[] payload() default {};
 }
-

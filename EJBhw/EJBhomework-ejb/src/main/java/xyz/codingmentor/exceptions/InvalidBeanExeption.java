@@ -1,14 +1,13 @@
-
 package xyz.codingmentor.exceptions;
 
 /**
  *
  * @author mhorvath
  */
-public class InvalidBeanExeption extends RuntimeException{
+public class InvalidBeanExeption extends RuntimeException {
 
     public InvalidBeanExeption() {
-     super();
+        super();
     }
 
     public InvalidBeanExeption(String message) {

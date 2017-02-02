@@ -11,8 +11,6 @@ import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.beans.Device;
 import xyz.codingmentor.db.DeviceDB;
 import xyz.codingmentor.exceptions.EntityException;

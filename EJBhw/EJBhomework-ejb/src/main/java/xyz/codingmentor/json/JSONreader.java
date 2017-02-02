@@ -42,9 +42,8 @@ public class JSONreader {
         });
     }
 
-    public UserDB jsonToUserDB(UserDB userDB) throws EntityException{
+    public UserDB jsonToUserDB(UserDB userDB) throws EntityException {
         Calendar calendar = Calendar.getInstance();
-        //userDB = new UserDB();
         List<UserEntity> userEntitys = new ArrayList<>();
         try {
             userEntitys = this.jsonToUserEntityList();
@@ -60,7 +59,6 @@ public class JSONreader {
     }
 
     public DeviceDB jsonToDeviceDB(DeviceDB deviceDB) throws EntityException {
-        //deviceDB = new DeviceDB();
         List<Device> devices = new ArrayList<>();
         try {
             devices = this.jsonToDeviceList();

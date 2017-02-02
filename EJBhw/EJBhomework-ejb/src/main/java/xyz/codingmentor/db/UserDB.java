@@ -1,5 +1,6 @@
 package xyz.codingmentor.db;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ import xyz.codingmentor.interceptor.ValidationInterceptor;
  */
 @Singleton
 @Interceptors(ValidationInterceptor.class)
-public class UserDB {
+public class UserDB implements Serializable{
 
     private Map<String, UserEntity> userMap = new HashMap<>();
 

@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.constraint;
 
 import javax.validation.ConstraintValidator;
@@ -18,10 +17,10 @@ public class DateOfBirthBeforeRegistrationValidator implements ConstraintValidat
 
     @Override
     public boolean isValid(UserEntity user, ConstraintValidatorContext cvc) {
-        if (user == null||user.getDateOfBirth() == null || user.getRegistrationDate() == null) {
+        if (user == null || user.getDateOfBirth() == null || user.getRegistrationDate() == null) {
             return true;
         }
-        return user.getDateOfBirth().before(user.getRegistrationDate());        
+        return user.getDateOfBirth().before(user.getRegistrationDate());
     }
 
 }

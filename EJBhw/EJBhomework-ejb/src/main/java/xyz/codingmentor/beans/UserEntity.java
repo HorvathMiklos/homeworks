@@ -1,6 +1,6 @@
-
 package xyz.codingmentor.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -14,11 +14,10 @@ import xyz.codingmentor.constraint.FirstnameLastnameBothFilledOrNullAtTheSameTim
  *
  * @author mhorvath
  */
-
 @Bean
 @FirstnameLastnameBothFilledOrNullAtTheSameTime
 @DateOfBirthBeforeRegistration
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @NotNull
     @Size(min = 6)
@@ -26,19 +25,21 @@ public class UserEntity {
     @NotNull
     @Size(min = 6)
     @Pattern.List({
-        @Pattern(regexp = ".*[a-z].*"),
-        @Pattern(regexp = ".*[A-Z].*"),
+        @Pattern(regexp = ".*[a-z].*")
+        ,
+        @Pattern(regexp = ".*[A-Z].*")
+        ,
         @Pattern(regexp = "(.*[1-9].*)|(.*[\\=\\+\\<\\>\\.\\,\\)].*)")
     })
     private String password;
     private String firstname;
     private String lastname;
-    @Pattern(regexp ="^\\d{4}.*")
+    @Pattern(regexp = "^\\d{4}.*")
     private String address;
-    @Pattern(regexp ="^((06)|(\\+36))\\d{9}")
+    @Pattern(regexp = "^((06)|(\\+36))\\d{9}")
     private String phone;
     @NotNull
-    @Pattern(regexp ="^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}")        
+    @Pattern(regexp = "^[a-z0-9]+@[a-z]+\\.[a-z]{2,3}")
     private String email;
     private Sex sex;
     @NotNull
@@ -122,7 +123,6 @@ public class UserEntity {
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
-    
 
     public String getUsername() {
         return username;
@@ -143,13 +143,15 @@ public class UserEntity {
     public Date getLastModifiedDate() {
         return lastModifiedDate;
     }
-    
+
     public Sex getSex() {
         return sex;
     }
+
     public String getAddress() {
         return address;
     }
+
     public boolean isAdmin() {
         return admin;
     }
@@ -158,6 +160,5 @@ public class UserEntity {
     public String toString() {
         return "UserEntity{" + "username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", sex=" + sex + ", registrationDate=" + registrationDate + ", lastModifiedDate=" + lastModifiedDate + ", dateOfBirth=" + dateOfBirth + ", admin=" + admin + '}';
     }
-    
-     
+
 }

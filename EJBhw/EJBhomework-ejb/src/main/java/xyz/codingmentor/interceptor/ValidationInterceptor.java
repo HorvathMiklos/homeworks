@@ -10,7 +10,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import xyz.codingmentor.annotations.Bean;
-import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.InvalidBeanExeption;
 
 /**

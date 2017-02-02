@@ -1,6 +1,6 @@
-
 package xyz.codingmentor.beans;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,11 +17,12 @@ import xyz.codingmentor.constraint.SamsungIsNotGreen;
 @Bean
 @AppleBlackOrWhite
 @SamsungIsNotGreen
-public class Device {
+public class Device implements Serializable {
+
     @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     @NotNull
     @Size(min = 36)
-    private String id;  
+    private String id;
     @NotNull
     private Manufacturer manufacturer;
     @NotNull
@@ -39,8 +40,7 @@ public class Device {
     public Device() {
         //for json reader, empty on purpuse
     }
-    
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -88,6 +88,7 @@ public class Device {
     public String getId() {
         return id;
     }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -117,5 +118,5 @@ public class Device {
     public String toString() {
         return "Device{" + "id=" + id + ", manufacturer=" + manufacturer + ", type=" + type + ", price=" + price + ", color=" + color + ", count=" + count + '}';
     }
-    
+
 }

@@ -1,13 +1,12 @@
 package xyz.codingmentor.dto;
 
-
 /**
  *
  * @author mhorvath
  */
 public class ResultDTO<T> {
-    
-    public enum ResultType{
+
+    public enum ResultType {
         ERROR,
         SUCCESS;
     }
@@ -16,6 +15,7 @@ public class ResultDTO<T> {
     private T message;
 
     public ResultDTO() {
+        //needed by json mapper
     }
 
     public ResultDTO(ResultType result, T message) {
@@ -38,6 +38,5 @@ public class ResultDTO<T> {
     public void setMessage(T message) {
         this.message = message;
     }
-    
-    
+
 }

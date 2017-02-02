@@ -7,7 +7,6 @@ package xyz.codingmentor;
 
 import java.io.Serializable;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -18,7 +17,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import xyz.codingmentor.beans.Device;
 import xyz.codingmentor.cart.Cart;
 import xyz.codingmentor.dto.ResultDTO;
 import xyz.codingmentor.exceptions.EntityException;
@@ -37,13 +35,14 @@ public class CartRestService implements Serializable {
     private Cart cart;
 
     private static final String USER_KEY = "user";
+    private static final String LOGIN_ERROR = "Log in first!";
 
     @Path("/{id}/{count}")
     @POST
     public ResultDTO addDeviceToCart(@Context HttpServletRequest request, @PathParam("id") String deviceId, @PathParam("count") int count) throws EntityException {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
-            throw new IllegalStateException("Log in first!");
+            throw new IllegalStateException(LOGIN_ERROR);
         }
 
         cart.addDevice(deviceId, count);
@@ -55,7 +54,7 @@ public class CartRestService implements Serializable {
     public ResultDTO deleteDeviceFromCart(@Context HttpServletRequest request, @PathParam("id") String deviceId, @PathParam("count") int count) throws EntityException {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
-            throw new IllegalStateException("Log in first!");
+            throw new IllegalStateException(LOGIN_ERROR);
         }
 
         cart.deleteDevice(deviceId, count);
@@ -66,10 +65,10 @@ public class CartRestService implements Serializable {
     public ResultDTO buyCart(@Context HttpServletRequest request) throws EntityException {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
-            throw new IllegalStateException("Log in first!");
+            throw new IllegalStateException(LOGIN_ERROR);
         }
-         ResultDTO result = new ResultDTO(ResultDTO.ResultType.SUCCESS, cart.value().toString());
-         cart.buy();
-         return result;
+        ResultDTO result = new ResultDTO(ResultDTO.ResultType.SUCCESS, cart.value().toString());
+        cart.buy();
+        return result;
     }
 }

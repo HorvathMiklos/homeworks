@@ -1,6 +1,6 @@
-
 package xyz.codingmentor.db;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,44 +21,45 @@ import xyz.codingmentor.interceptor.ValidationInterceptor;
  */
 @Singleton
 @Interceptors(ValidationInterceptor.class)
-public class DeviceDB {
+public class DeviceDB implements Serializable {
 
-    private Map<String,Device> deviceMap = new HashMap<>();
-        
-    private void checkDeviceExistence(String deviceID) throws EntityException{
-        if(!deviceMap.containsKey(deviceID)){
+    private Map<String, Device> deviceMap = new HashMap<>();
+
+    private void checkDeviceExistence(String deviceID) throws EntityException {
+        if (!deviceMap.containsKey(deviceID)) {
             throw new NotExistingDeviceException(deviceID);
         }
     }
+
     @ExcludeClassInterceptors
-    public Device addDevice(Device newDevice) throws EntityException{
-        if(deviceMap.containsKey(newDevice.getId())){
+    public Device addDevice(Device newDevice) throws EntityException {
+        if (deviceMap.containsKey(newDevice.getId())) {
             throw new DeviceAllreadyInDeviceListException();
         }
         newDevice.setId(UUID.randomUUID().toString());
         deviceMap.put(newDevice.getId(), newDevice);
         return deviceMap.get(newDevice.getId());
     }
-    
-    public Device editDevice(Device deviceToEdit) throws EntityException{
+
+    public Device editDevice(Device deviceToEdit) throws EntityException {
         checkDeviceExistence(deviceToEdit.getId());
         deviceMap.put(deviceToEdit.getId(), deviceToEdit);
-        return deviceMap.get(deviceToEdit.getId());                      
+        return deviceMap.get(deviceToEdit.getId());
     }
-    
-    public Device getDevice(String id) throws EntityException{
+
+    public Device getDevice(String id) throws EntityException {
         checkDeviceExistence(id);
-        return deviceMap.get(id);        
+        return deviceMap.get(id);
     }
-    
-    public boolean isExisting(String id){
-        return deviceMap.containsKey(id);           
+
+    public boolean isExisting(String id) {
+        return deviceMap.containsKey(id);
     }
-    
-    public Device deleteDevice(Device deviceToDelete) throws EntityException{
+
+    public Device deleteDevice(Device deviceToDelete) throws EntityException {
         Device deletedDevice;
         checkDeviceExistence(deviceToDelete.getId());
-        deletedDevice=getDevice(deviceToDelete.getId());
+        deletedDevice = getDevice(deviceToDelete.getId());
         deviceMap.remove(deviceToDelete.getId());
         return deletedDevice;
     }
@@ -67,4 +68,3 @@ public class DeviceDB {
         return new ArrayList<>(deviceMap.values());
     }
 }
-

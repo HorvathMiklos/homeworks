@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.constraint;
 
 import javax.validation.ConstraintValidator;
@@ -18,7 +17,7 @@ public class FirstnameLastnameBothFilledOrNullAtTheSameTimeValidator implements 
 
     @Override
     public boolean isValid(UserEntity user, ConstraintValidatorContext cvc) {
-        if(user==null){
+        if (user == null) {
             return true;
         }
         if (user.getFirstname() != null) {

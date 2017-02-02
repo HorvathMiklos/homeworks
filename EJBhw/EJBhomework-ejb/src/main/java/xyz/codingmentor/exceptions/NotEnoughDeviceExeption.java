@@ -1,11 +1,10 @@
-
 package xyz.codingmentor.exceptions;
 
 /**
  *
  * @author mhorvath
  */
-public class NotEnoughDeviceExeption extends EntityException{
+public class NotEnoughDeviceExeption extends EntityException {
 
     public NotEnoughDeviceExeption() {
         //nothing to inicialize, empty on purpose
@@ -14,5 +13,5 @@ public class NotEnoughDeviceExeption extends EntityException{
     public NotEnoughDeviceExeption(String message) {
         super(message);
     }
-    
+
 }
