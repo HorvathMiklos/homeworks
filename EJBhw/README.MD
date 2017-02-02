@@ -6,14 +6,14 @@ Original homework description (Hungarian):
 - [] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
 - [] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
 - [] lekérés username alapján (bárki megteheti)
-- [] összes lekérdezése (bárki megteheti)
+- [x] összes lekérdezése (bárki megteheti)
 - [] bejelentkezés (sikeres bejelentkezés után kerüljön be a sessionbe a UserEntity)
 
 ## device:
 - [] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
 - [] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
 - [] lekérés id alapján (bárki megteheti)
-- [] összes lekérdezése (bárki megteheti)
+- [x] összes lekérdezése (bárki megteheti)
 
 ## cart:
 - [] device kosárhoz adás (bejelentkezést követõen tehetõ csak meg)
@@ -21,9 +21,9 @@ Original homework description (Hungarian):
 - [] kosár tartalmának megvásárlása vásárlás (bejelentkezést követõen tehetõ csak meg)
 
 ## Továbbá:
-- [] Hozz létre egy Singleton beant, ami az alkalmazás elindulásakor feltölti a UserDB-t és a DeviceDB-t. Itt az elõzõ projekt main metódusa által json fájlból való felolvasást kell átmozgatni/beilleszteni. A Main.java osztályra nincs szükség! (Ez egy külön singleton legyen, a UserDB és a DeviceDB osztályokon felül)
-- [] A DeviceDB és a UserDB legyen átalakítva Singleton beanné a korábbi háziból.
-- [] A Cart osztály (a korábbi háziból) legyen átalakítva Stateful beanné.
+- [x] Hozz létre egy Singleton beant, ami az alkalmazás elindulásakor feltölti a UserDB-t és a DeviceDB-t. Itt az elõzõ projekt main metódusa által json fájlból való felolvasást kell átmozgatni/beilleszteni. A Main.java osztályra nincs szükség! (Ez egy külön singleton legyen, a UserDB és a DeviceDB osztályokon felül)
+- [x] A DeviceDB és a UserDB legyen átalakítva Singleton beanné a korábbi háziból.
+- [x] A Cart osztály (a korábbi háziból) legyen átalakítva Stateful beanné.
 - [] Az interceptorok, validáláshoz kapcsolódó osztályok, saját (eddigi) excpetion-ök, singletonok, stateful beanek kerüljenek az EJB modulba, továbbra is mûködjön az interceptor
 - [] A REST service-ek kerüljenek a WEB modulba
 - [] A REST service-ek minden saját exception-re json választ adjanak vissza
