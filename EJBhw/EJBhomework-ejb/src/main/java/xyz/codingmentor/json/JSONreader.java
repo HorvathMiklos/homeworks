@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -10,7 +9,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.inject.Inject;
 import xyz.codingmentor.beans.Device;
 import xyz.codingmentor.beans.UserEntity;
 import xyz.codingmentor.db.DeviceDB;
@@ -21,53 +19,57 @@ import xyz.codingmentor.db.UserDB;
  * @author mhorvath
  */
 public class JSONreader {
-    @Inject
-    UserDB userDBtoReturn;
-    @Inject
-    DeviceDB deviceDBtoReturn;
+
     private final ObjectMapper mapper;
-    private File deviceDBFile;
-    private File userDBFile;
-    public JSONreader(String deviceDbPath,String userDbPath) {
+    private final File deviceDBFile;
+    private final File userDBFile;
+
+    public JSONreader(String deviceDbPath, String userDbPath) {
         ClassLoader classLoader = getClass().getClassLoader();
-        deviceDBFile=new File(classLoader.getResource(deviceDbPath).getFile());
-        userDBFile=new File(classLoader.getResource(userDbPath).getFile());
-        mapper=new ObjectMapper();
+        deviceDBFile = new File(classLoader.getResource(deviceDbPath).getFile());
+        userDBFile = new File(classLoader.getResource(userDbPath).getFile());
+        mapper = new ObjectMapper();
     }
-    private List<UserEntity> jsonToUserEntityList() throws IOException{
-        return mapper.readValue(userDBFile, new TypeReference<List<UserEntity>>(){});
+
+    private List<UserEntity> jsonToUserEntityList() throws IOException {
+        return mapper.readValue(userDBFile, new TypeReference<List<UserEntity>>() {
+        });
     }
-    private List<Device> jsonToDeviceList() throws IOException{
-        return mapper.readValue(deviceDBFile, new TypeReference<List<Device>>(){});
+
+    private List<Device> jsonToDeviceList() throws IOException {
+        return mapper.readValue(deviceDBFile, new TypeReference<List<Device>>() {
+        });
     }
-    public UserDB jsonToUserDB(){
+
+    public UserDB jsonToUserDB(UserDB userDB) {
         Calendar calendar = Calendar.getInstance();
-        userDBtoReturn=new UserDB();
+        userDB = new UserDB();
         List<UserEntity> userEntitys = new ArrayList<>();
         try {
-            userEntitys=this.jsonToUserEntityList();
+            userEntitys = this.jsonToUserEntityList();
         } catch (IOException ex) {
             Logger.getLogger(JSONreader.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (UserEntity userEntity : userEntitys) {
             userEntity.setRegistrationDate(calendar.getTime());
             userEntity.setLastModifiedDate(calendar.getTime());
-            userDBtoReturn.addUser(userEntity);
+            userDB.addUser(userEntity);
         }
-        return userDBtoReturn;
+        return userDB;
     }
-    public DeviceDB jsonToDeviceDB(){
-        deviceDBtoReturn=new DeviceDB();
+
+    public DeviceDB jsonToDeviceDB(DeviceDB deviceDB) {
+        deviceDB = new DeviceDB();
         List<Device> devices = new ArrayList<>();
         try {
-            devices=this.jsonToDeviceList();
+            devices = this.jsonToDeviceList();
         } catch (IOException ex) {
             Logger.getLogger(JSONreader.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Device device : devices) {
-            deviceDBtoReturn.addDevice(device);
+            deviceDB.addDevice(device);
         }
-        return deviceDBtoReturn;
+        return deviceDB;
     }
 
 }

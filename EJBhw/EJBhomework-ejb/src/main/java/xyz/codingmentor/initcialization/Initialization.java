@@ -32,8 +32,8 @@ public class Initialization {
         String usersPath = "users.json";
         String devicesPath = "devices.json";
         JSONreader reader = new JSONreader(devicesPath, usersPath);
-        userDB = reader.jsonToUserDB();
-        deviceDB = reader.jsonToDeviceDB();
+        reader.jsonToUserDB(userDB);
+        reader.jsonToDeviceDB(deviceDB);
         LOGGER.log(Level.INFO, userDB.toString());
         for (UserEntity userEntity : userDB.getAllUser()) {
             LOGGER.log(Level.INFO, userEntity.toString());
