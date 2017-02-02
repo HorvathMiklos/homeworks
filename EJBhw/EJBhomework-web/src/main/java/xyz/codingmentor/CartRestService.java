@@ -35,7 +35,7 @@ public class CartRestService implements Serializable {
 
     @Inject
     private Cart cart;
-    
+
     private static final String USER_KEY = "user";
 
     @Path("/{id}/{count}")
@@ -50,11 +50,18 @@ public class CartRestService implements Serializable {
         return new ResultDTO(ResultDTO.ResultType.SUCCESS, cart.value().toString());
     }
 
+    @Path("/{id}/{count}")
     @DELETE
-    public ResultDTO removeFromCart() {
-        return null;
-    }
+    public ResultDTO deleteDeviceFromCart(@Context HttpServletRequest request, @PathParam("id") String deviceId, @PathParam("count") int count) throws EntityException {
+        HttpSession session = request.getSession(false);
+        if (null == session.getAttribute(USER_KEY)) {
+            throw new IllegalStateException("Log in first!");
+        }
 
+        cart.deleteDevice(deviceId, count);
+        return new ResultDTO(ResultDTO.ResultType.SUCCESS, cart.value().toString());
+    }
+    
     @POST
     public ResultDTO buyCart() {
         return null;
