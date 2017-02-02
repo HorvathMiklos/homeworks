@@ -21,11 +21,7 @@ import xyz.codingmentor.interceptor.ValidationInterceptor;
 @Interceptors(ValidationInterceptor.class)
 public class UserDB {
 
-    private Map<String, UserEntity> userMap;
-
-    public UserDB() {
-        userMap = new HashMap<>();
-    }
+    private Map<String, UserEntity> userMap = new HashMap<>();;
 
     private void checkUserExistence(String username) {
         if (!userMap.containsKey(username)) {

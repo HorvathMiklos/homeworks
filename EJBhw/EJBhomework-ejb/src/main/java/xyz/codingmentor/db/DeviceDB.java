@@ -21,11 +21,7 @@ import xyz.codingmentor.interceptor.ValidationInterceptor;
 @Interceptors(ValidationInterceptor.class)
 public class DeviceDB {
 
-    private Map<String,Device> deviceMap;
-
-    public DeviceDB() {
-        deviceMap = deviceMap = new HashMap<>();
-    }
+    private Map<String,Device> deviceMap = new HashMap<>();;
         
     private void checkDeviceExistence(String deviceID){
         if(!deviceMap.containsKey(deviceID)){
