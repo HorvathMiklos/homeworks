@@ -43,7 +43,7 @@ public class JSONreader {
 
     public UserDB jsonToUserDB(UserDB userDB) {
         Calendar calendar = Calendar.getInstance();
-        userDB = new UserDB();
+        //userDB = new UserDB();
         List<UserEntity> userEntitys = new ArrayList<>();
         try {
             userEntitys = this.jsonToUserEntityList();
@@ -59,7 +59,7 @@ public class JSONreader {
     }
 
     public DeviceDB jsonToDeviceDB(DeviceDB deviceDB) {
-        deviceDB = new DeviceDB();
+        //deviceDB = new DeviceDB();
         List<Device> devices = new ArrayList<>();
         try {
             devices = this.jsonToDeviceList();

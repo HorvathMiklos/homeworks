@@ -14,10 +14,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.db.DeviceDB;
 
 /**
  * REST Web Service
@@ -27,6 +29,8 @@ import xyz.codingmentor.beans.Device;
 @Path("device")
 @RequestScoped
 public class DeviceRestService {
+    @Inject
+    private DeviceDB deviceDB;
     @Context
     private UriInfo context;
     public DeviceRestService() {
@@ -43,10 +47,10 @@ public class DeviceRestService {
     public void getDeviceById(){
     
     }
-    /*
+    
     @GET
     public List<Device> getAllDevices(){
-    
+        return deviceDB.getAllDevices();
     }
-    */
+    
 }
