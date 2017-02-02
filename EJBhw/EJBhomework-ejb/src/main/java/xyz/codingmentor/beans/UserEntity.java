@@ -2,6 +2,7 @@ package xyz.codingmentor.beans;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -25,10 +26,8 @@ public class UserEntity implements Serializable {
     @NotNull
     @Size(min = 6)
     @Pattern.List({
-        @Pattern(regexp = ".*[a-z].*")
-        ,
-        @Pattern(regexp = ".*[A-Z].*")
-        ,
+        @Pattern(regexp = ".*[a-z].*"),
+        @Pattern(regexp = ".*[A-Z].*"),
         @Pattern(regexp = "(.*[1-9].*)|(.*[\\=\\+\\<\\>\\.\\,\\)].*)")
     })
     private String password;
@@ -161,4 +160,29 @@ public class UserEntity implements Serializable {
         return "UserEntity{" + "username=" + username + ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", address=" + address + ", phone=" + phone + ", email=" + email + ", sex=" + sex + ", registrationDate=" + registrationDate + ", lastModifiedDate=" + lastModifiedDate + ", dateOfBirth=" + dateOfBirth + ", admin=" + admin + '}';
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.username);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserEntity other = (UserEntity) obj;
+        if (!Objects.equals(this.username, other.username)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

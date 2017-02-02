@@ -17,7 +17,7 @@ import xyz.codingmentor.constraint.SamsungIsNotGreen;
 @Bean
 @AppleBlackOrWhite
 @SamsungIsNotGreen
-public class Device implements Serializable {
+public class DeviceEntity implements Serializable {
 
     @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     @NotNull
@@ -37,7 +37,7 @@ public class Device implements Serializable {
     @Min(0)
     private Integer count;
 
-    public Device() {
+    public DeviceEntity() {
         //for json reader, empty on purpuse
     }
 
@@ -107,7 +107,7 @@ public class Device implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Device other = (Device) obj;
+        final DeviceEntity other = (DeviceEntity) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

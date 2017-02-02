@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import xyz.codingmentor.beans.Color;
-import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.beans.DeviceEntity;
 import xyz.codingmentor.beans.Manufacturer;
 import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.NotExistingDeviceException;
@@ -16,9 +16,9 @@ public class DeviceDBTest {
     
     private static ValidatorFactory vf;
     private static Validator validator;
-    private Device newDeviceOne;
-    private Device DeviceOneEdited;
-    private Device newDeviceTwo;
+    private DeviceEntity newDeviceOne;
+    private DeviceEntity DeviceOneEdited;
+    private DeviceEntity newDeviceTwo;
     private DeviceDB deviceDB;
     
     public DeviceDBTest() {
@@ -31,21 +31,21 @@ public class DeviceDBTest {
         validator = vf.getValidator();
         deviceDB = new DeviceDB();
         
-        newDeviceOne = new Device();
+        newDeviceOne = new DeviceEntity();
         newDeviceOne.setManufacturer(Manufacturer.HTC);
         newDeviceOne.setType("phone");
         newDeviceOne.setPrice(1000);
         newDeviceOne.setColor(Color.BLUE);
         newDeviceOne.setCount(50);
         
-        DeviceOneEdited = new Device();
+        DeviceOneEdited = new DeviceEntity();
         DeviceOneEdited.setManufacturer(Manufacturer.HTC);
         DeviceOneEdited.setType("phone");
         DeviceOneEdited.setPrice(1000);
         DeviceOneEdited.setColor(Color.BLUE);
         DeviceOneEdited.setCount(40);
         
-        newDeviceTwo = new Device();
+        newDeviceTwo = new DeviceEntity();
         newDeviceTwo.setManufacturer(Manufacturer.ONEPLUS);
         newDeviceTwo.setType("phone");
         newDeviceTwo.setPrice(1500);

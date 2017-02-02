@@ -11,7 +11,7 @@ import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.beans.DeviceEntity;
 import xyz.codingmentor.db.DeviceDB;
 import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.NotEnoughDeviceExeption;
@@ -25,13 +25,13 @@ import xyz.codingmentor.exceptions.NotExistingDeviceException;
 @Stateful
 @StatefulTimeout(value = 2000, unit = TimeUnit.SECONDS)
 public class Cart implements Serializable {
-
+    private static final Logger LOGGER = Logger.getLogger(Cart.class.getSimpleName());
     private Integer value;
     private Map<String, Integer> devicesInCart;
 
     @Inject
     private DeviceDB deviceDB;
-    private static final Logger LOGGER = Logger.getLogger(Cart.class.getSimpleName());
+    
 
     @PostConstruct
     private void init() {
@@ -43,7 +43,7 @@ public class Cart implements Serializable {
         if (!deviceDB.isExisting(id)) {
             throw new NotExistingDeviceException(id);
         }
-        Device device = deviceDB.getDevice(id);
+        DeviceEntity device = deviceDB.getDevice(id);
         if (device.getCount() < count) {
             throw new NotEnoughDeviceExeption(id);
         }
@@ -61,7 +61,7 @@ public class Cart implements Serializable {
 
     private void modifyCountsToDelete(String id, int count) throws EntityException {
         devicesInCart.put(id, devicesInCart.get(id) - count);
-        Device deviceUsedForEdit = deviceDB.getDevice(id);
+        DeviceEntity deviceUsedForEdit = deviceDB.getDevice(id);
         deviceUsedForEdit.setCount(deviceUsedForEdit.getCount() + count);
     }
 

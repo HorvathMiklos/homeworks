@@ -14,13 +14,13 @@ public class DeviceTest {
 
     private static ValidatorFactory vf;
     private static Validator validator;
-    private Device newDevice;
+    private DeviceEntity newDevice;
 
     public DeviceTest() {
     }
 
     private <T> void testViolation(T violatedValue, int numbersOfViolations) {
-        Set<ConstraintViolation<Device>> violations = validator.validate(newDevice);
+        Set<ConstraintViolation<DeviceEntity>> violations = validator.validate(newDevice);
         Assert.assertEquals(numbersOfViolations, violations.size());
         if (violations.size() > 0) {
             Assert.assertEquals(violatedValue, violations.iterator().next().getInvalidValue());
@@ -31,7 +31,7 @@ public class DeviceTest {
     public void setUp() {
         vf = Validation.buildDefaultValidatorFactory();
         validator = vf.getValidator();
-        newDevice = new Device();
+        newDevice = new DeviceEntity();
         newDevice.setId(UUID.randomUUID().toString());
 
         newDevice.setManufacturer(Manufacturer.HTC);
@@ -43,7 +43,7 @@ public class DeviceTest {
 
     @Test
     public void testDeviceGood() {
-        Set<ConstraintViolation<Device>> violations = validator.validate(newDevice);
+        Set<ConstraintViolation<DeviceEntity>> violations = validator.validate(newDevice);
         Assert.assertEquals(0, violations.size());
     }
 

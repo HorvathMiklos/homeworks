@@ -1,5 +1,4 @@
 *.class
-*.json
 build/
 **/nbproject/
 manifest.mf

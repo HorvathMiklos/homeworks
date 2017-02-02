@@ -3,14 +3,14 @@ package xyz.codingmentor.constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import xyz.codingmentor.beans.Color;
-import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.beans.DeviceEntity;
 import xyz.codingmentor.beans.Manufacturer;
 
 /**
  *
  * @author mhorvath
  */
-public class SamsungIsNotGreenValidator implements ConstraintValidator<SamsungIsNotGreen, Device> {
+public class SamsungIsNotGreenValidator implements ConstraintValidator<SamsungIsNotGreen, DeviceEntity> {
 
     @Override
     public void initialize(SamsungIsNotGreen a) {
@@ -18,7 +18,7 @@ public class SamsungIsNotGreenValidator implements ConstraintValidator<SamsungIs
     }
 
     @Override
-    public boolean isValid(Device device, ConstraintValidatorContext cvc) {
+    public boolean isValid(DeviceEntity device, ConstraintValidatorContext cvc) {
         if (device == null) {
             return true;
         }

@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package xyz.codingmentor;
+
+package xyz.codingmentor.restservices;
 
 import java.util.List;
 import javax.ws.rs.core.Context;
@@ -19,7 +15,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
-import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.beans.DeviceEntity;
 import xyz.codingmentor.beans.UserEntity;
 import xyz.codingmentor.db.DeviceDB;
 import xyz.codingmentor.dto.ResultDTO;
@@ -30,7 +26,7 @@ import xyz.codingmentor.exceptions.EntityException;
  *
  * @author mhorvath
  */
-@Path("device")
+@Path("devices")
 @RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 public class DeviceRestService {
@@ -41,13 +37,13 @@ public class DeviceRestService {
     private static final String USER_KEY = "user";
 
     @GET
-    public List<Device> getAllDevices() {
+    public List<DeviceEntity> getAllDevices() {
         return deviceDB.getAllDevices();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResultDTO addDevice(@Context HttpServletRequest request, Device device) throws EntityException {
+    public ResultDTO addDevice(@Context HttpServletRequest request, DeviceEntity device) throws EntityException {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {
             throw new IllegalStateException("Log in first!");
@@ -72,13 +68,13 @@ public class DeviceRestService {
         if (!currentUser.isAdmin()) {
             throw new IllegalStateException("You are not admin!");
         }
-        Device deviceToDelete = deviceDB.getDevice(deviceId);
+        DeviceEntity deviceToDelete = deviceDB.getDevice(deviceId);
         return new ResultDTO(ResultDTO.ResultType.SUCCESS, deviceDB.deleteDevice(deviceToDelete));
     }
 
     @Path("/{id}")
     @GET
-    public Device getDeviceById(@PathParam("id") String id) throws EntityException {
+    public DeviceEntity getDeviceById(@PathParam("id") String id) throws EntityException {
         return deviceDB.getDevice(id);
     }
 }

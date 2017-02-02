@@ -11,11 +11,11 @@ import java.util.logging.Logger;
  *
  * @author mhorvath
  */
-public class JSONwriter {
+public class JSONWriter {
 
     private final ObjectMapper mapper;
 
-    public JSONwriter() {
+    public JSONWriter() {
         mapper = new ObjectMapper();
     }
 
@@ -23,7 +23,7 @@ public class JSONwriter {
         try {
             mapper.writeValue(new File(path), entities);
         } catch (IOException ex) {
-            Logger.getLogger(JSONwriter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JSONWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

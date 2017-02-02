@@ -1,4 +1,4 @@
-package xyz.codingmentor;
+package xyz.codingmentor.config;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -21,10 +21,10 @@ public class ApplicationConfig extends Application {
      * Do not modify addRestResourceClasses() method. It is automatically populated with all resources defined in the project. If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(xyz.codingmentor.CartRestService.class);
-        resources.add(xyz.codingmentor.DeviceRestService.class);
-        resources.add(xyz.codingmentor.UserRestService.class);
         resources.add(xyz.codingmentor.exception.GeneralExceptionMapper.class);
+        resources.add(xyz.codingmentor.restservices.CartRestService.class);
+        resources.add(xyz.codingmentor.restservices.DeviceRestService.class);
+        resources.add(xyz.codingmentor.restservices.UserRestService.class);
     }
 
 }

@@ -6,12 +6,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.beans.DeviceEntity;
 import xyz.codingmentor.beans.UserEntity;
 import xyz.codingmentor.db.DeviceDB;
 import xyz.codingmentor.db.UserDB;
 import xyz.codingmentor.exceptions.EntityException;
-import xyz.codingmentor.json.JSONreader;
+import xyz.codingmentor.json.JSONReader;
 
 /**
  *
@@ -32,13 +32,13 @@ public class Initialization {
     public void dbInit() {
         String usersPath = "users.json";
         String devicesPath = "devices.json";
-        JSONreader reader = new JSONreader(devicesPath, usersPath);
+        JSONReader reader = new JSONReader(devicesPath, usersPath);
         tryAddUser(reader);
         tryAddDevice(reader);
         logAll();
     }
 
-    private void tryAddDevice(JSONreader reader) {
+    private void tryAddDevice(JSONReader reader) {
         try {
             reader.jsonToDeviceDB(deviceDB);
         } catch (EntityException ex) {
@@ -46,7 +46,7 @@ public class Initialization {
         }
     }
 
-    private void tryAddUser(JSONreader reader) {
+    private void tryAddUser(JSONReader reader) {
         try {
             reader.jsonToUserDB(userDB);
         } catch (EntityException ex) {
@@ -68,7 +68,7 @@ public class Initialization {
 
     private void logDevices() {
         LOGGER.log(Level.INFO, deviceDB.toString());
-        for (Device device : deviceDB.getAllDevices()) {
+        for (DeviceEntity device : deviceDB.getAllDevices()) {
             LOGGER.log(Level.INFO, device.toString());
         }
     }

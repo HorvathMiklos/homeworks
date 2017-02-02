@@ -9,7 +9,7 @@ import java.util.UUID;
 import javax.ejb.Singleton;
 import javax.interceptor.ExcludeClassInterceptors;
 import javax.interceptor.Interceptors;
-import xyz.codingmentor.beans.Device;
+import xyz.codingmentor.beans.DeviceEntity;
 import xyz.codingmentor.exceptions.DeviceAllreadyInDeviceListException;
 import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.NotExistingDeviceException;
@@ -23,7 +23,7 @@ import xyz.codingmentor.interceptor.ValidationInterceptor;
 @Interceptors(ValidationInterceptor.class)
 public class DeviceDB implements Serializable {
 
-    private Map<String, Device> deviceMap = new HashMap<>();
+    private Map<String, DeviceEntity> deviceMap = new HashMap<>();
 
     private void checkDeviceExistence(String deviceID) throws EntityException {
         if (!deviceMap.containsKey(deviceID)) {
@@ -32,7 +32,7 @@ public class DeviceDB implements Serializable {
     }
 
     @ExcludeClassInterceptors
-    public Device addDevice(Device newDevice) throws EntityException {
+    public DeviceEntity addDevice(DeviceEntity newDevice) throws EntityException {
         if (deviceMap.containsKey(newDevice.getId())) {
             throw new DeviceAllreadyInDeviceListException();
         }
@@ -41,13 +41,13 @@ public class DeviceDB implements Serializable {
         return deviceMap.get(newDevice.getId());
     }
 
-    public Device editDevice(Device deviceToEdit) throws EntityException {
+    public DeviceEntity editDevice(DeviceEntity deviceToEdit) throws EntityException {
         checkDeviceExistence(deviceToEdit.getId());
         deviceMap.put(deviceToEdit.getId(), deviceToEdit);
         return deviceMap.get(deviceToEdit.getId());
     }
 
-    public Device getDevice(String id) throws EntityException {
+    public DeviceEntity getDevice(String id) throws EntityException {
         checkDeviceExistence(id);
         return deviceMap.get(id);
     }
@@ -56,15 +56,15 @@ public class DeviceDB implements Serializable {
         return deviceMap.containsKey(id);
     }
 
-    public Device deleteDevice(Device deviceToDelete) throws EntityException {
-        Device deletedDevice;
+    public DeviceEntity deleteDevice(DeviceEntity deviceToDelete) throws EntityException {
+        DeviceEntity deletedDevice;
         checkDeviceExistence(deviceToDelete.getId());
         deletedDevice = getDevice(deviceToDelete.getId());
         deviceMap.remove(deviceToDelete.getId());
         return deletedDevice;
     }
 
-    public List<Device> getAllDevices() {
+    public List<DeviceEntity> getAllDevices() {
         return new ArrayList<>(deviceMap.values());
     }
 }
