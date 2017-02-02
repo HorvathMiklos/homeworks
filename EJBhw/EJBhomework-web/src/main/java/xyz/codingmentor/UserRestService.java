@@ -49,8 +49,19 @@ public class UserRestService implements Serializable {
     }
 
     @POST
-    public UserEntity addUser(@Context HttpServletRequest request) {
-        return null;
+    public ResultDTO addUser(@Context HttpServletRequest request, UserEntity user) throws EntityException {
+
+        HttpSession session = request.getSession(false);
+        if (null == session.getAttribute(USER_KEY)) {
+            throw new IllegalStateException("Log in first!");
+        }
+
+        UserEntity currentUser = (UserEntity) session.getAttribute(USER_KEY);
+        if (!currentUser.isAdmin()) {
+            throw new IllegalStateException("You are not admin!");
+        }
+
+        return new ResultDTO(ResultType.SUCCESS, userDB.addUser(user));
     }
 
     @Path("/{userName}")
@@ -68,13 +79,25 @@ public class UserRestService implements Serializable {
     @Path("/login")
     @POST
     public ResultDTO login(@Context HttpServletRequest request, UserEntity user) throws EntityException {
-        if(!userDB.authenticate(user.getUsername(), user.getPassword())){
+        if (!userDB.authenticate(user.getUsername(), user.getPassword())) {
             return new ResultDTO(ResultType.ERROR, "invalid username or password");
         }
-        UserEntity userEntity=userDB.getUser(user.getUsername());
+        UserEntity userEntity = userDB.getUser(user.getUsername());
         HttpSession session = request.getSession(true);
         session.setMaxInactiveInterval(2000);
         session.setAttribute(USER_KEY, userEntity);
         return new ResultDTO(ResultType.SUCCESS, userEntity);
+    }
+
+    @POST
+    @Path("/logout")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResultDTO logout(@Context HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (null == session.getAttribute(USER_KEY)) {
+            throw new IllegalStateException("Log in first!");
+        }
+        request.getSession().invalidate();
+        return new ResultDTO(ResultType.SUCCESS, "Logged out");
     }
 }
