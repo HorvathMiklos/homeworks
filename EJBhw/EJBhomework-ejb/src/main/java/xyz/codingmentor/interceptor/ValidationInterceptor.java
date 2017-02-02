@@ -22,9 +22,15 @@ public class ValidationInterceptor {
 
     @AroundInvoke
     public Object validation(InvocationContext ic) throws Exception {
-        Arrays.asList(ic.getParameters()).stream().filter(parameter -> null != parameter && parameter.getClass().isAnnotationPresent(Bean.class)).forEach(this::validateBean);
-
+         validateParams(ic.getParameters());
         return ic.proceed();
+    }
+
+    private void validateParams(Object[] parameters) {
+        if (null == parameters) {
+            return;
+        }
+        Arrays.asList(parameters).stream().filter(p -> p.getClass().isAnnotationPresent(Bean.class)).forEach(this::validateBean);
     }
 
     private void validateBean(Object bean) {
