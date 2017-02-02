@@ -26,9 +26,9 @@ Original homework description (Hungarian):
 - [x] A Cart osztály (a korábbi háziból) legyen átalakítva Stateful beanné.
 - [x] Az interceptorok, validáláshoz kapcsolódó osztályok, saját (eddigi) excpetion-ök, singletonok, stateful beanek kerüljenek az EJB modulba, továbbra is mûködjön az interceptor
 - [x] A REST service-ek kerüljenek a WEB modulba
-- [ ] A REST service-ek minden saját exception-re json választ adjanak vissza
-- [ ] Legyen exception kezelés általánosan is, minden lehetséges exceptionre, melyre a szerver json választ adjon
-- [ ] az eddig megírt teszt osztályok is legyenek áttéve az új projektbe, és fusson le az összes korábbi teszt
+- [x] A REST service-ek minden saját exception-re json választ adjanak vissza
+- [x] Legyen exception kezelés általánosan is, minden lehetséges exceptionre, melyre a szerver json választ adjon
+- [x] az eddig megírt teszt osztályok is legyenek áttéve az új projektbe, és fusson le az összes korábbi teszt
 - [ ] Az alkalmazás tesztelést manuálisan végezzétek el, minden rest endpointot teszteljetek. A teszteléshez használt json példákat tegyétek a repository-ba egy scripts mappába. Minden kéréshez tartozzon egy külön sh fájl (pl test-login.sh), ami curl-el végrehajtja a logint. (ez szintén a scripts mappába kerüljön). Így könnyen ti is újra tudjátok tesztelni az alkalmazást a fejlesztés során, és mások által is könnyen demonstrálható, tesztelhetõ lesz.
 
 ## Tesztelés:
