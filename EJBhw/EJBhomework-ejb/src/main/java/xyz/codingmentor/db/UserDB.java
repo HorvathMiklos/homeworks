@@ -9,6 +9,7 @@ import javax.ejb.Singleton;
 import javax.interceptor.ExcludeClassInterceptors;
 import javax.interceptor.Interceptors;
 import xyz.codingmentor.beans.UserEntity;
+import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.NotExistingUserException;
 import xyz.codingmentor.exceptions.UserAlreadyInUserListException;
 import xyz.codingmentor.interceptor.ValidationInterceptor;
@@ -21,16 +22,16 @@ import xyz.codingmentor.interceptor.ValidationInterceptor;
 @Interceptors(ValidationInterceptor.class)
 public class UserDB {
 
-    private Map<String, UserEntity> userMap = new HashMap<>();;
+    private Map<String, UserEntity> userMap = new HashMap<>();
 
-    private void checkUserExistence(String username) {
+    private void checkUserExistence(String username) throws EntityException {
         if (!userMap.containsKey(username)) {
             throw new NotExistingUserException(username);
         }
     }
 
     @ExcludeClassInterceptors
-    public UserEntity addUser(UserEntity newUser) {
+    public UserEntity addUser(UserEntity newUser) throws EntityException {
         if (userMap.containsKey(newUser.getUsername())) {
             throw new UserAlreadyInUserListException();
         }
@@ -38,7 +39,7 @@ public class UserDB {
         return userMap.get(newUser.getUsername());
     }
 
-    public UserEntity getUser(String username) {
+    public UserEntity getUser(String username) throws EntityException {
         checkUserExistence(username);
         return userMap.get(username);
 
@@ -54,7 +55,7 @@ public class UserDB {
 
     }
 
-    public UserEntity modifyUser(UserEntity userToModify) {
+    public UserEntity modifyUser(UserEntity userToModify) throws EntityException {
         Calendar now = Calendar.getInstance();
         checkUserExistence(userToModify.getUsername());
         userToModify.setLastModifiedDate(now.getTime());
@@ -62,7 +63,7 @@ public class UserDB {
         return userMap.get(userToModify.getUsername());
     }
 
-    public UserEntity deleteUser(UserEntity userToDelete) {
+    public UserEntity deleteUser(UserEntity userToDelete) throws EntityException {
         UserEntity deletedUser;
         checkUserExistence(userToDelete.getUsername());
         deletedUser = userMap.get(userToDelete.getUsername());

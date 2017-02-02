@@ -28,6 +28,7 @@ public class ApplicationConfig extends Application {
         resources.add(xyz.codingmentor.CartRestService.class);
         resources.add(xyz.codingmentor.DeviceRestService.class);
         resources.add(xyz.codingmentor.UserRestService.class);
+        resources.add(xyz.codingmentor.exception.GeneralExceptionMapper.class);
     }
 
 }

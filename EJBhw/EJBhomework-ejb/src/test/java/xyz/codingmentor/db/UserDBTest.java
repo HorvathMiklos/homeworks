@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import xyz.codingmentor.beans.Sex;
 import xyz.codingmentor.beans.UserEntity;
+import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.NotExistingUserException;
 
 public class UserDBTest {
@@ -83,13 +84,13 @@ public class UserDBTest {
      * Test of addUser method, of class UserDB.
      */
     @Test
-    public void testAddUser() {
+    public void testAddUser() throws EntityException {
         userDB.addUser(newUser);
         assertEquals(true, userDB.getAllUser().contains(newUser));
     }
 
     @Test
-    public void testGetUser() {
+    public void testGetUser() throws EntityException {
         userDB.addUser(newUserBela);
         userDB.addUser(newUserJulia);
         assertEquals(newUserBela, userDB.getUser("Bela"));
@@ -98,31 +99,31 @@ public class UserDBTest {
     }
 
     @Test(expected = NotExistingUserException.class)
-    public void testGetUserThrowsNotExistingUserException() {
+    public void testGetUserThrowsNotExistingUserException() throws EntityException {
         userDB.getUser("dgjhrktrsdrgstr");
     }
 
     @Test
-    public void testAuthenticate() {
+    public void testAuthenticate() throws EntityException {
         assertEquals(false, userDB.authenticate("Bela", "wefweQWerf123wdfaseQ"));
         userDB.addUser(newUserJulia);
         assertEquals(true, userDB.authenticate("Julia", "Admin112"));
     }
 
     @Test
-    public void testModifyUser() {
+    public void testModifyUser() throws EntityException {
         userDB.addUser(newUserBela);
         assertEquals(newUserBelaModified, userDB.modifyUser(newUserBelaModified));
         assertEquals("1123 Somwhereelse street 58", userDB.getUser("Bela").getAddress());
     }
 
     @Test(expected = NotExistingUserException.class)
-    public void testModifyUserThrowsNotExistingUserException() {
+    public void testModifyUserThrowsNotExistingUserException() throws EntityException {
         userDB.modifyUser(newUserBelaModified);
     }
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteUser() throws EntityException {
         userDB.addUser(newUserJulia);
         assertEquals(true, userDB.getAllUser().contains(newUserJulia));
         userDB.deleteUser(newUserJulia);
@@ -130,7 +131,7 @@ public class UserDBTest {
     }
 
     @Test(expected = NotExistingUserException.class)
-    public void testDeleteUserThrowsNotExistingUserException() {
+    public void testDeleteUserThrowsNotExistingUserException() throws EntityException {
         userDB.deleteUser(newUserJulia);
     }
 

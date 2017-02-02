@@ -12,6 +12,7 @@ import org.junit.Before;
 import xyz.codingmentor.beans.Color;
 import xyz.codingmentor.beans.Device;
 import xyz.codingmentor.beans.Manufacturer;
+import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.exceptions.NotExistingDeviceException;
 
 
@@ -65,13 +66,13 @@ public class DeviceDBTest {
     }
 
     @Test
-    public void testAddDevice() {
+    public void testAddDevice() throws EntityException{
         deviceDB.addDevice(newDeviceOne);
         assertEquals(true, deviceDB.getAllDevices().contains(newDeviceOne));
     }
 
     @Test
-    public void testEditDevice() {
+    public void testEditDevice() throws EntityException{
         deviceDB.addDevice(newDeviceOne);
         assertEquals(newDeviceOne, deviceDB.editDevice(DeviceOneEdited));
         assertEquals(DeviceOneEdited.getCount(), deviceDB.getDevice(iDOne).getCount());
@@ -79,12 +80,12 @@ public class DeviceDBTest {
     }
 
     @Test(expected = NotExistingDeviceException.class)
-    public void testEditDeviceThrowsNotExistingDeviceException() {
+    public void testEditDeviceThrowsNotExistingDeviceException() throws EntityException{
         deviceDB.editDevice(DeviceOneEdited);
     }
 
     @Test
-    public void testGetDevice() {
+    public void testGetDevice() throws EntityException{
         deviceDB.addDevice(newDeviceOne);
         deviceDB.addDevice(newDeviceTwo);
         assertEquals(newDeviceOne, deviceDB.getDevice(iDOne));
@@ -92,12 +93,12 @@ public class DeviceDBTest {
     }
 
     @Test(expected = NotExistingDeviceException.class)
-    public void testGetDeviceThrowsNotExistingDeviceException() {
+    public void testGetDeviceThrowsNotExistingDeviceException() throws EntityException{
         deviceDB.getDevice(iDnotExisting);
     }
 
     @Test
-    public void testDeleteDevice() {
+    public void testDeleteDevice() throws EntityException{
         deviceDB.addDevice(newDeviceOne);
         deviceDB.addDevice(newDeviceTwo);
         deviceDB.deleteDevice(newDeviceTwo);
@@ -107,7 +108,7 @@ public class DeviceDBTest {
     }
 
     @Test(expected = NotExistingDeviceException.class)
-    public void testDeleteDeviceThrowsNotExistingDeviceException() {
+    public void testDeleteDeviceThrowsNotExistingDeviceException() throws EntityException{
         deviceDB.deleteDevice(newDeviceTwo);
     }
 

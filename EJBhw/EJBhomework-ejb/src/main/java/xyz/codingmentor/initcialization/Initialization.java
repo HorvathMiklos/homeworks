@@ -10,6 +10,7 @@ import xyz.codingmentor.beans.Device;
 import xyz.codingmentor.beans.UserEntity;
 import xyz.codingmentor.db.DeviceDB;
 import xyz.codingmentor.db.UserDB;
+import xyz.codingmentor.exceptions.EntityException;
 import xyz.codingmentor.json.JSONreader;
 
 /**
@@ -32,12 +33,40 @@ public class Initialization {
         String usersPath = "users.json";
         String devicesPath = "devices.json";
         JSONreader reader = new JSONreader(devicesPath, usersPath);
-        reader.jsonToUserDB(userDB);
-        reader.jsonToDeviceDB(deviceDB);
+        tryAddUser(reader);
+        tryAddDevice(reader);
+        logAll();
+    }
+
+    private void tryAddDevice(JSONreader reader) {
+        try {
+            reader.jsonToDeviceDB(deviceDB);
+        } catch (EntityException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void tryAddUser(JSONreader reader) {
+        try {
+            reader.jsonToUserDB(userDB);
+        } catch (EntityException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void logAll() {
+        logDevices();
+        logUsers();
+    }
+
+    private void logUsers() {
         LOGGER.log(Level.INFO, userDB.toString());
         for (UserEntity userEntity : userDB.getAllUser()) {
             LOGGER.log(Level.INFO, userEntity.toString());
         }
+    }
+
+    private void logDevices() {
         LOGGER.log(Level.INFO, deviceDB.toString());
         for (Device device : deviceDB.getAllDevices()) {
             LOGGER.log(Level.INFO, device.toString());

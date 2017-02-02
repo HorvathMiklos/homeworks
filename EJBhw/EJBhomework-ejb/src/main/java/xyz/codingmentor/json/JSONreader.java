@@ -13,6 +13,7 @@ import xyz.codingmentor.beans.Device;
 import xyz.codingmentor.beans.UserEntity;
 import xyz.codingmentor.db.DeviceDB;
 import xyz.codingmentor.db.UserDB;
+import xyz.codingmentor.exceptions.EntityException;
 
 /**
  *
@@ -41,7 +42,7 @@ public class JSONreader {
         });
     }
 
-    public UserDB jsonToUserDB(UserDB userDB) {
+    public UserDB jsonToUserDB(UserDB userDB) throws EntityException{
         Calendar calendar = Calendar.getInstance();
         //userDB = new UserDB();
         List<UserEntity> userEntitys = new ArrayList<>();
@@ -58,7 +59,7 @@ public class JSONreader {
         return userDB;
     }
 
-    public DeviceDB jsonToDeviceDB(DeviceDB deviceDB) {
+    public DeviceDB jsonToDeviceDB(DeviceDB deviceDB) throws EntityException {
         //deviceDB = new DeviceDB();
         List<Device> devices = new ArrayList<>();
         try {

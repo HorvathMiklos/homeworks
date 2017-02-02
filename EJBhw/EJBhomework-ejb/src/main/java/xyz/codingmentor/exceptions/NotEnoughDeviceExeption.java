@@ -5,7 +5,7 @@ package xyz.codingmentor.exceptions;
  *
  * @author mhorvath
  */
-public class NotEnoughDeviceExeption extends RuntimeException{
+public class NotEnoughDeviceExeption extends EntityException{
 
     public NotEnoughDeviceExeption() {
         //nothing to inicialize, empty on purpose

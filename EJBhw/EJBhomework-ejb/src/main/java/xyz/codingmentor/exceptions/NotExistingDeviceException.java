@@ -5,7 +5,7 @@ package xyz.codingmentor.exceptions;
  *
  * @author mhorvath
  */
-public class NotExistingDeviceException extends RuntimeException {
+public class NotExistingDeviceException extends EntityException {
 
     public NotExistingDeviceException() {
         //nothing to inicialize empty on purpose
