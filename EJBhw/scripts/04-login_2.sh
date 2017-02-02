@@ -1,0 +1,1 @@
+curl --verbose --write-out "\n" --request POST --data @02-create_user.json --header "Content-Type: application/json" --cookie-jar cart-cookies.txt --cookie cart-cookies.txt http://localhost:8080/EJBhomework-web/web/users/login
