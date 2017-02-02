@@ -76,5 +76,4 @@ public class UserDB {
     public List<UserEntity> getAllUser() {
         return new ArrayList<>(userMap.values());
     }
-
 }

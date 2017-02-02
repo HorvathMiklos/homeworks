@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import javax.ejb.Singleton;
 import javax.interceptor.ExcludeClassInterceptors;
 import javax.interceptor.Interceptors;
@@ -34,6 +35,7 @@ public class DeviceDB {
         if(deviceMap.containsKey(newDevice.getId())){
             throw new DeviceAllreadyInDeviceListException();
         }
+        newDevice.setId(UUID.randomUUID().toString());
         deviceMap.put(newDevice.getId(), newDevice);
         return deviceMap.get(newDevice.getId());
     }

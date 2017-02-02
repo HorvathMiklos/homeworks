@@ -10,13 +10,13 @@ Original homework description (Hungarian):
 - [x] bejelentkezés (sikeres bejelentkezés után kerüljön be a sessionbe a UserEntity)
 
 ## device:
-- [ ] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
-- [ ] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
-- [ ] lekérés id alapján (bárki megteheti)
+- [x] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
+- [x] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
+- [x] lekérés id alapján (bárki megteheti)
 - [x] összes lekérdezése (bárki megteheti)
 
 ## cart:
-- [ ] device kosárhoz adás (bejelentkezést követõen tehetõ csak meg)
+- [x] device kosárhoz adás (bejelentkezést követõen tehetõ csak meg)
 - [ ] device kosárból elvétel (bejelentkezést követõen tehetõ csak meg)
 - [ ] kosár tartalmának megvásárlása vásárlás (bejelentkezést követõen tehetõ csak meg)
 

@@ -33,7 +33,6 @@ import xyz.codingmentor.exceptions.EntityException;
  */
 @Path("users")
 @SessionScoped
-@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserRestService implements Serializable {
 
@@ -47,6 +46,7 @@ public class UserRestService implements Serializable {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public ResultDTO addUser(@Context HttpServletRequest request, UserEntity user) throws EntityException {
 
         HttpSession session = request.getSession(false);
@@ -85,6 +85,7 @@ public class UserRestService implements Serializable {
 
     @Path("/login")
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public ResultDTO login(@Context HttpServletRequest request, UserEntity user) throws EntityException {
         if (!userDB.authenticate(user.getUsername(), user.getPassword())) {
             return new ResultDTO(ResultType.ERROR, "invalid username or password");
@@ -98,7 +99,6 @@ public class UserRestService implements Serializable {
 
     @POST
     @Path("/logout")
-    @Produces(MediaType.APPLICATION_JSON)
     public ResultDTO logout(@Context HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (null == session.getAttribute(USER_KEY)) {

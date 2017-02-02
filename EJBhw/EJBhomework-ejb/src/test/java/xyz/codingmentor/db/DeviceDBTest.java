@@ -24,7 +24,6 @@ public class DeviceDBTest {
     private Device DeviceOneEdited;
     private Device newDeviceTwo;
     private DeviceDB deviceDB;
-    private String iDOne, iDTwo, iDnotExisting;
 
     public DeviceDBTest() {
 
@@ -36,12 +35,7 @@ public class DeviceDBTest {
         validator = vf.getValidator();
         deviceDB = new DeviceDB();
 
-        iDOne = UUID.randomUUID().toString();
-        iDTwo = UUID.randomUUID().toString();
-        iDnotExisting = UUID.randomUUID().toString();
-
         newDeviceOne = new Device();
-        newDeviceOne.setId(iDOne);
         newDeviceOne.setManufacturer(Manufacturer.HTC);
         newDeviceOne.setType("phone");
         newDeviceOne.setPrice(1000);
@@ -49,7 +43,6 @@ public class DeviceDBTest {
         newDeviceOne.setCount(50);
 
         DeviceOneEdited = new Device();
-        DeviceOneEdited.setId(iDOne);
         DeviceOneEdited.setManufacturer(Manufacturer.HTC);
         DeviceOneEdited.setType("phone");
         DeviceOneEdited.setPrice(1000);
@@ -57,7 +50,6 @@ public class DeviceDBTest {
         DeviceOneEdited.setCount(40);
 
         newDeviceTwo = new Device();
-        newDeviceTwo.setId(iDTwo);
         newDeviceTwo.setManufacturer(Manufacturer.ONEPLUS);
         newDeviceTwo.setType("phone");
         newDeviceTwo.setPrice(1500);
@@ -72,10 +64,10 @@ public class DeviceDBTest {
     }
 
     @Test
-    public void testEditDevice() throws EntityException{
+    public void editDeviceReturnsSameDeviceAsInput() throws EntityException{
         deviceDB.addDevice(newDeviceOne);
-        assertEquals(newDeviceOne, deviceDB.editDevice(DeviceOneEdited));
-        assertEquals(DeviceOneEdited.getCount(), deviceDB.getDevice(iDOne).getCount());
+        newDeviceOne.setCount(314592);
+        assertEquals(newDeviceOne, deviceDB.editDevice(newDeviceOne));
 
     }
 
@@ -84,17 +76,9 @@ public class DeviceDBTest {
         deviceDB.editDevice(DeviceOneEdited);
     }
 
-    @Test
-    public void testGetDevice() throws EntityException{
-        deviceDB.addDevice(newDeviceOne);
-        deviceDB.addDevice(newDeviceTwo);
-        assertEquals(newDeviceOne, deviceDB.getDevice(iDOne));
-        assertEquals(newDeviceTwo, deviceDB.getDevice(iDTwo));
-    }
-
     @Test(expected = NotExistingDeviceException.class)
     public void testGetDeviceThrowsNotExistingDeviceException() throws EntityException{
-        deviceDB.getDevice(iDnotExisting);
+        deviceDB.getDevice("NotExistingId");
     }
 
     @Test
