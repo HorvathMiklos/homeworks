@@ -7,7 +7,7 @@ Original homework description (Hungarian):
 - [ ] törlés (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
 - [ ] lekérés username alapján (bárki megteheti)
 - [x] összes lekérdezése (bárki megteheti)
-- [ ] bejelentkezés (sikeres bejelentkezés után kerüljön be a sessionbe a UserEntity)
+- [x] bejelentkezés (sikeres bejelentkezés után kerüljön be a sessionbe a UserEntity)
 
 ## device:
 - [ ] hozzáadás (csak admin tehesse meg, session-ben tárolt UserEntity alapján legyen eldöntve, admin e aki be van lépve)
