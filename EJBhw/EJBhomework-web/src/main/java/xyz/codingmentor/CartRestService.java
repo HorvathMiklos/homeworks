@@ -61,9 +61,15 @@ public class CartRestService implements Serializable {
         cart.deleteDevice(deviceId, count);
         return new ResultDTO(ResultDTO.ResultType.SUCCESS, cart.value().toString());
     }
-    
+
     @POST
-    public ResultDTO buyCart() {
-        return null;
+    public ResultDTO buyCart(@Context HttpServletRequest request) throws EntityException {
+        HttpSession session = request.getSession(false);
+        if (null == session.getAttribute(USER_KEY)) {
+            throw new IllegalStateException("Log in first!");
+        }
+         ResultDTO result = new ResultDTO(ResultDTO.ResultType.SUCCESS, cart.value().toString());
+         cart.buy();
+         return result;
     }
 }

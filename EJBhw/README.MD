@@ -17,8 +17,8 @@ Original homework description (Hungarian):
 
 ## cart:
 - [x] device kosárhoz adás (bejelentkezést követõen tehetõ csak meg)
-- [ ] device kosárból elvétel (bejelentkezést követõen tehetõ csak meg)
-- [ ] kosár tartalmának megvásárlása vásárlás (bejelentkezést követõen tehetõ csak meg)
+- [x] device kosárból elvétel (bejelentkezést követõen tehetõ csak meg)
+- [x] kosár tartalmának megvásárlása vásárlás (bejelentkezést követõen tehetõ csak meg)
 
 ## Továbbá:
 - [x] Hozz létre egy Singleton beant, ami az alkalmazás elindulásakor feltölti a UserDB-t és a DeviceDB-t. Itt az elõzõ projekt main metódusa által json fájlból való felolvasást kell átmozgatni/beilleszteni. A Main.java osztályra nincs szükség! (Ez egy külön singleton legyen, a UserDB és a DeviceDB osztályokon felül)

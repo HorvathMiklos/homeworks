@@ -97,6 +97,7 @@ public class Cart implements Serializable {
         LOGGER.log(Level.INFO, "Bought devices:");
         logAllDevices();
         LOGGER.log(Level.INFO, "Value of bought devices:" + value.toString());
+        init();
     }
 
     public void logAllDevices() throws EntityException {
