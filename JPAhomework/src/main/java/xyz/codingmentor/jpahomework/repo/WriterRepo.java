@@ -1,16 +1,15 @@
 package xyz.codingmentor.jpahomework.repo;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.WriterDTO;
 import xyz.codingmentor.jpahomework.api.WriterRepository;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
-import xyz.codingmentor.jpahomework.model.entities.Book;
 import xyz.codingmentor.jpahomework.model.entities.Writer;
 import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 
@@ -21,6 +20,9 @@ import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 @Stateless
 @RepoQualifyer(EntityType.WRITER)
 public class WriterRepo implements WriterRepository{
+    @Inject
+    Writer writer;
+    
     /*
     @PersistenceContext(unitName = "jpahomeworkpersistenceunit")
     private EntityManager entityManager;
