@@ -17,6 +17,13 @@ public class BookIdentifier {
     false, updatable = false)
     String title;
 
+    public BookIdentifier(String writerid, String title) {
+        this.writerid = writerid;
+        this.title = title;
+    }
+    
+    
+    
     public String getWriterid() {
         return writerid;
     }

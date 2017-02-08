@@ -12,6 +12,7 @@ import xyz.codingmentor.jpahomework.model.enums.Gender;
  */
 public class WriterDTO {
     private Long id;
+    private String name;
     private Gender gender;
     private Date dateOfBirth;
     private List<Book> writenBooks;
@@ -22,6 +23,14 @@ public class WriterDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Gender getGender() {

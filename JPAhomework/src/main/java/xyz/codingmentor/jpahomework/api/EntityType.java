@@ -5,6 +5,8 @@ package xyz.codingmentor.jpahomework.api;
  *
  * @author mhorvath
  */
-public interface BookRepo {
-    
+public enum EntityType {
+    BOOK,
+    USER,
+    WRITER
 }

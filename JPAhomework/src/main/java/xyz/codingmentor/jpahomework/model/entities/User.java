@@ -11,9 +11,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import xyz.codingmentor.jpahomework.api.UserDTO;
 import xyz.codingmentor.jpahomework.model.embedables.Address;
 import xyz.codingmentor.jpahomework.model.enums.Gender;
 
@@ -40,8 +42,21 @@ public class User {
     private Date dateOfRegistration;
     @Embedded
     private Address address;
+    @OneToMany
     private List<Book> rentedBooks;
 
+    public User(UserDTO userDTO) {
+        this.id = userDTO.getId();
+        this.name = userDTO.getName();
+        this.gender = userDTO.getGender();
+        this.dateOfBirth = userDTO.getDateOfBirth();
+        this.dateOfRegistration = userDTO.getDateOfRegistration();
+        this.address = userDTO.getAddress();
+        this.rentedBooks = userDTO.getRentedBooks();
+    }
+    
+    
+    
     public Long getId() {
         return id;
     }
