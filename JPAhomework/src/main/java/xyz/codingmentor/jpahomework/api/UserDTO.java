@@ -19,7 +19,11 @@ public class UserDTO {
     private Date dateOfRegistration;
     private Address address;
     private List<Book> rentedBooks;
-
+    
+    public void addRentedBook(Book book){
+        rentedBooks.add(book);
+    }
+    
     public Long getId() {
         return id;
     }

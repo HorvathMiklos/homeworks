@@ -17,6 +17,10 @@ public class WriterDTO {
     private Date dateOfBirth;
     private List<Book> writenBooks;
 
+    public void addWritenBook(Book book){
+        writenBooks.add(book);
+    }
+    
     public Long getId() {
         return id;
     }

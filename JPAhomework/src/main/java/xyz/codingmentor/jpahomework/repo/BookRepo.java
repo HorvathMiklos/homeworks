@@ -10,7 +10,8 @@ import javax.persistence.PersistenceContext;
 import xyz.codingmentor.jpahomework.api.BookDTO;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.api.BookRepository;
-import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
+import xyz.codingmentor.jpahomework.api.EntityType;
+import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 import xyz.codingmentor.jpahomework.model.entities.Book;
 
 /**
@@ -18,6 +19,7 @@ import xyz.codingmentor.jpahomework.model.entities.Book;
  * @author mhorvath
  */
 @Stateless
+@RepoQualifyer(EntityType.BOOK)
 public class BookRepo implements BookRepository{
     /*
     @PersistenceContext(unitName = "jpahomeworkpersistenceunit")
@@ -43,8 +45,8 @@ public class BookRepo implements BookRepository{
     }
 
     @Override
-    public BookDTO findBook(BookIdentifier bookIdentifier) throws RepositoryException {
-        Book book = entityManager.find(Book.class, bookIdentifier);
+    public BookDTO findBook(String title) throws RepositoryException {
+        Book book = entityManager.find(Book.class, title);
         if (null != book) {
             return buildBook(book);
         }
@@ -55,8 +57,8 @@ public class BookRepo implements BookRepository{
     public BookDTO updateBook(BookDTO book) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        Book entity = entityManager.find(Book.class, book.getBookId());
-        entity.setBookId(book.getBookId());
+        Book entity = entityManager.find(Book.class, book.getTitle());
+        entity.setTitle(book.getTitle());
         entity.setStyle(book.getStyle());
         entityManager.merge(entity);
         tx.commit();
@@ -64,10 +66,10 @@ public class BookRepo implements BookRepository{
     }
 
     @Override
-    public BookDTO removeBook(BookIdentifier bookIdentifier) throws RepositoryException {
+    public BookDTO removeBook(String title) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        Book book = entityManager.find(Book.class, bookIdentifier);
+        Book book = entityManager.find(Book.class, title);
         if (null != book) {
             entityManager.remove(book);
         }
@@ -82,7 +84,7 @@ public class BookRepo implements BookRepository{
 */
     private BookDTO buildBook(Book book) {
         BookDTO bookDTO=new BookDTO();
-        bookDTO.setBookId(book.getBookId());
+        bookDTO.setTitle(book.getTitle());
         bookDTO.setStyle(book.getStyle());
         return bookDTO;
     }

@@ -24,7 +24,7 @@ import xyz.codingmentor.jpahomework.model.enums.Gender;
  * @author mhorvath
  */
 @Entity
-@Table(name = "user")
+@Table(name = "Library_user")
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -111,6 +111,5 @@ public class User {
 
     public void setRentedBooks(List<Book> rentedBooks) {
         this.rentedBooks = rentedBooks;
-    }
-    
+    }    
 }

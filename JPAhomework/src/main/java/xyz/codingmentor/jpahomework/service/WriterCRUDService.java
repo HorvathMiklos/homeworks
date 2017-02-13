@@ -7,7 +7,6 @@ import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 import xyz.codingmentor.jpahomework.api.WriterDTO;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
-import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
 import xyz.codingmentor.jpahomework.repo.BookRepo;
 import xyz.codingmentor.jpahomework.repo.WriterRepo;
 
@@ -19,8 +18,8 @@ public class WriterCRUDService {
     private WriterRepo writerRepo;
     
     @Inject 
-    public WriterCRUDService(@RepoQualifyer(EntityType.BOOK) WriterRepo writerRepo) {
-        this.writerRepo=writerRepo;
+    public WriterCRUDService(@RepoQualifyer(EntityType.WRITER) WriterRepo writerRepository) {
+        this.writerRepo=writerRepository;
     }
     
     public WriterDTO createWriter(WriterDTO writerDTO) throws RepositoryException {

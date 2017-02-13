@@ -20,8 +20,8 @@ import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 @Stateless
 @RepoQualifyer(EntityType.WRITER)
 public class WriterRepo implements WriterRepository{
-    @Inject
-    Writer writer;
+    /*@Inject
+    Writer writer;*/
     
     /*
     @PersistenceContext(unitName = "jpahomeworkpersistenceunit")

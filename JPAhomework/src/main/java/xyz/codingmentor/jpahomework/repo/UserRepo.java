@@ -3,8 +3,12 @@ package xyz.codingmentor.jpahomework.repo;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import xyz.codingmentor.jpahomework.api.EntityType;
+import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 import xyz.codingmentor.jpahomework.api.UserDTO;
 import xyz.codingmentor.jpahomework.api.UserRepository;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
@@ -15,10 +19,19 @@ import xyz.codingmentor.jpahomework.model.entities.User;
  * @author mhorvath
  */
 @Stateless
+@RepoQualifyer(EntityType.USER)
 public class UserRepo implements UserRepository{
-    @PersistenceContext(unitName = "jpahomeworkpersistenceunit")
+    /*@PersistenceContext(unitName = "jpahomeworkpersistenceunit")
     private EntityManager entityManager;
-
+    */
+    private EntityManagerFactory factory;
+    private EntityManager entityManager;
+    
+    public UserRepo() {
+        factory = Persistence.createEntityManagerFactory("jpahomeworkpersistenceunit");
+        entityManager = factory.createEntityManager();
+    
+    }
     @Override
     public UserDTO createUser(UserDTO userDTO) throws RepositoryException {
         User user = new User(userDTO);

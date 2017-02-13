@@ -1,22 +1,21 @@
 
 package xyz.codingmentor.jpahomework.api;
 
-import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
 
 /**
  *
  * @author mhorvath
  */
 public class BookDTO {
-    BookIdentifier bookId;
+    String title;
     String style;
 
-    public BookIdentifier getBookId() {
-        return bookId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBookId(BookIdentifier bookId) {
-        this.bookId = bookId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getStyle() {
