@@ -1,8 +1,10 @@
-
 package xyz.codingmentor.jpahomework.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +27,9 @@ import xyz.codingmentor.jpahomework.model.enums.Gender;
 @Entity
 @Table(name = "my_user")
 public class User implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
     private String name;
@@ -38,14 +43,15 @@ public class User implements Serializable {
     private Date dateOfRegistration;
     @Embedded
     private Address address;
-    
-    //@ManyToMany(/*cascade = CascadeType.ALL*/)
-    
-    //private List<Book> rentedBooks=new ArrayList<>();
 
-      
     
-    
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<Book> rentedBooks = new ArrayList<>();
+
+    public void rentBook(Book book) {
+        rentedBooks.add(book);
+    }
+
     public Long getId() {
         return id;
     }
@@ -93,7 +99,7 @@ public class User implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-/*
+    
     public List<Book> getRentedBooks() {
         return rentedBooks;
     }
@@ -101,9 +107,6 @@ public class User implements Serializable {
     public void setRentedBooks(List<Book> rentedBooks) {
         this.rentedBooks = rentedBooks;
     }    
-*/
-    /*
-    public void addRentedBook(Book bookOne) {
-        
-    }*/
+     
+ 
 }

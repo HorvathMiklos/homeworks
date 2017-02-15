@@ -8,7 +8,6 @@ import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
 import xyz.codingmentor.jpahomework.model.entities.Book;
 import xyz.codingmentor.jpahomework.model.entities.User;
 import xyz.codingmentor.jpahomework.model.entities.Writer;
-import xyz.codingmentor.jpahomework.model.enums.Gender;
 import xyz.codingmentor.jpahomework.service.BookCRUDservice;
 import xyz.codingmentor.jpahomework.service.UserCRUDservice;
 import xyz.codingmentor.jpahomework.service.WriterCRUDService;
@@ -32,15 +31,7 @@ public class Application {
     }
     
     void execute() throws RepositoryException {
-        /*Writer testWriter=new Writer();
-        testWriter.setName("Béla");
-        testWriter.setGender(Gender.MAN);
-        writerCRUDService.createWriter(testWriter);
-        
-        User testUser= new User();
-        testUser.setName("username");
-        userCRUDservice.createUser(testUser);*/
-        
+                
         BookIdentifier bookIdentifierOne = new BookIdentifier("publisherOne", "BookOne");
         BookIdentifier bookIdentifierTwo = new BookIdentifier("publisherTwo", "BookTwo");
         BookIdentifier bookIdentifierThree = new BookIdentifier("publisherThree", "BookThree");
@@ -73,31 +64,20 @@ public class Application {
         Writer writerFour =new Writer();
         writerFour.setName("writerFour");
         
-        //userOne.addRentedBook(bookOne);
-        bookOne.addUser(userOne);
-        //userOne.addRentedBook(bookTwo);
-        bookTwo.addUser(userOne);
-        //userOne.addRentedBook(bookThree);
-        bookThree.addUser(userOne);
-        //userOne.addRentedBook(bookFour);
-        bookFour.addUser(userOne);
-        //userTwo.addRentedBook(bookTwo);
-        bookTwo.addUser(userTwo);
-        //userThree.addRentedBook(bookThree);
-        bookThree.addUser(userThree);
-        //userThree.addRentedBook(bookFour);
-        bookFour.addUser(userThree);
-        //userFour.addRentedBook(bookOne);
-        bookOne.addUser(userFour);
+        userFour.rentBook(bookFour);
+        userOne.rentBook(bookOne);        
+        userThree.rentBook(bookThree);
         
-        //writerOne.addWritenBook(bookTwo);
-        bookTwo.addWriter(writerOne);
-        //writerTwo.addWritenBook(bookOne);
-        bookOne.addWriter(writerTwo);
-        //writerThree.addWritenBook(bookThree);
-        bookThree.addWriter(writerThree);
-        //writerFour.addWritenBook(bookFour);
-        bookFour.addWriter(writerFour);
+        
+        writerOne.addWritenBook(bookTwo);
+        
+        writerTwo.addWritenBook(bookOne);
+        
+        writerThree.addWritenBook(bookThree);
+        
+        writerFour.addWritenBook(bookFour);
+        
+        
         
         bookCRUDservice.createBook(bookOne);
         bookCRUDservice.createBook(bookTwo);
@@ -111,6 +91,8 @@ public class Application {
         userCRUDservice.createUser(userFour);
         userCRUDservice.close();
         
+        
+                
         writerCRUDService.createWriter(writerOne);
         writerCRUDService.createWriter(writerTwo);
         writerCRUDService.createWriter(writerThree);
