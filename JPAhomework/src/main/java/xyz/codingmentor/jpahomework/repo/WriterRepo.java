@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import xyz.codingmentor.jpahomework.api.EntityType;
-import xyz.codingmentor.jpahomework.api.WriterDTO;
 import xyz.codingmentor.jpahomework.api.WriterRepository;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.model.entities.Writer;
@@ -42,36 +41,34 @@ public class WriterRepo implements WriterRepository{
     
     
     @Override
-    public WriterDTO createWriter(WriterDTO writerDTO) throws RepositoryException {
-        Writer writer = new Writer(writerDTO);
+    public Writer createWriter(Writer writer) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
         entityManager.persist(writer);
         tx.commit();
-        return buildWriter(writer);
+        return writer;
     }
 
     @Override
-    public WriterDTO findWriter(Long id) throws RepositoryException {
+    public Writer findWriter(Long id) throws RepositoryException {
         return null;
     }
 
     @Override
-    public WriterDTO updateWriter(WriterDTO writerDTO) throws RepositoryException {
+    public Writer updateWriter(Writer writer) throws RepositoryException {
         return null;
     }
 
     @Override
-    public WriterDTO removeWriter(Long id) throws RepositoryException {
+    public Writer removeWriter(Long id) throws RepositoryException {
         return null;
     }
     
-    private WriterDTO buildWriter(Writer writer){
-        WriterDTO writerDTO=new WriterDTO();
-        writerDTO.setId(writer.getId());
-        writerDTO.setName(writer.getName());
-        return null;
+    public void close(){
+        entityManager.close();
+        factory.close();
     }
+   
 
    
 }

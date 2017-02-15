@@ -3,12 +3,12 @@ package xyz.codingmentor.jpahomework;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import xyz.codingmentor.jpahomework.api.BookDTO;
-import xyz.codingmentor.jpahomework.api.UserDTO;
-import xyz.codingmentor.jpahomework.api.WriterDTO;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
+import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
+import xyz.codingmentor.jpahomework.model.entities.Book;
+import xyz.codingmentor.jpahomework.model.entities.User;
+import xyz.codingmentor.jpahomework.model.entities.Writer;
 import xyz.codingmentor.jpahomework.model.enums.Gender;
-import xyz.codingmentor.jpahomework.repo.WriterRepo;
 import xyz.codingmentor.jpahomework.service.BookCRUDservice;
 import xyz.codingmentor.jpahomework.service.UserCRUDservice;
 import xyz.codingmentor.jpahomework.service.WriterCRUDService;
@@ -32,51 +32,91 @@ public class Application {
     }
     
     void execute() throws RepositoryException {
-        WriterDTO testWriter=new WriterDTO();
+        /*Writer testWriter=new Writer();
         testWriter.setName("Béla");
         testWriter.setGender(Gender.MAN);
         writerCRUDService.createWriter(testWriter);
         
-        UserDTO testUser= new UserDTO();
+        User testUser= new User();
         testUser.setName("username");
-        userCRUDservice.createUser(testUser);
+        userCRUDservice.createUser(testUser);*/
         
-        BookDTO testBook = new BookDTO();
-        testBook.setTitle("testBook title");
-        bookCRUDservice.createBook(testBook);
+        BookIdentifier bookIdentifierOne = new BookIdentifier("publisherOne", "BookOne");
+        BookIdentifier bookIdentifierTwo = new BookIdentifier("publisherTwo", "BookTwo");
+        BookIdentifier bookIdentifierThree = new BookIdentifier("publisherThree", "BookThree");
+        BookIdentifier bookIdentifierFour = new BookIdentifier("publisherFour", "BookFour");
         
-        BookDTO bookOne = new BookDTO();
-        testBook.setTitle("bookOne");
-        BookDTO bookTwo = new BookDTO();
-        testBook.setTitle("bookTwo");
-        BookDTO bookThree = new BookDTO();
-        testBook.setTitle("bookThree");
-        BookDTO bookFour = new BookDTO();
-        testBook.setTitle("bookFour");       
+        Book bookOne = new Book();
+        bookOne.setBookIdentifier(bookIdentifierOne);
+        Book bookTwo = new Book();
+        bookTwo.setBookIdentifier(bookIdentifierTwo);
+        Book bookThree = new Book();
+        bookThree.setBookIdentifier(bookIdentifierThree);
+        Book bookFour = new Book();
+        bookFour.setBookIdentifier(bookIdentifierFour);
         
-        UserDTO userOne= new UserDTO();
-        testUser.setName("userOne");
-        UserDTO userTwo= new UserDTO();
-        testUser.setName("userTwo");
-        UserDTO userThree= new UserDTO();
-        testUser.setName("userThree");
-        UserDTO userFour= new UserDTO();
-        testUser.setName("userFour");
+        User userOne= new User();
+        userOne.setName("userOne");
+        User userTwo= new User();
+        userTwo.setName("userTwo");
+        User userThree= new User();
+        userThree.setName("userThree");
+        User userFour= new User();
+        userFour.setName("userFour");
         
-        WriterDTO writerOne=new WriterDTO();
-        testWriter.setName("writerOne");
-        WriterDTO writerTwo=new WriterDTO();
-        testWriter.setName("writerTwo");
-        WriterDTO writerThree=new WriterDTO();
-        testWriter.setName("writerThree");
-        WriterDTO writerFour =new WriterDTO();
-        testWriter.setName("writerFour");
+        Writer writerOne=new Writer();
+        writerOne.setName("writerOne");
+        Writer writerTwo=new Writer();
+        writerTwo.setName("writerTwo");
+        Writer writerThree=new Writer();
+        writerThree.setName("writerThree");
+        Writer writerFour =new Writer();
+        writerFour.setName("writerFour");
         
-        userOne.addRentedBook(bookOne);
-        userOne.addRentedBook(bookTwo);
-        userOne.addRentedBook(bookThree);
-        userOne.addRentedBook(bookFour);
-        userTwo.addRentedBook(bookTwo);
+        //userOne.addRentedBook(bookOne);
+        bookOne.addUser(userOne);
+        //userOne.addRentedBook(bookTwo);
+        bookTwo.addUser(userOne);
+        //userOne.addRentedBook(bookThree);
+        bookThree.addUser(userOne);
+        //userOne.addRentedBook(bookFour);
+        bookFour.addUser(userOne);
+        //userTwo.addRentedBook(bookTwo);
+        bookTwo.addUser(userTwo);
+        //userThree.addRentedBook(bookThree);
+        bookThree.addUser(userThree);
+        //userThree.addRentedBook(bookFour);
+        bookFour.addUser(userThree);
+        //userFour.addRentedBook(bookOne);
+        bookOne.addUser(userFour);
+        
+        //writerOne.addWritenBook(bookTwo);
+        bookTwo.addWriter(writerOne);
+        //writerTwo.addWritenBook(bookOne);
+        bookOne.addWriter(writerTwo);
+        //writerThree.addWritenBook(bookThree);
+        bookThree.addWriter(writerThree);
+        //writerFour.addWritenBook(bookFour);
+        bookFour.addWriter(writerFour);
+        
+        bookCRUDservice.createBook(bookOne);
+        bookCRUDservice.createBook(bookTwo);
+        bookCRUDservice.createBook(bookThree);
+        bookCRUDservice.createBook(bookFour);
+        bookCRUDservice.close();
+        
+        userCRUDservice.createUser(userOne);
+        userCRUDservice.createUser(userTwo);
+        userCRUDservice.createUser(userThree);
+        userCRUDservice.createUser(userFour);
+        userCRUDservice.close();
+        
+        writerCRUDService.createWriter(writerOne);
+        writerCRUDService.createWriter(writerTwo);
+        writerCRUDService.createWriter(writerThree);
+        writerCRUDService.createWriter(writerFour);
+        writerCRUDService.close();
+ 
     }
 
 }

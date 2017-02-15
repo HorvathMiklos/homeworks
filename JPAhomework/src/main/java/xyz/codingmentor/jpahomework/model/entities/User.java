@@ -1,8 +1,8 @@
 
 package xyz.codingmentor.jpahomework.model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -11,11 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import xyz.codingmentor.jpahomework.api.UserDTO;
 import xyz.codingmentor.jpahomework.model.embedables.Address;
 import xyz.codingmentor.jpahomework.model.enums.Gender;
 
@@ -24,13 +22,11 @@ import xyz.codingmentor.jpahomework.model.enums.Gender;
  * @author mhorvath
  */
 @Entity
-@Table(name = "Library_user")
-public class User {
+@Table(name = "my_user")
+public class User implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    @Column(nullable =
-    false, updatable = false)
     private String name;
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -42,19 +38,12 @@ public class User {
     private Date dateOfRegistration;
     @Embedded
     private Address address;
-    @OneToMany
-    private List<Book> rentedBooks;
-
-    public User(UserDTO userDTO) {
-        this.id = userDTO.getId();
-        this.name = userDTO.getName();
-        this.gender = userDTO.getGender();
-        this.dateOfBirth = userDTO.getDateOfBirth();
-        this.dateOfRegistration = userDTO.getDateOfRegistration();
-        this.address = userDTO.getAddress();
-        this.rentedBooks = userDTO.getRentedBooks();
-    }
     
+    //@ManyToMany(/*cascade = CascadeType.ALL*/)
+    
+    //private List<Book> rentedBooks=new ArrayList<>();
+
+      
     
     
     public Long getId() {
@@ -104,7 +93,7 @@ public class User {
     public void setAddress(Address address) {
         this.address = address;
     }
-
+/*
     public List<Book> getRentedBooks() {
         return rentedBooks;
     }
@@ -112,4 +101,9 @@ public class User {
     public void setRentedBooks(List<Book> rentedBooks) {
         this.rentedBooks = rentedBooks;
     }    
+*/
+    /*
+    public void addRentedBook(Book bookOne) {
+        
+    }*/
 }

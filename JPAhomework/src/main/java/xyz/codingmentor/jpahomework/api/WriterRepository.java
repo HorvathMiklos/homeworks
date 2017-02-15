@@ -3,6 +3,7 @@ package xyz.codingmentor.jpahomework.api;
 
 import javax.ejb.Stateless;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
+import xyz.codingmentor.jpahomework.model.entities.Writer;
 
 /**
  *
@@ -10,13 +11,13 @@ import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
  */
 @Stateless
 public interface WriterRepository {
-    WriterDTO createWriter(WriterDTO writerDTO) throws RepositoryException;
+    Writer createWriter(Writer writer) throws RepositoryException;
 
-    WriterDTO findWriter(Long id) throws RepositoryException;
+    Writer findWriter(Long id) throws RepositoryException;
 
-    WriterDTO updateWriter(WriterDTO writerDTO) throws RepositoryException;
+    Writer updateWriter(Writer writer) throws RepositoryException;
 
-    WriterDTO removeWriter(Long id) throws RepositoryException;
+    Writer removeWriter(Long id) throws RepositoryException;
 
    
 }

@@ -1,14 +1,11 @@
 package xyz.codingmentor.jpahomework.service;
 
-import java.util.List;
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import xyz.codingmentor.jpahomework.api.BookDTO;
 import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
+import xyz.codingmentor.jpahomework.model.entities.Book;
 import xyz.codingmentor.jpahomework.repo.BookRepo;
-import xyz.codingmentor.jpahomework.repo.WriterRepo;
 
 /**
  *
@@ -22,19 +19,22 @@ public class BookCRUDservice {
         this.bookRepo=bookRepository;
     }
     
-    public BookDTO createBook(BookDTO bookDTO) throws RepositoryException {
-        return bookRepo.createBook(bookDTO);
+    public Book createBook(Book book) throws RepositoryException {
+        return bookRepo.createBook(book);
     }
 
-    public BookDTO findBook(String title) throws RepositoryException {
+    public Book findBook(String title) throws RepositoryException {
         return bookRepo.findBook(title);
     }
 
-    public void updateBook(BookDTO book) throws RepositoryException {
+    public void updateBook(Book book) throws RepositoryException {
         bookRepo.updateBook(book);
     }
 
     public void removeBook(String title) throws RepositoryException {
         bookRepo.removeBook(title);
+    }
+    public void close(){
+        bookRepo.close();
     }
 }

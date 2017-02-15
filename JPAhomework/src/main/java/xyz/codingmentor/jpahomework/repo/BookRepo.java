@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import xyz.codingmentor.jpahomework.api.BookDTO;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.api.BookRepository;
 import xyz.codingmentor.jpahomework.api.EntityType;
@@ -35,38 +34,34 @@ public class BookRepo implements BookRepository{
     }
     
     @Override
-    public BookDTO createBook(BookDTO bookdto) throws RepositoryException {
-        Book book = new Book(bookdto);
+    public Book createBook(Book book) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
         entityManager.persist(book);
         tx.commit();
-        return buildBook(book);
+        return book;
     }
 
     @Override
-    public BookDTO findBook(String title) throws RepositoryException {
-        Book book = entityManager.find(Book.class, title);
-        if (null != book) {
-            return buildBook(book);
-        }
-        return null;
+    public Book findBook(String title){
+        return entityManager.find(Book.class, title);
+        
     }
 
     @Override
-    public BookDTO updateBook(BookDTO book) throws RepositoryException {
+    public Book updateBook(Book book) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        Book entity = entityManager.find(Book.class, book.getTitle());
-        entity.setTitle(book.getTitle());
+        Book entity = entityManager.find(Book.class, book.getBookIdentifier());
+        entity.setBookIdentifier(book.getBookIdentifier());
         entity.setStyle(book.getStyle());
         entityManager.merge(entity);
         tx.commit();
-        return buildBook(entity);
+        return entity;
     }
 
     @Override
-    public BookDTO removeBook(String title) throws RepositoryException {
+    public Book removeBook(String title) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
         Book book = entityManager.find(Book.class, title);
@@ -74,20 +69,15 @@ public class BookRepo implements BookRepository{
             entityManager.remove(book);
         }
         tx.commit();
-        return buildBook(book);
+        return book;
     }
-/*
-    @Override
+
     public void close() {
-        
+        entityManager.close();
+        factory.close();
     }
-*/
-    private BookDTO buildBook(Book book) {
-        BookDTO bookDTO=new BookDTO();
-        bookDTO.setTitle(book.getTitle());
-        bookDTO.setStyle(book.getStyle());
-        return bookDTO;
-    }
+
+    
     
 
 }
