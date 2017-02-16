@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,6 +45,7 @@ public class Writer implements Serializable{
     private List<Book> writenBooks=new ArrayList<>();
     
     public Writer() {
+    //empty on purpose
     }
     
     public void addWritenBook(Book book){

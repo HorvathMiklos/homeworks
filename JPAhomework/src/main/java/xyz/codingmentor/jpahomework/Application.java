@@ -113,8 +113,8 @@ public class Application {
         writerFive.setName("writerFive");
         Writer writerSix =new Writer();
         writerSix.setName("writerSix");
-        Writer Asimov =new Writer();
-        Asimov.setName("Asimov");
+        Writer asimov =new Writer();
+        asimov.setName("Asimov");
         Writer youngWriter =new Writer();
         youngWriter.setName("young");
         dateInString = "31-08-1992 10:20:56";
@@ -145,7 +145,6 @@ public class Application {
         bookCRUDservice.createBook(bookFive);
         bookCRUDservice.createBook(bookSix);
         bookCRUDservice.createBook(bookScifi);
-        //bookCRUDservice.close();
         
         userCRUDservice.createUser(userOne);
         userCRUDservice.createUser(userTwo);
@@ -165,7 +164,7 @@ public class Application {
         writerCRUDService.createWriter(writerSix);
         writerCRUDService.createWriter(oldWriter);
         writerCRUDService.createWriter(youngWriter);
-        writerCRUDService.createWriter(Asimov);
+        writerCRUDService.createWriter(asimov);
         
         bookCRUDservice.removeBook(bookIdentifierFive);
         bookCRUDservice.updateBook(bookSixModified);

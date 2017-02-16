@@ -54,7 +54,6 @@ public class UserRepo implements UserRepository{
     public User updateUser(User user) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        //User entity = entityManager.find(User.class, user.getId());
         entityManager.merge(user);
         tx.commit();
         return user;

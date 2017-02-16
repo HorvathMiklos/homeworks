@@ -6,9 +6,7 @@ import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.model.entities.User;
-import xyz.codingmentor.jpahomework.repo.BookRepo;
 import xyz.codingmentor.jpahomework.repo.UserRepo;
-import xyz.codingmentor.jpahomework.repo.WriterRepo;
 
 /**
  *

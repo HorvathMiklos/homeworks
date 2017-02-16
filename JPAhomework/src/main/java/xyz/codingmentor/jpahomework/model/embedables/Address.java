@@ -1,6 +1,7 @@
 
 package xyz.codingmentor.jpahomework.model.embedables;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 /**
@@ -8,7 +9,7 @@ import javax.persistence.Embeddable;
  * @author mhorvath
  */
 @Embeddable
-public class Address {
+public class Address implements Serializable{
     private String country;
     private String city;
     private String street;

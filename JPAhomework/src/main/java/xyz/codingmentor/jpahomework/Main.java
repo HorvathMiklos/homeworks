@@ -11,6 +11,11 @@ import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
  * @author mhorvath
  */
 public class Main {
+
+    private Main() {
+        //empty on purpose
+    }
+    
     public static void main(String[] args) throws RepositoryException, ParseException {
         Weld weld = new Weld();
         WeldContainer container = weld.initialize();

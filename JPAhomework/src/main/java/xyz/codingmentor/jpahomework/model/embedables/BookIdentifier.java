@@ -14,6 +14,7 @@ public class BookIdentifier implements Serializable{
     String title;
 
     public BookIdentifier() {
+    //empty on purpuse
     }
 
     public BookIdentifier(String publisher, String title) {

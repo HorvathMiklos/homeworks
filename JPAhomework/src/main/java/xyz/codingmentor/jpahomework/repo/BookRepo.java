@@ -51,7 +51,6 @@ public class BookRepo implements BookRepository{
     public Book updateBook(Book book) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        //Book entity = entityManager.find(Book.class, book.getBookIdentifier());
         entityManager.merge(book);
         tx.commit();
         return findBook(book.getBookIdentifier());
