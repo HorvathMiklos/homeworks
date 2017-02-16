@@ -32,8 +32,8 @@ public class BookCRUDservice {
         bookRepo.updateBook(book);
     }
 
-    public void removeBook(String title) throws RepositoryException {
-        bookRepo.removeBook(title);
+    public void removeBook(BookIdentifier bookIdentifier) throws RepositoryException {
+        bookRepo.removeBook(bookIdentifier);
     }
     public void close(){
         bookRepo.close();

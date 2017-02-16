@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -13,6 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,6 +27,10 @@ import xyz.codingmentor.jpahomework.model.enums.Gender;
  */
 @Entity
 @Table(name = "my_user")
+@NamedQueries({
+    @NamedQuery(name = "my_user.byGender", query = "SELECT u FROM User u WHERE u.gender LIKE :gender"),
+    @NamedQuery(name = "my_user.registrationBefore", query = "SELECT u FROM User u WHERE u.dateOfRegistration < :date")
+})
 public class User implements Serializable {
 
     @Id

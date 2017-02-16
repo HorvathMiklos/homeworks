@@ -4,6 +4,7 @@ package xyz.codingmentor.jpahomework.model.entities;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
 
@@ -14,6 +15,7 @@ import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
  */
 @Entity
 @Table(name = "book")
+@NamedQuery(name = "books.byStyle",query = "SELECT b FROM Book b WHERE b.style LIKE :style")             
 public class Book implements Serializable{
     @EmbeddedId
     BookIdentifier bookIdentifier;

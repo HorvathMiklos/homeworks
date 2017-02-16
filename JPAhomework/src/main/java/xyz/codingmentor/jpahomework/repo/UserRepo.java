@@ -1,16 +1,20 @@
 
 package xyz.codingmentor.jpahomework.repo;
 
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.RepoQualifyer;
 import xyz.codingmentor.jpahomework.api.UserRepository;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.model.entities.User;
+import xyz.codingmentor.jpahomework.model.enums.Gender;
 
 /**
  *
@@ -66,6 +70,16 @@ public class UserRepo implements UserRepository{
         }
         tx.commit();
         return user;
+    }
+    
+    public List<User> userByGender(Gender gender){
+        Query query = entityManager.createNamedQuery("my_user.byGender").setParameter("gender",gender);
+        return query.getResultList();
+    }
+    
+    public List<User> usersRegisteredBefore(Date date){
+        Query query = entityManager.createNamedQuery("my_user.registrationBefore").setParameter("date",date);
+        return query.getResultList();
     }
 
     public void close(){

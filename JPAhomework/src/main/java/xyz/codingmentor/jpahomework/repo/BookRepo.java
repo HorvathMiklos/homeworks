@@ -1,11 +1,13 @@
 
 package xyz.codingmentor.jpahomework.repo;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.api.BookRepository;
 import xyz.codingmentor.jpahomework.api.EntityType;
@@ -56,17 +58,22 @@ public class BookRepo implements BookRepository{
     }
 
     @Override
-    public Book removeBook(String title) throws RepositoryException {
+    public Book removeBook(BookIdentifier bookIdentifier) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        Book book = entityManager.find(Book.class, title);
+        Book book = entityManager.find(Book.class, bookIdentifier);
         if (null != book) {
             entityManager.remove(book);
         }
         tx.commit();
         return book;
     }
-
+    
+    public List<Book> findBookByStyle(String style){
+        Query query = entityManager.createNamedQuery("books.byStyle").setParameter("style",style);
+        return query.getResultList();
+    }
+    
     public void close() {
         entityManager.close();
         factory.close();

@@ -1,10 +1,13 @@
 package xyz.codingmentor.jpahomework.repo;
 
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.WriterRepository;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
@@ -65,6 +68,16 @@ public class WriterRepo implements WriterRepository{
         }
         tx.commit();
         return writer;
+    }
+    
+    public List<Writer> findWriterByName(String name){
+        Query query = entityManager.createNamedQuery("writer.byName").setParameter("name",name);
+        return query.getResultList();
+    }
+    
+    public List<Writer> writersBornBefore(Date date){
+        Query query = entityManager.createNamedQuery("writer.bornBefore").setParameter("date",date);
+        return query.getResultList();
     }
     
     public void close(){

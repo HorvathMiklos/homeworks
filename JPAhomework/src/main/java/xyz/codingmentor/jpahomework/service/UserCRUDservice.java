@@ -33,7 +33,7 @@ public class UserCRUDservice {
         userRepo.updateUser(user);
     }
 
-    public void removeBook(long id) throws RepositoryException {
+    public void removeUser(long id) throws RepositoryException {
         userRepo.removeUser(id);
     }
     

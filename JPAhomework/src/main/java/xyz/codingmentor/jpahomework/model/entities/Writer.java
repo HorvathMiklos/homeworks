@@ -13,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,7 +27,10 @@ import xyz.codingmentor.jpahomework.model.enums.Gender;
  */
 @Entity
 @Table(name = "writer")
-
+@NamedQueries({
+    @NamedQuery(name = "writer.byName", query = "SELECT w FROM Writer w WHERE w.name LIKE :name"),
+    @NamedQuery(name = "writer.bornBefore", query = "SELECT w FROM Writer w WHERE w.dateOfBirth < :date")
+})
 public class Writer implements Serializable{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "writer_id")
@@ -37,7 +42,7 @@ public class Writer implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     
-    @OneToMany//(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<Book> writenBooks=new ArrayList<>();
     
     public Writer() {

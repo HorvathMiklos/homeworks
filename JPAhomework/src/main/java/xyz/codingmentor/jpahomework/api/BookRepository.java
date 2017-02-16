@@ -18,6 +18,6 @@ public interface BookRepository {
 
     Book updateBook(Book book) throws RepositoryException;
 
-    Book removeBook(String title) throws RepositoryException;
+    Book removeBook(BookIdentifier bookIdentifie) throws RepositoryException;
 
 }
