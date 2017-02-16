@@ -15,7 +15,7 @@ import xyz.codingmentor.jpahomework.repo.WriterRepo;
  * @author mhorvath
  */
 public class UserCRUDservice { 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
     
     @Inject 
     public UserCRUDservice(@RepoQualifyer(EntityType.USER) UserRepo userRepository) {

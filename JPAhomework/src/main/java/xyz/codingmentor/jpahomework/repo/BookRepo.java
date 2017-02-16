@@ -6,11 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import xyz.codingmentor.jpahomework.exceptions.RepositoryException;
 import xyz.codingmentor.jpahomework.api.BookRepository;
 import xyz.codingmentor.jpahomework.api.EntityType;
 import xyz.codingmentor.jpahomework.api.RepoQualifyer;
+import xyz.codingmentor.jpahomework.model.embedables.BookIdentifier;
 import xyz.codingmentor.jpahomework.model.entities.Book;
 
 /**
@@ -20,10 +20,7 @@ import xyz.codingmentor.jpahomework.model.entities.Book;
 @Stateless
 @RepoQualifyer(EntityType.BOOK)
 public class BookRepo implements BookRepository{
-    /*
-    @PersistenceContext(unitName = "jpahomeworkpersistenceunit")
-    private EntityManager entityManager;
-    */
+    
     private EntityManagerFactory factory;
     private EntityManager entityManager;
 
@@ -43,8 +40,8 @@ public class BookRepo implements BookRepository{
     }
 
     @Override
-    public Book findBook(String title){
-        return entityManager.find(Book.class, title);
+    public Book findBook(BookIdentifier bookIdentifier){
+        return entityManager.find(Book.class, bookIdentifier);
         
     }
 
@@ -52,12 +49,10 @@ public class BookRepo implements BookRepository{
     public Book updateBook(Book book) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        Book entity = entityManager.find(Book.class, book.getBookIdentifier());
-        entity.setBookIdentifier(book.getBookIdentifier());
-        entity.setStyle(book.getStyle());
-        entityManager.merge(entity);
+        //Book entity = entityManager.find(Book.class, book.getBookIdentifier());
+        entityManager.merge(book);
         tx.commit();
-        return entity;
+        return findBook(book.getBookIdentifier());
     }
 
     @Override

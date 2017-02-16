@@ -45,7 +45,7 @@ public class User implements Serializable {
     private Address address;
 
     
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     private List<Book> rentedBooks = new ArrayList<>();
 
     public void rentBook(Book book) {
@@ -107,6 +107,11 @@ public class User implements Serializable {
     public void setRentedBooks(List<Book> rentedBooks) {
         this.rentedBooks = rentedBooks;
     }    
-     
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", name=" + name + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", dateOfRegistration=" + dateOfRegistration + ", address=" + address + ", rentedBooks=" + rentedBooks + '}';
+    }
+    
  
 }

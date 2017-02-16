@@ -35,5 +35,10 @@ public class Book implements Serializable{
     public void setStyle(String style) {
         this.style = style;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" + "bookIdentifier=" + bookIdentifier + ", style=" + style + '}';
+    }
     
 }

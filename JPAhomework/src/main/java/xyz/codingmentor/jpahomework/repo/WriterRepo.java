@@ -1,7 +1,6 @@
 package xyz.codingmentor.jpahomework.repo;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -27,9 +26,7 @@ public class WriterRepo implements WriterRepository{
         factory = Persistence.createEntityManagerFactory("jpahomeworkpersistenceunit");
         entityManager = factory.createEntityManager();
     
-    }
-    
-    
+    }    
     
     @Override
     public Writer createWriter(Writer writer) throws RepositoryException {
@@ -42,24 +39,36 @@ public class WriterRepo implements WriterRepository{
 
     @Override
     public Writer findWriter(Long id) throws RepositoryException {
+        Writer writer = entityManager.find(Writer.class, id);
+        if (null != writer) {
+            return writer;
+        }
         return null;
     }
 
     @Override
     public Writer updateWriter(Writer writer) throws RepositoryException {
-        return null;
+        EntityTransaction tx = entityManager.getTransaction();
+        tx.begin();
+        entityManager.merge(writer);
+        tx.commit();
+        return writer;
     }
 
     @Override
     public Writer removeWriter(Long id) throws RepositoryException {
-        return null;
+        EntityTransaction tx = entityManager.getTransaction();
+        tx.begin();
+        Writer writer = entityManager.find(Writer.class, id);
+        if (null != writer) {
+            entityManager.remove(writer);
+        }
+        tx.commit();
+        return writer;
     }
     
     public void close(){
         entityManager.close();
         factory.close();
-    }
-   
-
-   
+    }     
 }

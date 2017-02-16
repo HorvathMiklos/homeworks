@@ -13,9 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,7 +37,7 @@ public class Writer implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
     
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany//(cascade = {CascadeType.ALL})
     private List<Book> writenBooks=new ArrayList<>();
     
     public Writer() {
@@ -87,6 +85,11 @@ public class Writer implements Serializable{
 
     public void setWritenBooks(List<Book> writenBooks) {
         this.writenBooks = writenBooks;
+    }
+
+    @Override
+    public String toString() {
+        return "Writer{" + "id=" + id + ", name=" + name + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", writenBooks=" + writenBooks + '}';
     }
     
 }

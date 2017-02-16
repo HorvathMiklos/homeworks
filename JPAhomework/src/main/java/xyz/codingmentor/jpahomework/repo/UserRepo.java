@@ -19,9 +19,7 @@ import xyz.codingmentor.jpahomework.model.entities.User;
 @Stateless
 @RepoQualifyer(EntityType.USER)
 public class UserRepo implements UserRepository{
-    /*@PersistenceContext(unitName = "jpahomeworkpersistenceunit")
-    private EntityManager entityManager;
-    */
+   
     private EntityManagerFactory factory;
     private EntityManager entityManager;
     
@@ -52,17 +50,10 @@ public class UserRepo implements UserRepository{
     public User updateUser(User user) throws RepositoryException {
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        User entity = entityManager.find(User.class, user.getId());
-        entity.setId(user.getId());
-        entity.setName(user.getName());
-        entity.setGender(user.getGender());
-        entity.setAddress(user.getAddress());
-    //    entity.setRentedBooks(user.getRentedBooks());
-        entity.setDateOfRegistration(user.getDateOfRegistration());
-        entity.setDateOfBirth(user.getDateOfBirth());
-        entityManager.merge(entity);
+        //User entity = entityManager.find(User.class, user.getId());
+        entityManager.merge(user);
         tx.commit();
-        return entity;
+        return user;
     }
 
     @Override

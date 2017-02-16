@@ -36,6 +36,8 @@ public class Application {
         BookIdentifier bookIdentifierTwo = new BookIdentifier("publisherTwo", "BookTwo");
         BookIdentifier bookIdentifierThree = new BookIdentifier("publisherThree", "BookThree");
         BookIdentifier bookIdentifierFour = new BookIdentifier("publisherFour", "BookFour");
+        BookIdentifier bookIdentifierFive = new BookIdentifier("publisherFive", "BookFive");
+        BookIdentifier bookIdentifierSix = new BookIdentifier("publisherSix", "BookSix");
         
         Book bookOne = new Book();
         bookOne.setBookIdentifier(bookIdentifierOne);
@@ -45,6 +47,10 @@ public class Application {
         bookThree.setBookIdentifier(bookIdentifierThree);
         Book bookFour = new Book();
         bookFour.setBookIdentifier(bookIdentifierFour);
+        Book bookFive = new Book();
+        bookFive.setBookIdentifier(bookIdentifierFive);
+        Book bookSix = new Book();
+        bookSix.setBookIdentifier(bookIdentifierSix);
         
         User userOne= new User();
         userOne.setName("userOne");
@@ -54,6 +60,10 @@ public class Application {
         userThree.setName("userThree");
         User userFour= new User();
         userFour.setName("userFour");
+        User userFive= new User();
+        userFive.setName("userFive");
+        User userSix= new User();
+        userSix.setName("userSix");
         
         Writer writerOne=new Writer();
         writerOne.setName("writerOne");
@@ -63,6 +73,10 @@ public class Application {
         writerThree.setName("writerThree");
         Writer writerFour =new Writer();
         writerFour.setName("writerFour");
+        Writer writerFive =new Writer();
+        writerFive.setName("writerFive");
+        Writer writerSix =new Writer();
+        writerSix.setName("writerSix");
         
         userFour.rentBook(bookFour);
         userOne.rentBook(bookOne);        
@@ -77,26 +91,28 @@ public class Application {
         
         writerFour.addWritenBook(bookFour);
         
-        
-        
         bookCRUDservice.createBook(bookOne);
         bookCRUDservice.createBook(bookTwo);
         bookCRUDservice.createBook(bookThree);
         bookCRUDservice.createBook(bookFour);
+        bookCRUDservice.createBook(bookFive);
+        bookCRUDservice.createBook(bookSix);
         bookCRUDservice.close();
         
         userCRUDservice.createUser(userOne);
         userCRUDservice.createUser(userTwo);
         userCRUDservice.createUser(userThree);
         userCRUDservice.createUser(userFour);
-        userCRUDservice.close();
-        
-        
+        userCRUDservice.createUser(userFive);
+        userCRUDservice.createUser(userSix);
+        userCRUDservice.close();      
                 
         writerCRUDService.createWriter(writerOne);
         writerCRUDService.createWriter(writerTwo);
         writerCRUDService.createWriter(writerThree);
         writerCRUDService.createWriter(writerFour);
+        writerCRUDService.createWriter(writerFive);
+        writerCRUDService.createWriter(writerSix);
         writerCRUDService.close();
  
     }
