@@ -1,12 +1,10 @@
 
 package xyz.codingmentor.repo;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceContext;
+import xyz.codingmentor.api.CRUDRepo;
+import xyz.codingmentor.api.CRUDRepository;
+import xyz.codingmentor.api.EntityModel;
 import xyz.codingmentor.model.MovieStar;
 
 /**
@@ -14,6 +12,15 @@ import xyz.codingmentor.model.MovieStar;
  * @author mhorvath
  */
 @Stateless
-public class MovieStarRepo {
+@CRUDRepo(EntityModel.MOVIESTAR)
+public class MovieStarRepo extends AbstractCRUDRepository<MovieStar> implements CRUDRepository<MovieStar>{
+
+    public MovieStarRepo() {
+    }
+    
+    @Override
+    protected Class<MovieStar> getEntityClass() {
+        return MovieStar.class;
+    }
     
 }

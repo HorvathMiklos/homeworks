@@ -23,6 +23,11 @@ public class MovieStar implements Serializable{
     @ManyToMany
     List<Movie> movies;
 
+    public MovieStar() {
+    }
+
+    
+    
     public Long getId() {
         return id;
     }

@@ -1,8 +1,6 @@
 
 package xyz.codingmentor.api;
 
-import xyz.codingmentor.model.Category;
-
 /**
  *
  * @author mhorvath

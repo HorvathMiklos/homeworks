@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.MediaType;
 import xyz.codingmentor.api.CRUDRepo;
+import xyz.codingmentor.api.CRUDRepository;
 import xyz.codingmentor.api.EntityModel;
 import xyz.codingmentor.model.Movie;
 import xyz.codingmentor.repo.MovieRepo;
@@ -26,9 +27,9 @@ import xyz.codingmentor.repo.MovieRepo;
 @Path("movie")
 @RequestScoped
 public class MovieResource {
-    MovieRepo movieRepo;
+    CRUDRepository<Movie> movieRepo;
     @Inject
-    public MovieResource(@CRUDRepo(EntityModel.MOVIE) MovieRepo movieRepo) {
+    public MovieResource(@CRUDRepo(EntityModel.MOVIE) CRUDRepository<Movie> movieRepo) {
         this.movieRepo = movieRepo;
     }
 

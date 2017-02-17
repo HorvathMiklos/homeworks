@@ -1,18 +1,22 @@
 
 package xyz.codingmentor.repo;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import xyz.codingmentor.api.CRUDRepo;
 import xyz.codingmentor.api.CRUDRepository;
+import xyz.codingmentor.api.EntityModel;
 import xyz.codingmentor.model.Category;
 
 /**
  *
  * @author mhorvath
  */
-
+@Stateless
+@CRUDRepo(EntityModel.CATEGORY)
 public class CategoryRepo extends AbstractCRUDRepository<Category> implements CRUDRepository<Category>{
-    @PersistenceContext(unitName = "jpawebPU")
+    @PersistenceContext(unitName = "jpawebhwPU")
     private EntityManager entityManager;
 
     
