@@ -1,15 +1,18 @@
 
 package xyz.codingmentor;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
-import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import xyz.codingmentor.api.CRUDService;
+import xyz.codingmentor.api.CRUDServiceQualifier;
+import xyz.codingmentor.api.EntityModel;
+import xyz.codingmentor.model.Trailer;
 
 /**
  * REST Web Service
@@ -17,35 +20,39 @@ import javax.ws.rs.core.MediaType;
  * @author mhorvath
  */
 @Path("trailer")
-@RequestScoped
 public class TrailerResource {
+    private final CRUDService<Trailer> trailerService;
 
-    @Context
-    private UriInfo context;
-
-    /**
-     * Creates a new instance of TrailerResource
-     */
     public TrailerResource() {
+        trailerService = null;
     }
-
-    /**
-     * Retrieves representation of an instance of xyz.codingmentor.TrailerResource
-     * @return an instance of java.lang.String
-     */
+    
+    
+    @Inject
+    public TrailerResource(@CRUDServiceQualifier(EntityModel.TRAILER) CRUDService<Trailer> trailerService) {
+        this.trailerService = trailerService;
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createTrailer(Trailer trailer){
+        trailerService.createEntity(trailer);
+    }
+    
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    @Path("/{id}")
+    public Trailer getTrailerById(@PathParam("id") Long trailerId){
+        return trailerService.getEntityById(trailerId);
     }
-
-    /**
-     * PUT method for updating or creating an instance of TrailerResource
-     * @param content representation for the resource
-     */
+    
     @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    public void putXml(String content) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Trailer updateTrailer(Trailer trailer){
+        return trailerService.updateEntity(trailer);
+    }
+    @POST
+    @Path("/delete/{id}")
+    public void removeTrailer(@PathParam("id") Long entityId){
+        trailerService.removeEntity(entityId);
     }
 }

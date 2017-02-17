@@ -24,9 +24,7 @@ public class MovieStar implements Serializable{
     List<Movie> movies;
 
     public MovieStar() {
-    }
-
-    
+    }    
     
     public Long getId() {
         return id;

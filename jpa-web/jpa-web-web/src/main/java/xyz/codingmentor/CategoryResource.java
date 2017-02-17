@@ -1,15 +1,17 @@
-
 package xyz.codingmentor;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
-import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import xyz.codingmentor.api.CRUDService;
+import xyz.codingmentor.api.EntityModel;
+import xyz.codingmentor.model.Category;
+import xyz.codingmentor.api.CRUDServiceQualifier;
 
 /**
  * REST Web Service
@@ -17,35 +19,37 @@ import javax.ws.rs.core.MediaType;
  * @author mhorvath
  */
 @Path("category")
-@RequestScoped
 public class CategoryResource {
 
-    @Context
-    private UriInfo context;
+    private final CRUDService<Category> categoryService;
 
-    /**
-     * Creates a new instance of CategoryResource
-     */
-    public CategoryResource() {
+    @Inject
+    public CategoryResource(@CRUDServiceQualifier(EntityModel.CATEGORY) CRUDService<Category> categoryService) {
+        this.categoryService = categoryService;
     }
 
-    /**
-     * Retrieves representation of an instance of xyz.codingmentor.CategoryResource
-     * @return an instance of java.lang.String
-     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createCategory(Category category) {
+        categoryService.createEntity(category);
+    }
+
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    @Path("/{id}")
+    public Category getCategoryById(@PathParam("id") Long entityId) {
+        return categoryService.getEntityById(entityId);
     }
 
-    /**
-     * PUT method for updating or creating an instance of CategoryResource
-     * @param content representation for the resource
-     */
     @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    public void putXml(String content) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Category updateCategory(Category category) {
+        return categoryService.updateEntity(category);
     }
+
+    @POST
+    @Path("/delete/{id}")
+    public void removeCategory(@PathParam("id") Long entityId) {
+        categoryService.removeEntity(entityId);
+    }
+
 }

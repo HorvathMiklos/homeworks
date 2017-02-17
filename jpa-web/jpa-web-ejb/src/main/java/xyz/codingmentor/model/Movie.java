@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Movie implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
-
+    @XmlTransient
     public List<MovieStar> getStars() {
         return stars;
     }
@@ -60,11 +61,11 @@ public class Movie implements Serializable{
     public void setTrailers(List<Trailer> trailers) {
         this.trailers = trailers;
     }
-
+    @XmlTransient
     public List<Category> getCategories() {
         return categories;
     }
-
+    
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }

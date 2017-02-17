@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.repo;
 
 /**
@@ -6,5 +5,5 @@ package xyz.codingmentor.repo;
  * @author mhorvath
  */
 public class jpqlRepo {
-
+    //TODO
 }

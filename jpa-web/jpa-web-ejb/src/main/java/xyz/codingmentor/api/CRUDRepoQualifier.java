@@ -1,4 +1,3 @@
-
 package xyz.codingmentor.api;
 
 import static java.lang.annotation.ElementType.FIELD;
@@ -17,6 +16,7 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({TYPE, METHOD, FIELD, PARAMETER})
-public @interface CRUDSpecification {
+public @interface CRUDRepoQualifier {
+
     EntityModel value();
 }

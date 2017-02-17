@@ -7,14 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author mhorvath
  */
 @Entity
-public class Category implements Serializable{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Category implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
     @OneToMany
@@ -39,6 +42,7 @@ public class Category implements Serializable{
         this.name = name;
     }
 
+    @XmlTransient
     public List<Movie> getMovies() {
         return movies;
     }
@@ -46,5 +50,5 @@ public class Category implements Serializable{
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
     }
-    
+
 }
