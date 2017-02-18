@@ -1,0 +1,14 @@
+{
+    "address": "1123 Java street 58",
+    "admin": true,
+    "dateOfBirth": "2016-02-02T13:26:34.912+01:00",
+    "email": "2verycleveremailadress@companymail.com",
+    "firstname": "Firstname",
+    "lastModifiedDate": "2017-02-02T13:43:40.463+01:00",
+    "lastname": "Lastname",
+    "password": "Admin112",
+    "phone": "06112358132",
+    "registrationDate": "2017-02-02T13:43:40.463+01:00",
+    "sex": "MALE",
+    "username": "rstname Lastname"
+  }

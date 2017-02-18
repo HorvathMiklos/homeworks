@@ -1,0 +1,1 @@
+curl --verbose --write-out "\n" --request POST --header "Content-Type: application/json" --cookie-jar cart-cookies.txt --cookie cart-cookies.txt http://localhost:8080/EJBhomework-web/web/cart/4564e1b8-fc7a-4d0c-9725-42d614205b0b/1
