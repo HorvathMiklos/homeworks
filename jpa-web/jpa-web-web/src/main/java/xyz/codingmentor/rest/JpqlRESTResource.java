@@ -17,7 +17,7 @@ import xyz.codingmentor.repo.JpqlRepo;
  * @author mhorvath
  */
 @Produces(MediaType.APPLICATION_JSON)
-@Path("jpql")
+@Path("query")
 public class JpqlRESTResource {
 
     private final JpqlRepo jpqlService;
@@ -27,7 +27,7 @@ public class JpqlRESTResource {
         this.jpqlService = jpqlService;
     }
 
-    @Path("moviestar/nation/{nt}")
+    @Path("movieStar/nation/{nt}")
     @GET
     public List<MovieStar> findMovieStarsByNation(@PathParam("nt") String nationality) {
         return jpqlService.findMovieStarsByNation(nationality);
@@ -45,7 +45,7 @@ public class JpqlRESTResource {
         return jpqlService.findMovieTitleOrCategory(title, categoryId);
     }
 
-    @Path("moviestar/")
+    @Path("movieStar/")
     @GET
     public List<MovieStar> findMovieStarTitleName(@QueryParam("movie") String movie, @QueryParam("name") String movieStarName) {
         return jpqlService.findMovieStarTitleName(movie, movieStarName);

@@ -1,0 +1,42 @@
+Init database with test values: http://localhost:8080/jpa-web-web/webresources/initDB
+
+CRUD Examples for MovieStar
+create path: (POST)
+http://localhost:8080/jpa-web-web/webresources/movieStar
+
+get path: (GET)
+http://localhost:8080/jpa-web-web/webresources/movieStar/1
+
+updateEntity path: (PUT)
+http://localhost:8080/jpa-web-web/webresources/movieStar/
+
+JSON example
+{
+  "firstName": "Bud",
+    "id": 1,
+  "lastName": "Spencer",
+  "nationality": "Italian"
+}
+
+removeEntity path: (POST)
+http://localhost:8080/jpa-web-web/webresources/movieStar/delete/1
+
+The pathes are made with the same logic for the other resources too:
+
+http://localhost:8080/jpa-web-web/webresources/trailer
+http://localhost:8080/jpa-web-web/webresources/movie
+http://localhost:8080/jpa-web-web/webresources/category
+
+JPQL Examples
+
+Query moviestar by nationality
+http://localhost:8080/jpa-web-web/webresources/query/movieStar/nation/American
+
+Query trailers by movie
+http://localhost:8080/jpa-web-web/webresources/query/trailer/Star Wars
+
+Query movie by title and/or category
+http://localhost:8080/jpa-web-web/webresources/query/movie?title=Ex Machina&category=1
+
+Query moviestar by movie and/or name
+http://localhost:8080/jpa-web-web/webresources/query/movieStar?movie=Crime Busters&name=Terence
