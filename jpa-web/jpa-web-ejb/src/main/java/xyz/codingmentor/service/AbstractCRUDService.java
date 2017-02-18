@@ -2,9 +2,7 @@ package xyz.codingmentor.service;
 
 import xyz.codingmentor.api.CRUDRepository;
 import xyz.codingmentor.api.CRUDService;
-
 /**
- *
  * @author mhorvath
  */
 public abstract class AbstractCRUDService<T> implements CRUDService<T> {
