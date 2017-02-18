@@ -98,20 +98,20 @@ public class DbInit {
         t3.setTitle("Exciting Trailer - Ex Machina");
         trailerService.createEntity(t3);
         
-        joinMoviesAndMovieStars(1l, 1l);
-        joinMoviesAndMovieStars(2l, 1l);
-        joinMoviesAndMovieStars(3l, 2l);
-        joinMoviesAndMovieStars(4l, 3l);
-        joinMoviesAndMovieStars(5l, 5l);
+        joinMoviesAndMovieStars(1L, 1L);
+        joinMoviesAndMovieStars(2L, 1L);
+        joinMoviesAndMovieStars(3L, 2L);
+        joinMoviesAndMovieStars(4L, 3L);
+        joinMoviesAndMovieStars(5L, 5L);
         
-        joinCategoryAndMovies(2l, 1l);
-        joinCategoryAndMovies(1l, 2l);
-        joinCategoryAndMovies(1l, 3l);
+        joinCategoryAndMovies(2L, 1L);
+        joinCategoryAndMovies(1L, 2L);
+        joinCategoryAndMovies(1L, 3L);
         
-        joinTrailersAndMovie(1l, 3l);
-        joinTrailersAndMovie(2l, 3l);
+        joinTrailersAndMovie(1L, 3L);
+        joinTrailersAndMovie(2L, 3L);
         
-        joinTrailersAndMovie(3l, 2l);
+        joinTrailersAndMovie(3L, 2L);
         
     }
 

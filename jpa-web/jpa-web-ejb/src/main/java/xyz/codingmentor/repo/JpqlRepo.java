@@ -33,26 +33,26 @@ public class JpqlRepo {
     }
 
     public List<Movie> findMovieTitleOrCategory(String title, Long categoryId) {
-        if (null != title && null != categoryId) {
-            return findMovieTitleCategory(title, categoryId);
-        }
-        if (null != title && null == categoryId) {
+        if (null != title) {
+            if (null != categoryId) {
+                return findMovieTitleCategory(title, categoryId);
+            }
             return findMoviesForTitle(title);
         }
-        if (null == title && null != categoryId) {
+        if (null != categoryId) {
             return findMoviesForCategory(categoryId);
         }
         throw new IllegalArgumentException("Need at least one query param!");
     }
 
     public List<MovieStar> findMovieStarTitleName(String movieTitle, String movieStarName) {
-        if (null != movieTitle && null != movieStarName) {
-            return findMovieStarsForMovieOrName(movieTitle, movieStarName);
-        }
-        if (null != movieTitle && null == movieStarName) {
+        if (null != movieTitle) {
+            if (null != movieStarName) {
+                return findMovieStarsForMovieOrName(movieTitle, movieStarName);
+            }
             return findMovieStarForMovie(movieTitle);
         }
-        if (null == movieTitle && null != movieStarName) {
+        if (null != movieStarName) {
             return findMovieStarsName(movieStarName);
         }
         throw new IllegalArgumentException("Need at least one query param!");

@@ -25,11 +25,11 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(xyz.codingmentor.rest.CategoryResource.class);
+        resources.add(xyz.codingmentor.rest.InitResource.class);
         resources.add(xyz.codingmentor.rest.JpqlRESTResource.class);
         resources.add(xyz.codingmentor.rest.MovieResource.class);
         resources.add(xyz.codingmentor.rest.MovieStarResource.class);
         resources.add(xyz.codingmentor.rest.TrailerResource.class);
-        resources.add(xyz.codingmentor.rest.initResource.class);
     }
     
 }

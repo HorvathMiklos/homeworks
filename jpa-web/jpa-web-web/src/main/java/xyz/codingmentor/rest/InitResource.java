@@ -9,7 +9,7 @@ import xyz.codingmentor.dbinit.DbInit;
  * @author mhorvath
  */
 @Path("initDB")
-public class initResource {
+public class InitResource {
     
     @Inject
     DbInit dbInit;
